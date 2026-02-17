@@ -1,5 +1,5 @@
 // Adding mock submissions and enhancing data for Admin Dashboard
-import { Property, Society, Submission, Inquiry } from "@/types";
+import { Property, Society, Submission, Inquiry } from "../types";
 
 export const societies: Society[] = [
     {
