@@ -2,112 +2,174 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { Property, Submission, Society, Inquiry } from "@/types";
-import { properties as initialProperties, submissions as initialSubmissions, societies as initialSocieties, inquiries as initialInquiries } from "@/lib/data";
+import { societies as initialSocieties } from "@/lib/data"; // Keep societies static for now
+
+export interface FilterSettings {
+    bhkOptions: string[];
+    bathOptions: string[];
+    assuranceLabels: string[];
+    locations: string[];
+    sortOptions: { id: string; label: string }[];
+    priceSettings: { min: number; max: number; step: number };
+}
 
 interface DataContextType {
     properties: Property[];
     submissions: Submission[];
     societies: Society[];
     inquiries: Inquiry[];
-    addSubmission: (submission: Submission) => void;
-    approveSubmission: (subId: string) => void;
-    rejectSubmission: (subId: string) => void;
-    deleteProperty: (propertyId: string) => void;
-    updatePropertyStatus: (propertyId: string, status: Property['status']) => void;
-    addListing: (property: Property) => void;
+    filterSettings: FilterSettings;
+    addSubmission: (submission: Submission) => Promise<void>;
+    approveSubmission: (subId: string) => Promise<void>;
+    rejectSubmission: (subId: string) => Promise<void>;
+    deleteProperty: (propertyId: string) => Promise<void>;
+    updatePropertyStatus: (propertyId: string, status: Property['status']) => Promise<void>;
+    addListing: (property: Property) => Promise<void>;
+    updateFilterSettings: (settings: Partial<FilterSettings>) => Promise<void>;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-const STORAGE_KEY = "truva_platform_data";
+const defaultFilterSettings: FilterSettings = {
+    bhkOptions: ["2 BHK", "2.5 BHK", "3 BHK", "4 BHK"],
+    bathOptions: ["2 Bath", "3 Bath", "4 Bath"],
+    assuranceLabels: ["Legally cleared", "Fully refurbished", "Ready-to-move in"],
+    locations: ["Worli", "Parel", "Lower Parel", "Dadra", "Byculla", "Prabhadevi"],
+    sortOptions: [
+        { id: 'relevance', label: 'Relevance' },
+        { id: 'price-asc', label: 'Price: Low to High' },
+        { id: 'price-desc', label: 'Price: High to Low' },
+        { id: 'area-desc', label: 'Area: Largest First' }
+    ],
+    priceSettings: { min: 1, max: 20, step: 0.5 }
+};
 
 export function DataProvider({ children }: { children: ReactNode }) {
-    const [properties, setProperties] = useState<Property[]>(initialProperties);
-    const [submissions, setSubmissions] = useState<Submission[]>(initialSubmissions);
+    const [properties, setProperties] = useState<Property[]>([]);
+    const [submissions, setSubmissions] = useState<Submission[]>([]);
     const [societies] = useState<Society[]>(initialSocieties);
-    const [inquiries, setInquiries] = useState<Inquiry[]>(initialInquiries);
+    const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+    const [filterSettings, setFilterSettings] = useState<FilterSettings>(defaultFilterSettings);
     const [isInitialized, setIsInitialized] = useState(false);
 
-    // Initial Load
+    // Fetch Initial Data
     useEffect(() => {
-        const savedData = localStorage.getItem(STORAGE_KEY);
-        if (savedData) {
+        const fetchData = async () => {
             try {
-                const parsed = JSON.parse(savedData);
-                if (parsed.properties) setProperties(parsed.properties);
-                if (parsed.submissions) setSubmissions(parsed.submissions);
-                // Inquiries and societies are less dynamic for now but could be persistent too
-            } catch (e) {
-                console.error("Failed to parse saved data", e);
+                // Parallel fetch for properties and submissions
+                const [propsRes, subsRes] = await Promise.all([
+                    fetch('/api/properties'),
+                    fetch('/api/submissions')
+                ]);
+
+                if (propsRes.ok) {
+                    const data = await propsRes.json();
+                    if (Array.isArray(data)) setProperties(data);
+                }
+
+                if (subsRes.ok) {
+                    const data = await subsRes.json();
+                    if (Array.isArray(data)) setSubmissions(data);
+                }
+
+                // Fetch settings separately to not block main content
+                const settingsRes = await fetch('/api/settings');
+                if (settingsRes.ok) {
+                    const savedSettings = await settingsRes.json();
+                    if (Object.keys(savedSettings).length > 0) {
+                        setFilterSettings(prev => ({ ...prev, ...savedSettings }));
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch initial data", error);
+            } finally {
+                setIsInitialized(true);
             }
-        }
-        setIsInitialized(true);
+        };
+
+        fetchData();
     }, []);
 
-    // Save on Change
-    useEffect(() => {
-        if (isInitialized) {
-            const dataToSave = { properties, submissions };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-        }
-    }, [properties, submissions, isInitialized]);
-
-    const addSubmission = (submission: Submission) => {
-        setSubmissions(prev => [submission, ...prev]);
-    };
-
-    const approveSubmission = (subId: string) => {
-        const submission = submissions.find(s => s.id === subId);
-        if (submission) {
-            const newProperty: Property = {
-                id: `prop-${Date.now()}`,
-                title: submission.propertyName || `${submission.developerName} Asset`,
-                slug: `new-listing-${Date.now()}`,
-                description: submission.description || "New property listing approved from submission.",
-                price: submission.valuationAmount || 0,
-                type: 'sale' as const,
-                bhk: 3, // Default
-                location: {
-                    area: submission.location || "Mumbai",
-                    city: "Mumbai",
-                    address: "Verified Asset"
-                },
-                amenities: submission.amenities ? submission.amenities.map(a => ({ icon: 'Check', label: a })) : [],
-                images: [submission.projectImages?.[0] || submission.image || ""],
-                projectImages: submission.projectImages || [],
-                virtualTourUrl: submission.virtualTourUrl,
-                masterPlanUrl: submission.masterPlanUrl,
-                floorPlanUrl: submission.floorPlanUrl,
-                stats: { bathrooms: 2, areaSqFt: submission.carpetArea || 0 },
-                status: 'LISTED' as const,
-                auditScore: 100,
-                sellerName: submission.sellerName,
-                developerName: submission.developerName,
-                configurations: submission.configurations,
-                highlights: submission.highlights,
-                connectivity: submission.connectivity,
-                mapUrl: submission.mapUrl
-            };
-
-            setProperties(prev => [newProperty, ...prev]);
-            setSubmissions(prev => prev.filter(s => s.id !== subId));
+    const addSubmission = async (submission: Submission) => {
+        try {
+            const res = await fetch('/api/submissions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(submission)
+            });
+            if (res.ok) {
+                const savedSubmission = await res.json();
+                setSubmissions(prev => [savedSubmission, ...prev]);
+            }
+        } catch (error) {
+            console.error("Failed to add submission", error);
         }
     };
 
-    const rejectSubmission = (subId: string) => {
+    const approveSubmission = async (subId: string) => {
+        try {
+            const res = await fetch('/api/admin/approve', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: subId })
+            });
+
+            if (res.ok) {
+                const newProperty = await res.json();
+                // Optimistically update UI
+                setProperties(prev => [newProperty, ...prev]);
+                setSubmissions(prev => prev.filter(s => s.id !== subId));
+            }
+        } catch (error) {
+            console.error("Failed to approve submission", error);
+        }
+    };
+
+    const rejectSubmission = async (subId: string) => {
+        // Optimistic update
         setSubmissions(prev => prev.filter(s => s.id !== subId));
+        // TODO: Backend API call for rejection status update if needed
     };
 
-    const deleteProperty = (propertyId: string) => {
+    const deleteProperty = async (propertyId: string) => {
         setProperties(prev => prev.filter(p => p.id !== propertyId));
+        // TODO: Backend API call
     };
 
-    const updatePropertyStatus = (propertyId: string, status: Property['status']) => {
+    const updatePropertyStatus = async (propertyId: string, status: Property['status']) => {
         setProperties(prev => prev.map(p => p.id === propertyId ? { ...p, status } : p));
+        // TODO: Backend API call
     };
 
-    const addListing = (property: Property) => {
-        setProperties(prev => [property, ...prev]);
+    const addListing = async (property: Property) => {
+        try {
+            const res = await fetch('/api/properties', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(property)
+            });
+            if (res.ok) {
+                const savedProperty = await res.json();
+                setProperties(prev => [savedProperty, ...prev]);
+            }
+        } catch (error) {
+            console.error("Failed to add listing", error);
+        }
+    };
+
+    const updateFilterSettings = async (settings: Partial<FilterSettings>) => {
+        const newSettings = { ...filterSettings, ...settings };
+        setFilterSettings(newSettings);
+
+        try {
+            await fetch('/api/settings', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newSettings)
+            });
+        } catch (error) {
+            console.error("Failed to update settings", error);
+        }
     };
 
     return (
@@ -116,12 +178,14 @@ export function DataProvider({ children }: { children: ReactNode }) {
             submissions,
             societies,
             inquiries,
+            filterSettings,
             addSubmission,
             approveSubmission,
             rejectSubmission,
             deleteProperty,
             updatePropertyStatus,
-            addListing
+            addListing,
+            updateFilterSettings
         }}>
             {children}
         </DataContext.Provider>

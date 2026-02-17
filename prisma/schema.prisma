@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Property Model
+model Property {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @db.Text
+  price           Float
+  type            String   // 'sale' | 'rent'
+  bhk             Float
+  status          String   @default("LISTED") // 'LISTED' | 'SOLD' | 'ARCHIVED'
+  isFeatured      Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Structured Data (JSON)
+  location        Json      // { area, city, address, tower, floor }
+  stats           Json     // { bathrooms, areaSqFt }
+  amenities       Json     // [{ icon, label }]
+  configurations  Json?    // [{ configuration, price, area }]
+  contactDetails  Json?    // { phone, email }
+  environmentalScores Json? // { light, noise, air }
+
+  // Simple Fields
+  sellerName      String?
+  developerName   String?
+  highlights      String?  @db.Text
+  connectivity    String?  @db.Text
+  usageType       String?  @default("RESIDENTIAL")
+  constructionStatus String?
+  possessionDate  String?
+  viewOrientation String?
+  auditScore      Float?
+
+  // Media URLs
+  images          Json     // Array of strings stored as JSON
+  projectImages   Json?    // Array of strings stored as JSON
+  virtualTourUrl  String?
+  masterPlanUrl   String?
+  floorPlanUrl    String?
+  mapUrl          String?  @db.Text
+  
+  // MahaRERA
+  reraNumber      String?
+  reraQr          String?
+
+  inquiries       Inquiry[]
+}
+
+// Submission Model (Valuation Requests)
+model Submission {
+  id              String   @id @default(cuid())
+  sellerId        String?
+  
+  // Property Basic Info
+  propertyName    String?
+  description     String?  @db.Text
+  location        String?
+  carpetArea      Float?
+  floor           Float?
+  
+  // Status
+  status          String   @default("PENDING") // 'PENDING' | 'VALUATED' | 'AUDITING' | 'REJECTED' | 'APPROVED'
+  valuationAmount Float?
+  
+  // Contact
+  sellerName      String?
+  contactDetails  Json?    // { phone, email }
+  
+  // Developer Info
+  developerName   String?
+  societyId       String?
+  tower           String?
+  
+  // Media & Details
+  image           String?   // Cover image
+  projectImages   Json?     // Array of strings
+  amenities       Json?     // Array of strings
+  highlights      String?   @db.Text
+  connectivity    String?   @db.Text
+  
+  // URLs
+  virtualTourUrl  String?
+  masterPlanUrl   String?
+  floorPlanUrl    String?
+  mapUrl          String?   @db.Text
+  
+  // RERA
+  reraNumber      String?
+  reraQr          String?
+  
+  // Configurations
+  configurations  Json?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Inquiry Model
+model Inquiry {
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id])
+  name       String
+  email      String
+  phone      String
+  message    String   @db.Text
+  createdAt  DateTime @default(now())
+}
+
+// Global Settings (Singleton)
+model Settings {
+  id              Int      @id @default(1)
+  filterSettings  Json     // { bhkOptions, bathOptions, locations, priceSettings... }
+}

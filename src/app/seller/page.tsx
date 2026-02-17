@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 export default function SellerPage() {
     return (
         <main className="min-h-screen flex flex-col pt-20 relative overflow-hidden bg-[#FAFAFA]">
-            <Navbar />
 
             {/* Background Depth Effects */}
             <div className="absolute inset-0 z-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>

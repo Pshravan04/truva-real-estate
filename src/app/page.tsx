@@ -4,12 +4,12 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/ui/Hero";
 import { PropertyCard } from "@/components/PropertyCard";
 import { useData } from "@/context/DataContext";
-import { ShieldCheck, Zap, BarChart3, ChevronRight, Quote, Sparkles } from "lucide-react";
+import { ShieldCheck, Zap, BarChart3, ChevronRight, Quote, Sparkles, MessageSquare, Timer, LayoutDashboard, MoveDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   const { properties } = useData();
-  const featuredProperties = properties.filter(p => p.isFeatured);
+  const listedProperties = properties.filter(p => p.status === "LISTED");
 
   return (
     <main className="min-h-screen flex flex-col bg-[#FAFAFA] relative overflow-hidden">
@@ -23,53 +23,6 @@ export default function Home() {
         <div className="absolute bottom-0 left-[-10%] w-[600px] h-[600px] bg-primary/5 blur-[100px] rounded-full opacity-40" />
       </div>
 
-      {/* Section 1: The Truva Service Standard */}
-      <section className="py-32 relative z-10">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col items-center text-center mb-20 space-y-4">
-            <div className="inline-flex items-center gap-2 bg-white text-primary text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.2em] border border-border shadow-sm">
-              The Standards
-            </div>
-            <h2 className="text-5xl md:text-6xl font-black text-primary tracking-tighter leading-none">
-              RADICALLY BETTER <br />
-              <span className="opacity-40">HOME BUYING.</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: ShieldCheck,
-                title: "Physical Verification",
-                desc: "Every home is subjected to a 100-point structural and legal audit by our internal engineers.",
-                accent: "bg-accent"
-              },
-              {
-                icon: Zap,
-                title: "Direct Access",
-                desc: "Navigate the market without noise. Direct-to-owner connections ensured for every single listing.",
-                accent: "bg-orange-500"
-              },
-              {
-                icon: BarChart3,
-                title: "Zero Spam Policy",
-                desc: "Your privacy is an asset. No discovery calls or data sharing until you initiate a site visit.",
-                accent: "bg-primary"
-              }
-            ].map((item, i) => (
-              <div key={i} className="group bg-white p-10 rounded-[40px] border border-border/60 shadow-xl shadow-black/[0.02] hover:shadow-primary/5 transition-all text-left flex flex-col gap-6">
-                <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg", item.accent)}>
-                  <item.icon className="w-7 h-7" />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="font-black text-primary text-lg uppercase tracking-wider">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Section 2: Featured Collections */}
       <section className="py-32 bg-white relative z-10">
@@ -91,14 +44,67 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {featuredProperties.map((property) => (
+            {listedProperties.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Section 3: Client Stories / Testimonials */}
+      {/* Section 3: Market Insights */}
+      <section className="py-24 bg-[#0a0a0a] text-white relative z-10 overflow-hidden">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-white/10 rounded-[40px] overflow-hidden bg-black/40">
+            {/* Left Main Content */}
+            <div className="lg:col-span-8 p-12 md:p-24 space-y-10">
+              <div className="space-y-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-white/40">
+                  AN AVERAGE HOUSE TAKES 9-12 MONTHS TO SELL
+                </p>
+                <h2 className="text-5xl md:text-[80px] font-black leading-[0.95] tracking-tighter">
+                  Most Truva homes <br />
+                  <span className="text-[#FF4802]">sell by the weekend</span>
+                </h2>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-12 pt-4">
+                <button className="bg-white text-black px-10 py-5 rounded-sm font-black text-[11px] uppercase tracking-widest flex items-center gap-3 hover:bg-[#FF4802] hover:text-white transition-all shadow-xl shadow-white/5">
+                  <MessageSquare className="w-5 h-5" />
+                  Get early access
+                </button>
+                <button className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em] group">
+                  <span className="w-4 h-4 bg-[#FF4802] rounded-none inline-block" />
+                  HERE'S WHY <MoveDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Stats Pane */}
+            <div className="lg:col-span-4 border-l border-white/10 flex flex-col divide-y divide-white/10">
+              <div className="flex-1 p-12 md:p-16 flex flex-col justify-center gap-6 group hover:bg-white/5 transition-colors">
+                <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
+                  <Timer className="w-6 h-6 text-white/60 group-hover:text-[#FF4802] transition-colors" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-2">AVERAGE TIME TO SELL:</p>
+                  <p className="text-4xl md:text-5xl font-black tracking-tighter">45 days</p>
+                </div>
+              </div>
+              <div className="flex-1 p-12 md:p-16 flex flex-col justify-center gap-6 group hover:bg-white/5 transition-colors">
+                <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
+                  <LayoutDashboard className="w-6 h-6 text-white/60 group-hover:text-[#FF4802] transition-colors" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-2">TOTAL VALUE:</p>
+                  <p className="text-4xl md:text-5xl font-black tracking-tighter">300+ Crs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: Client Stories / Testimonials */}
       <section className="py-32 relative z-10 overflow-hidden">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -155,24 +161,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 relative z-10 px-6">
-        <div className="container mx-auto max-w-7xl bg-primary rounded-[56px] p-16 md:p-24 text-center text-white relative overflow-hidden shadow-2xl shadow-primary/20 group">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-black/20 to-primary" />
-          <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-white/10 blur-[100px] rounded-full" />
-
-          <div className="relative z-10 space-y-10 flex flex-col items-center">
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">
-              READY FOR YOUR <br />
-              <span className="opacity-40">NEXT CHAPTER?</span>
-            </h2>
-            <button className="bg-white text-primary hover:bg-black hover:text-white px-12 py-6 rounded-3xl transition-all font-black text-xs uppercase tracking-[0.2em] shadow-2xl flex items-center gap-4 group">
-              Speak with an Expert
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </main>

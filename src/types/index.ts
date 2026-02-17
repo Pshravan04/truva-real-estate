@@ -68,6 +68,8 @@ export interface Property {
     virtualTourUrl?: string;
     masterPlanUrl?: string;
     floorPlanUrl?: string;
+    reraNumber?: string;
+    reraQr?: string;
 }
 
 export interface Society {
@@ -110,6 +112,8 @@ export interface Submission {
     virtualTourUrl?: string;
     masterPlanUrl?: string;
     floorPlanUrl?: string;
+    reraNumber?: string;
+    reraQr?: string;
 }
 
 export interface Inquiry {

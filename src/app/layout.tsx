@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
-import { FluidCursor } from "@/components/layout/FluidCursor";
 import "./globals.css";
 
-const outfit = Outfit({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -25,11 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.variable} font-sans antialiased text-foreground check-pattern cursor-none-on-desktop`} suppressHydrationWarning>
+      <body className={`${poppins.variable} font-sans antialiased text-foreground check-pattern`} suppressHydrationWarning>
         <AuthProvider>
           <DataProvider>
             <Navbar />
-            <FluidCursor />
             {children}
           </DataProvider>
         </AuthProvider>

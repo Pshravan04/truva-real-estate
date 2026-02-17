@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, MapPin, Bed, Bath, Square } from "lucide-react";
+import { Heart, MapPin, Bed, Bath, Square, Shield } from "lucide-react";
 import { Property } from "@/types";
 
 interface PropertyCardProps {
@@ -8,7 +8,7 @@ interface PropertyCardProps {
 
 export function PropertyCard({ property }: PropertyCardProps) {
     return (
-        <Link href={`/properties/${property.id}`} className="group block bg-card rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300">
+        <Link href={`/properties/${property.slug}`} className="group block bg-card rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300">
             <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                     src={property.images[0]}
@@ -24,6 +24,11 @@ export function PropertyCard({ property }: PropertyCardProps) {
                     <span className="bg-black/70 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">
                         Fully Renovated
                     </span>
+                    {property.reraNumber && (
+                        <span className="bg-green-600/90 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm flex items-center gap-1">
+                            <Shield className="w-3 h-3" /> RERA
+                        </span>
+                    )}
                 </div>
             </div>
 

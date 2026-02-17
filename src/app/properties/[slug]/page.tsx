@@ -17,25 +17,25 @@ import { ImmersiveSections } from "@/components/property/ImmersiveSections";
 import { cn } from "@/lib/utils";
 
 interface PageProps {
-    params: Promise<{ id: string }>;
+    params: Promise<{ slug: string }>;
 }
 
 import { Property } from "@/types";
 
 export default function PropertyDetailsPage({ params }: PageProps) {
-    const { id } = use(params);
+    const { slug } = use(params);
     const { properties } = useData();
     const [property, setProperty] = useState<Property | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const found = properties.find((p) => p.id === id);
+        const found = properties.find((p) => p.slug === slug);
         if (found) {
             setProperty(found);
-        } else if (id.startsWith('prop-')) {
+        } else if (slug === 'dynamic-asset-preview') {
             // Dynamic fallback logic
             setProperty({
-                id: id,
+                id: '999',
                 title: "Oberoi Realty Asset",
                 slug: "dynamic-asset-preview",
                 description: "A recently verified premium asset, currently undergoing final platform deployment.",
@@ -50,7 +50,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
             } as Property);
         }
         setIsLoading(false);
-    }, [id, properties]);
+    }, [slug, properties]);
 
     if (isLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
     if (!property) return notFound();
@@ -128,6 +128,37 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                     </p>
                                 </div>
                             </div>
+
+                            {/* MahaRERA Details */}
+                            {(property.reraNumber || property.reraQr) && (
+                                <div className="flex items-center gap-4 p-6 bg-white rounded-[24px] border border-border/50 shadow-sm animate-in fade-in slide-in-from-bottom-2">
+                                    <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center">
+                                        <Shield className="w-6 h-6 text-primary" />
+                                    </div>
+                                    <div className="flex-1 space-y-1">
+                                        <p className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">MahaRERA Registration</p>
+                                        <div className="flex flex-col md:flex-row md:items-center gap-4">
+                                            {property.reraNumber && (
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-lg font-black text-primary tracking-tight">{property.reraNumber}</span>
+                                                    <span className="px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-[9px] font-black uppercase tracking-wider border border-green-200">Verified</span>
+                                                </div>
+                                            )}
+                                            {property.reraQr && (
+                                                <a 
+                                                    href={property.reraQr} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary hover:bg-secondary/80 text-primary text-xs font-bold transition-all group"
+                                                >
+                                                    <Zap className="w-4 h-4 group-hover:scale-110 transition-transform" /> 
+                                                    View QR Certificate
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Description & Highlights */}

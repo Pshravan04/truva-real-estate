@@ -22,6 +22,8 @@ import {
     Settings,
     Mail,
     Globe,
+    MapPin,
+    IndianRupee,
     ArrowLeft // Added for "Back to Dashboard" button
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -95,6 +97,17 @@ export default function AdminDashboard() {
                         <Globe className="w-4 h-4" />
                         Content Control
                     </button>
+
+                    <button
+                        onClick={() => setActiveTab('taxonomy')}
+                        className={cn(
+                            "w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all",
+                            activeTab === 'taxonomy' ? "bg-primary text-primary-foreground shadow-lg" : "text-muted-foreground hover:bg-secondary"
+                        )}
+                    >
+                        <Settings className="w-4 h-4" />
+                        Taxonomy & Filters
+                    </button>
                 </aside>
 
                 {/* Main Content */}
@@ -164,7 +177,7 @@ export default function AdminDashboard() {
                                                             </button>
                                                         </td>
                                                         <td className="px-6 py-4 flex items-center justify-center gap-2">
-                                                            <Link href={`/properties/${prop.id}`} target="_blank">
+                                                            <Link href={`/properties/${prop.slug}`} target="_blank">
                                                                 <button className="p-2 bg-secondary text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
                                                                     <Eye className="w-4 h-4" />
                                                                 </button>
@@ -253,7 +266,7 @@ export default function AdminDashboard() {
                                                         </div>
 
                                                         <div className="flex items-center gap-2">
-                                                            <Link href={`/properties/1`} target="_blank">
+                                                            <Link href={`/properties/dynamic-asset-preview`} target="_blank">
                                                                 <button className="flex items-center gap-2 bg-secondary text-primary px-5 py-3 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition-all shadow-sm">
                                                                     <Eye className="w-4 h-4" />
                                                                     Preview Page
@@ -394,10 +407,262 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     )}
+
+                    {/* 5. Taxonomy & Filters */}
+                    {activeTab === 'taxonomy' && (
+                        <TaxonomyControl />
+                    )}
                 </section>
             </div>
 
             <Footer />
         </main>
+    );
+}
+
+function TaxonomyControl() {
+    const { filterSettings, updateFilterSettings } = useData();
+    const [newItem, setNewItem] = useState({ type: '', value: '', id: '' });
+
+    const addItem = (type: 'bhkOptions' | 'bathOptions' | 'assuranceLabels' | 'locations') => {
+        if (!newItem.value) return;
+        updateFilterSettings({
+            [type]: [...filterSettings[type], newItem.value]
+        });
+        setNewItem({ type: '', value: '', id: '' });
+    };
+
+    const removeItem = (type: 'bhkOptions' | 'bathOptions' | 'assuranceLabels' | 'locations', index: number) => {
+        const newList = [...filterSettings[type]];
+        newList.splice(index, 1);
+        updateFilterSettings({ [type]: newList });
+    };
+
+    const addSortOption = () => {
+        if (!newItem.id || !newItem.value) return;
+        updateFilterSettings({
+            sortOptions: [...filterSettings.sortOptions, { id: newItem.id, label: newItem.value }]
+        });
+        setNewItem({ type: '', value: '', id: '' });
+    };
+
+    const removeSortOption = (index: number) => {
+        const newList = [...filterSettings.sortOptions];
+        newList.splice(index, 1);
+        updateFilterSettings({ sortOptions: newList });
+    };
+
+    const updatePriceSetting = (key: 'min' | 'max' | 'step', value: string) => {
+        updateFilterSettings({
+            priceSettings: { ...filterSettings.priceSettings, [key]: parseFloat(value) }
+        });
+    };
+
+    return (
+        <div className="max-w-6xl space-y-10 pb-20">
+            <div>
+                <h1 className="text-2xl font-black text-primary">Taxonomy & Filters</h1>
+                <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest mt-1">Marketplace Logic • Global Options</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                {/* BHK Options */}
+                <div className="bg-white p-8 rounded-[32px] border border-border space-y-6">
+                    <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <Plus className="w-4 h-4 text-primary" /> BHK Options
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                        {filterSettings.bhkOptions.map((opt, i) => (
+                            <span key={i} className="bg-secondary px-3 py-1.5 rounded-lg text-xs font-bold text-primary flex items-center gap-2">
+                                {opt}
+                                <button onClick={() => removeItem('bhkOptions', i)} className="text-primary/40 hover:text-red-500 transition-colors">
+                                    <XCircle className="w-3.5 h-3.5" />
+                                </button>
+                            </span>
+                        ))}
+                    </div>
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            placeholder="e.g. 5 BHK"
+                            value={newItem.type === 'bhk' ? newItem.value : ''}
+                            onChange={(e) => setNewItem({ ...newItem, type: 'bhk', value: e.target.value })}
+                            className="flex-1 bg-secondary border-none rounded-xl px-4 py-2.5 text-xs font-bold focus:ring-1 focus:ring-primary/20 outline-none"
+                        />
+                        <button onClick={() => addItem('bhkOptions')} className="bg-primary text-white p-2.5 rounded-xl hover:bg-black transition-all">
+                            <Plus className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Bathroom Options */}
+                <div className="bg-white p-8 rounded-[32px] border border-border space-y-6">
+                    <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <Plus className="w-4 h-4 text-primary" /> Bath Options
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                        {filterSettings.bathOptions.map((opt, i) => (
+                            <span key={i} className="bg-secondary px-3 py-1.5 rounded-lg text-xs font-bold text-primary flex items-center gap-2">
+                                {opt}
+                                <button onClick={() => removeItem('bathOptions', i)} className="text-primary/40 hover:text-red-500 transition-colors">
+                                    <XCircle className="w-3.5 h-3.5" />
+                                </button>
+                            </span>
+                        ))}
+                    </div>
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            placeholder="e.g. 5 Bath"
+                            value={newItem.type === 'bath' ? newItem.value : ''}
+                            onChange={(e) => setNewItem({ ...newItem, type: 'bath', value: e.target.value })}
+                            className="flex-1 bg-secondary border-none rounded-xl px-4 py-2.5 text-xs font-bold focus:ring-1 focus:ring-primary/20 outline-none"
+                        />
+                        <button onClick={() => addItem('bathOptions')} className="bg-primary text-white p-2.5 rounded-xl hover:bg-black transition-all">
+                            <Plus className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Locations */}
+                <div className="bg-white p-8 rounded-[32px] border border-border space-y-6">
+                    <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <MapPin className="w-4 h-4 text-[#FF4802]" /> Primary Locations
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                        {filterSettings.locations.map((loc, i) => (
+                            <span key={i} className="bg-secondary px-3 py-1.5 rounded-lg text-xs font-bold text-primary flex items-center gap-2">
+                                {loc}
+                                <button onClick={() => removeItem('locations', i)} className="text-primary/40 hover:text-red-500 transition-colors">
+                                    <XCircle className="w-3.5 h-3.5" />
+                                </button>
+                            </span>
+                        ))}
+                    </div>
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            placeholder="e.g. Juhu"
+                            value={newItem.type === 'loc' ? newItem.value : ''}
+                            onChange={(e) => setNewItem({ ...newItem, type: 'loc', value: e.target.value })}
+                            className="flex-1 bg-secondary border-none rounded-xl px-4 py-2.5 text-xs font-bold focus:ring-1 focus:ring-primary/20 outline-none"
+                        />
+                        <button onClick={() => addItem('locations')} className="bg-primary text-white p-2.5 rounded-xl hover:bg-black transition-all">
+                            <Plus className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Price Settings */}
+                <div className="bg-white p-8 rounded-[32px] border border-border space-y-6">
+                    <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <IndianRupee className="w-4 h-4 text-[#FF4802]" /> Price Slider Limits
+                    </h3>
+                    <div className="grid grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black opacity-30 uppercase tracking-widest">Min (CR)</label>
+                            <input
+                                type="number"
+                                value={filterSettings.priceSettings.min}
+                                onChange={(e) => updatePriceSetting('min', e.target.value)}
+                                className="w-full bg-secondary border-none rounded-xl px-3 py-2 text-xs font-bold focus:ring-1 focus:ring-primary/20 outline-none"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black opacity-30 uppercase tracking-widest">Max (CR)</label>
+                            <input
+                                type="number"
+                                value={filterSettings.priceSettings.max}
+                                onChange={(e) => updatePriceSetting('max', e.target.value)}
+                                className="w-full bg-secondary border-none rounded-xl px-3 py-2 text-xs font-bold focus:ring-1 focus:ring-primary/20 outline-none"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black opacity-30 uppercase tracking-widest">Step size</label>
+                            <input
+                                type="number"
+                                step="0.1"
+                                value={filterSettings.priceSettings.step}
+                                onChange={(e) => updatePriceSetting('step', e.target.value)}
+                                className="w-full bg-secondary border-none rounded-xl px-3 py-2 text-xs font-bold focus:ring-1 focus:ring-primary/20 outline-none"
+                            />
+                        </div>
+                    </div>
+                    <div className="p-4 bg-secondary/50 rounded-2xl">
+                        <p className="text-[10px] font-bold text-muted-foreground leading-relaxed">
+                            These values control the marketplace price slider. "Max" determines the default filter ceiling.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Sorting Options */}
+                <div className="col-span-full md:col-span-2 bg-white p-8 rounded-[32px] border border-border space-y-6">
+                    <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <TrendingUp className="w-4 h-4 text-primary" /> Marketplace Sorting Logic
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {filterSettings.sortOptions.map((opt, i) => (
+                            <div key={i} className="bg-secondary p-4 rounded-2xl flex items-center justify-between">
+                                <div>
+                                    <p className="text-[10px] font-black opacity-30 uppercase tracking-[0.15em] mb-1">ID: {opt.id}</p>
+                                    <p className="text-xs font-bold text-primary">{opt.label}</p>
+                                </div>
+                                <button onClick={() => removeSortOption(i)} className="p-2 text-primary/20 hover:text-red-500 transition-colors">
+                                    <Trash2 className="w-4 h-4" />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="flex flex-col md:flex-row gap-4 pt-4 border-t border-border/40">
+                        <input
+                            type="text"
+                            placeholder="Unique ID (e.g. price-asc)"
+                            value={newItem.type === 'sort' ? newItem.id : ''}
+                            onChange={(e) => setNewItem({ ...newItem, type: 'sort', id: e.target.value })}
+                            className="bg-secondary border-none rounded-xl px-4 py-3 text-xs font-bold flex-1 focus:ring-1 focus:ring-primary/20 outline-none"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Display Label (e.g. Price: Low to High)"
+                            value={newItem.type === 'sort' ? newItem.value : ''}
+                            onChange={(e) => setNewItem({ ...newItem, type: 'sort', value: e.target.value })}
+                            className="bg-secondary border-none rounded-xl px-4 py-3 text-xs font-bold flex-1 focus:ring-1 focus:ring-primary/20 outline-none"
+                        />
+                        <button onClick={addSortOption} className="bg-primary text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all">
+                            Add Sort Option
+                        </button>
+                    </div>
+                </div>
+
+                {/* Assurance Labels */}
+                <div className="col-span-full bg-white p-8 rounded-[32px] border border-border space-y-6">
+                    <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
+                        <ShieldCheck className="w-4 h-4 text-[#FF4802]" /> Truva Assurance Labels
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                        {filterSettings.assuranceLabels.map((opt, i) => (
+                            <span key={i} className="bg-[#FFF8F6] border border-[#FF4802]/10 px-4 py-2 rounded-xl text-xs font-black text-[#FF4802] flex items-center gap-3">
+                                {opt}
+                                <button onClick={() => removeItem('assuranceLabels', i)} className="text-[#FF4802]/40 hover:text-red-500 transition-colors">
+                                    <XCircle className="w-4 h-4" />
+                                </button>
+                            </span>
+                        ))}
+                    </div>
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            placeholder="Add new assurance label..."
+                            value={newItem.type === 'label' ? newItem.value : ''}
+                            onChange={(e) => setNewItem({ ...newItem, type: 'label', value: e.target.value })}
+                            className="flex-1 bg-secondary border-none rounded-xl px-5 py-3 text-sm font-bold focus:ring-1 focus:ring-primary/20 outline-none"
+                        />
+                        <button onClick={() => addItem('assuranceLabels')} className="bg-[#FF4802] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all">
+                            Add Label
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

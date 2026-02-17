@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-poppins), ui-serif, Georgia, serif;
   
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -25,6 +26,7 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+  --color-brand-orange: #FF4802;
 }
 
 :root {
@@ -49,6 +51,7 @@
   --ring: #0a0a0a;
 
   --radius: 0.5rem;
+  --brand-orange: #FF4802;
 }
 
 .dark {
@@ -108,4 +111,12 @@
     .cursor-none-on-desktop * {
         cursor: none !important;
     }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }

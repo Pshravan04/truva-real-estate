@@ -32,7 +32,9 @@ export function ValuationForm() {
         projectImages: [] as string[],
         virtualTourUrl: "",
         masterPlanUrl: "",
-        floorPlanUrl: ""
+        floorPlanUrl: "",
+        reraNumber: "",
+        reraQr: ""
     });
 
     const filteredSocieties = societies.filter(s =>
@@ -102,6 +104,8 @@ export function ValuationForm() {
             virtualTourUrl: formData.virtualTourUrl,
             masterPlanUrl: formData.masterPlanUrl,
             floorPlanUrl: formData.floorPlanUrl,
+            reraNumber: formData.reraNumber,
+            reraQr: formData.reraQr,
             projectImages: formData.projectImages.filter(img => img !== "")
         };
 
@@ -219,6 +223,32 @@ export function ValuationForm() {
                                                 className="w-full pl-10 p-3 rounded-xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-[11px] h-12"
                                                 value={formData.floorPlanUrl}
                                                 onChange={(e) => setFormData({ ...formData, floorPlanUrl: e.target.value })}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2 uppercase col-span-full">
+                                    <label className="text-[10px] font-black text-muted-foreground tracking-widest ml-1">MahaRERA Details</label>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="relative">
+                                            <Info className="absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground pointer-events-none" />
+                                            <input
+                                                type="text"
+                                                placeholder="MahaRERA Number"
+                                                className="w-full pl-10 p-3 rounded-xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-[11px] h-12"
+                                                value={formData.reraNumber}
+                                                onChange={(e) => setFormData({ ...formData, reraNumber: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="relative">
+                                            <Info className="absolute left-4 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground pointer-events-none" />
+                                            <input
+                                                type="text"
+                                                placeholder="MahaRERA QR URL"
+                                                className="w-full pl-10 p-3 rounded-xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-[11px] h-12"
+                                                value={formData.reraQr}
+                                                onChange={(e) => setFormData({ ...formData, reraQr: e.target.value })}
                                             />
                                         </div>
                                     </div>
