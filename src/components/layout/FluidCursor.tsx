@@ -9,6 +9,7 @@ interface Ripple {
     y: number;
 }
 
+
 export function FluidCursor() {
     const [ripples, setRipples] = useState<Ripple[]>([]);
     const [isPointer, setIsPointer] = useState(false);
@@ -123,3 +124,4 @@ export function FluidCursor() {
         </div>
     );
 }
+
