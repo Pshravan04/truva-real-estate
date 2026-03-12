@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma';
 export async function GET() {
     try {
         const settings = await prisma.settings.findUnique({
-            where: { id: 1 }
+            where: { id: 'global_settings' }
         });
         return NextResponse.json(settings?.filterSettings || {});
     } catch (error) {
@@ -16,9 +16,9 @@ export async function PUT(request: Request) {
     try {
         const body = await request.json();
         const settings = await prisma.settings.upsert({
-            where: { id: 1 },
+            where: { id: 'global_settings' },
             update: { filterSettings: body },
-            create: { id: 1, filterSettings: body }
+            create: { id: 'global_settings', filterSettings: body }
         });
         return NextResponse.json(settings.filterSettings);
     } catch (error) {

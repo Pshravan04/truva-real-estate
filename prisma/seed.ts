@@ -133,6 +133,27 @@ async function main() {
             console.warn(`Skipping inquiry for non-existent property ${inquiry.propertyId}`)
         }
     }
+
+    // Seed Settings
+    const existingSettings = await prisma.settings.findUnique({
+        where: { id: 'global_settings' }
+    });
+
+    if (!existingSettings) {
+        await prisma.settings.create({
+            data: {
+                id: 'global_settings',
+                filterSettings: {
+                    bhkOptions: ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5+ BHK"],
+                    bathOptions: ["1", "2", "3", "4+"],
+                    locations: ["Goregaon West", "Goregaon East", "Powai", "Andheri", "Juhu"],
+                    priceSettings: { min: 10000000, max: 200000000, step: 5000000 },
+                    assuranceLabels: ["Truva Assured", "Verified", "RERA Compliant"]
+                } as any
+            }
+        });
+        console.log('Created global settings.');
+    }
 }
 
 main()

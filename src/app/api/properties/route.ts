@@ -8,20 +8,7 @@ export async function GET() {
             orderBy: { createdAt: 'desc' }
         });
 
-        // Parse JSON fields
-        const parsedProperties = properties.map(p => ({
-            ...p,
-            location: p.location ? JSON.parse(JSON.stringify(p.location)) : null,
-            stats: p.stats ? JSON.parse(JSON.stringify(p.stats)) : null,
-            amenities: p.amenities ? JSON.parse(JSON.stringify(p.amenities)) : [],
-            configurations: p.configurations ? JSON.parse(JSON.stringify(p.configurations)) : [],
-            contactDetails: p.contactDetails ? JSON.parse(JSON.stringify(p.contactDetails)) : null,
-            environmentalScores: p.environmentalScores ? JSON.parse(JSON.stringify(p.environmentalScores)) : null,
-            images: p.images ? JSON.parse(JSON.stringify(p.images)) : [],
-            projectImages: p.projectImages ? JSON.parse(JSON.stringify(p.projectImages)) : [],
-        }));
-
-        return NextResponse.json(parsedProperties);
+        return NextResponse.json(properties);
     } catch (error) {
         console.error('Error fetching properties:', error);
         return NextResponse.json({ error: 'Failed to fetch properties' }, { status: 500 });

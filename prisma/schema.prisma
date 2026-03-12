@@ -3,16 +3,16 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 // Property Model
 model Property {
-  id              String   @id @default(cuid())
+  id              String   @id @default(cuid()) @map("_id")
   title           String
   slug            String   @unique
-  description     String   @db.Text
+  description     String
   price           Float
   type            String   // 'sale' | 'rent'
   bhk             Float
@@ -32,8 +32,8 @@ model Property {
   // Simple Fields
   sellerName      String?
   developerName   String?
-  highlights      String?  @db.Text
-  connectivity    String?  @db.Text
+  highlights      String?
+  connectivity    String?
   usageType       String?  @default("RESIDENTIAL")
   constructionStatus String?
   possessionDate  String?
@@ -46,7 +46,7 @@ model Property {
   virtualTourUrl  String?
   masterPlanUrl   String?
   floorPlanUrl    String?
-  mapUrl          String?  @db.Text
+  mapUrl          String?
   
   // MahaRERA
   reraNumber      String?
@@ -57,12 +57,12 @@ model Property {
 
 // Submission Model (Valuation Requests)
 model Submission {
-  id              String   @id @default(cuid())
+  id              String   @id @default(cuid()) @map("_id")
   sellerId        String?
   
   // Property Basic Info
   propertyName    String?
-  description     String?  @db.Text
+  description     String?
   location        String?
   carpetArea      Float?
   floor           Float?
@@ -84,14 +84,14 @@ model Submission {
   image           String?   // Cover image
   projectImages   Json?     // Array of strings
   amenities       Json?     // Array of strings
-  highlights      String?   @db.Text
-  connectivity    String?   @db.Text
+  highlights      String?
+  connectivity    String?
   
   // URLs
   virtualTourUrl  String?
   masterPlanUrl   String?
   floorPlanUrl    String?
-  mapUrl          String?   @db.Text
+  mapUrl          String?
   
   // RERA
   reraNumber      String?
@@ -106,18 +106,18 @@ model Submission {
 
 // Inquiry Model
 model Inquiry {
-  id         String   @id @default(cuid())
+  id         String   @id @default(cuid()) @map("_id")
   propertyId String
   property   Property @relation(fields: [propertyId], references: [id])
   name       String
   email      String
   phone      String
-  message    String   @db.Text
+  message    String
   createdAt  DateTime @default(now())
 }
 
 // Global Settings (Singleton)
 model Settings {
-  id              Int      @id @default(1)
+  id              String   @id @map("_id")
   filterSettings  Json     // { bhkOptions, bathOptions, locations, priceSettings... }
 }
