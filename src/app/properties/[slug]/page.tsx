@@ -80,7 +80,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-3">
-                                        <span className="bg-primary text-white text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest flex items-center gap-1 shadow-lg shadow-primary/20">
+                                        <span className="bg-[#FF6F38] text-white text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest flex items-center gap-1 shadow-lg shadow-[#FF6F38]/20">
                                             <Shield className="w-3 h-3" /> Jangid Brothers Assured
                                         </span>
                                         <span className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] opacity-60">
