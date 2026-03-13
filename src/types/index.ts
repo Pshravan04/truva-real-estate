@@ -36,6 +36,7 @@ export interface Property {
     };
     price: number;
     type: 'sale' | 'rent';
+    category?: 'PRIMARY' | 'SECONDARY' | 'UNDER_CONSTRUCTION';
     usageType?: 'RESIDENTIAL' | 'COMMERCIAL';
     constructionStatus?: 'READY_TO_MOVE' | 'UNDER_CONSTRUCTION' | 'NEAR_POSSESSION';
     possessionDate?: string;

@@ -52,6 +52,19 @@ export function BuyPropertyCard({ property }: BuyPropertyCardProps) {
             {/* Content */}
             <div className="p-5 flex flex-col flex-1">
                 <div className="mb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className={cn(
+                            "px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-widest",
+                            property.type === 'sale' ? "bg-primary text-white" : "bg-green-600 text-white"
+                        )}>
+                            For {property.type}
+                        </span>
+                        {property.category && (
+                            <span className="px-2 py-0.5 rounded-md bg-[#FF6F38]/10 text-[#FF6F38] text-[8px] font-black uppercase tracking-widest border border-[#FF6F38]/20">
+                                {property.category.replace(/_/g, ' ')}
+                            </span>
+                        )}
+                    </div>
                     <h3 className="text-[17px] font-bold text-primary group-hover:text-[#FF6F38] transition-colors tracking-tight leading-tight">
                         {property.bhk} BHK in {property.title.split(" ").slice(-1)}
                     </h3>

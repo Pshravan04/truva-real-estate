@@ -15,6 +15,7 @@ model Property {
   description     String
   price           Float
   type            String   // 'sale' | 'rent'
+  category        String?  @default("SECONDARY") // 'PRIMARY' | 'SECONDARY' | 'UNDER_CONSTRUCTION'
   bhk             Float
   status          String   @default("LISTED") // 'LISTED' | 'SOLD' | 'ARCHIVED'
   isFeatured      Boolean  @default(false)

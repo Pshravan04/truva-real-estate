@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useData } from "@/context/DataContext";
 import { Footer } from "@/components/layout/Footer";
 import { BuySidebar } from "@/components/property/BuySidebar";
@@ -12,8 +12,19 @@ import { cn } from "@/lib/utils";
 export default function BuyPage() {
     const { properties, filterSettings } = useData();
     const [selectedLocality, setSelectedLocality] = useState("");
+    const [selectedListingType, setSelectedListingType] = useState<"sale" | "rent">("sale");
+    const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedBhk, setSelectedBhk] = useState("");
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, filterSettings.priceSettings.max * 10000000]);
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 500000000]);
+
+    // Reset price range when listing type changes
+    useEffect(() => {
+        if (selectedListingType === "sale") {
+            setPriceRange([0, 500000000]);
+        } else {
+            setPriceRange([0, 500000]);
+        }
+    }, [selectedListingType]);
     const [selectedBath, setSelectedBath] = useState("");
     const [sortBy, setSortBy] = useState("relevance");
     const [isSortOpen, setIsSortOpen] = useState(false);
@@ -52,8 +63,10 @@ export default function BuyPage() {
             const matchesBhk = selectedBhk ? p.bhk === parseInt(selectedBhk) : true;
             const matchesPrice = p.price <= priceRange[1];
             const matchesBath = selectedBath ? p.stats.bathrooms === parseInt(selectedBath) : true;
+            const matchesListingType = p.type === selectedListingType;
+            const matchesCategory = selectedCategory ? p.category === selectedCategory : true;
 
-            return matchesLocality && matchesBhk && matchesPrice && matchesBath && p.status === "LISTED";
+            return matchesLocality && matchesBhk && matchesPrice && matchesBath && matchesListingType && matchesCategory && p.status === "LISTED";
         })
         .sort((a, b) => {
             if (sortBy === "price-asc") return a.price - b.price;
@@ -73,10 +86,14 @@ export default function BuyPage() {
                         localities={localities}
                         selectedLocality={selectedLocality}
                         onLocalityChange={setSelectedLocality}
+                        selectedListingType={selectedListingType}
+                        onListingTypeChange={setSelectedListingType}
+                        selectedCategory={selectedCategory}
+                        onCategoryChange={setSelectedCategory}
                         selectedBhk={selectedBhk}
                         onBhkChange={setSelectedBhk}
-                        priceRange={[0, priceRange[1] / 10000000]}
-                        onPriceChange={(val) => setPriceRange([0, val * 10000000])}
+                        priceRange={priceRange}
+                        onPriceChange={(val: number) => setPriceRange([0, val])}
                         selectedBath={selectedBath}
                         onBathChange={setSelectedBath}
                     />

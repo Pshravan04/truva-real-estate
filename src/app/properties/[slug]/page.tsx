@@ -6,7 +6,8 @@ import { notFound } from "next/navigation";
 import {
     MapPin, Bed, Bath, Square, Share2, Heart,
     Shield, Check, Eye, Zap, Info, Phone,
-    Mail, Building2, Layout, Calendar, Globe, Sparkles
+    Mail, Building2, Layout, Calendar, Globe, Sparkles,
+    Calculator
 } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
 import { ImageGallery } from "@/components/property/ImageGallery";
@@ -14,13 +15,13 @@ import { useData } from "@/context/DataContext";
 import { WhatsAppButton } from "@/components/property/WhatsAppButton";
 import { ScheduleCallForm } from "@/components/property/ScheduleCallForm";
 import { ImmersiveSections } from "@/components/property/ImmersiveSections";
+import { EMICalculator } from "@/components/property/EMICalculator";
 import { cn } from "@/lib/utils";
+import { Property } from "@/types";
 
 interface PageProps {
     params: Promise<{ slug: string }>;
 }
-
-import { Property } from "@/types";
 
 export default function PropertyDetailsPage({ params }: PageProps) {
     const { slug } = use(params);
@@ -33,7 +34,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
         if (found) {
             setProperty(found);
         } else if (slug === 'dynamic-asset-preview') {
-            // Dynamic fallback logic
             setProperty({
                 id: '999',
                 title: "Oberoi Realty Asset",
@@ -131,7 +131,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
 
                             {/* MahaRERA Details */}
                             {(property.reraNumber || property.reraQr) && (
-                                <div className="flex items-center gap-4 p-6 bg-white rounded-[24px] border border-border/50 shadow-sm animate-in fade-in slide-in-from-bottom-2">
+                                <div className="flex items-center gap-4 p-6 bg-white rounded-[24px] border border-border/50 shadow-sm">
                                     <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center">
                                         <Shield className="w-6 h-6 text-primary" />
                                     </div>
@@ -200,6 +200,38 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             )}
                         </div>
 
+                        <ImmersiveSections property={property} />
+
+                        {/* Virtual Tour Section */}
+                        {property.virtualTourUrl && (
+                            <div className="space-y-8 pt-12 border-t border-border/50">
+                                <div className="space-y-2">
+                                    <div className="inline-flex items-center gap-2 bg-[#FF6F38]/10 text-[#FF6F38] text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-[#FF6F38]/20">
+                                        <Eye className="w-3.5 h-3.5" /> Virtual Experience
+                                    </div>
+                                    <h2 className="text-3xl font-black text-primary tracking-tight">Immersive 3D Tour</h2>
+                                    <p className="text-muted-foreground font-medium">Walk through your potential future home from anywhere in the world.</p>
+                                </div>
+                                <div className="aspect-video w-full rounded-[40px] border border-border/50 overflow-hidden shadow-2xl shadow-primary/5 bg-secondary/20 relative group">
+                                    <iframe
+                                        src={property.virtualTourUrl}
+                                        width="100%"
+                                        height="100%"
+                                        style={{ border: 0 }}
+                                        allowFullScreen
+                                        loading="lazy"
+                                        className="relative z-10"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center z-0">
+                                        <div className="flex flex-col items-center gap-4 text-primary/40">
+                                            <Zap className="w-12 h-12 animate-pulse" />
+                                            <span className="text-[10px] font-black uppercase tracking-widest">Loading Immersive Space...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
                         {/* Unit Configurations */}
                         {property.configurations && property.configurations.length > 0 && (
                             <div className="space-y-6">
@@ -242,8 +274,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             </div>
                         </div>
 
-                        <ImmersiveSections property={property} />
-
                         {/* Map Section */}
                         {property.mapUrl && (
                             <div className="space-y-6">
@@ -267,18 +297,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             </div>
                         )}
 
-                        {/* Project Visualization Section */}
-                        {property.projectImages && property.projectImages.length > 0 && (
-                            <div className="space-y-6">
-                                <div className="flex items-center justify-between">
-                                    <h2 className="text-xl font-black text-primary uppercase tracking-tight">The Project</h2>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-                                        <Sparkles className="w-3 h-3 text-accent" /> Premium Vision
-                                    </span>
-                                </div>
-                                <ImageGallery images={property.projectImages} />
-                            </div>
-                        )}
+                        <ImageGallery images={property.projectImages || []} />
                     </div>
 
                     {/* Sidebar / Conversion Hub */}
@@ -286,39 +305,37 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                         <div className="sticky top-24 space-y-6">
                             {/* Contact Hub */}
                             <div className="bg-white p-8 rounded-[40px] border border-border shadow-2xl shadow-primary/5 space-y-8">
-                                <div className="space-y-2">
-                                    <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Presented By</p>
-                                    <h3 className="text-2xl font-black text-primary flex items-center gap-2">
-                                        <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                                            <span className="text-xs font-black">{property.sellerName?.charAt(0)}</span>
-                                        </div>
-                                        {property.sellerName}
-                                    </h3>
-                                    <div className="flex flex-col gap-2 pt-4">
-                                        <a href={`tel:${property.contactDetails?.phone}`} className="flex items-center gap-3 text-xs font-bold text-muted-foreground hover:text-primary transition-colors">
-                                            <div className="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
-                                                <Phone className="w-4 h-4" />
-                                            </div>
-                                            {property.contactDetails?.phone}
-                                        </a>
-                                        <a href={`mailto:${property.contactDetails?.email}`} className="flex items-center gap-3 text-xs font-bold text-muted-foreground hover:text-primary transition-colors">
-                                            <div className="w-8 h-8 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
-                                                <Mail className="w-4 h-4" />
-                                            </div>
-                                            {property.contactDetails?.email}
-                                        </a>
+                                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Presented By</p>
+                                <h3 className="text-lg font-black text-primary flex items-start gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-[#FF6F38]/10 flex items-center justify-center flex-shrink-0">
+                                        <Shield className="w-5 h-5 text-[#FF6F38]" />
                                     </div>
+                                    Authorized Jangid Brothers <br /> Seller Partner
+                                </h3>
+                                <div className="flex flex-col gap-2 pt-4">
+                                    <a href={`tel:+919152012345`} className="flex items-center gap-3 text-xs font-bold text-muted-foreground hover:text-primary transition-colors">
+                                        <div className="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
+                                            <Phone className="w-4 h-4" />
+                                        </div>
+                                        +91 91520 12345
+                                    </a>
+                                    <a href={`mailto:partners@jangidbrothers.com`} className="flex items-center gap-3 text-xs font-bold text-muted-foreground hover:text-primary transition-colors">
+                                        <div className="w-8 h-8 rounded-xl bg-[#FF6F38]/5 flex items-center justify-center text-[#FF6F38]">
+                                            <Mail className="w-4 h-4" />
+                                        </div>
+                                        partners@jangidbrothers.com
+                                    </a>
                                 </div>
+                            </div>
 
-                                <WhatsAppButton
-                                    propertyId={property.id}
-                                    propertyTitle={property.title}
-                                    phoneNumber={property.contactDetails?.phone || "+919876543210"}
-                                />
+                            <WhatsAppButton
+                                propertyId={property.id}
+                                propertyTitle={property.title}
+                                phoneNumber={property.contactDetails?.phone || "+919876543210"}
+                            />
 
-                                <div className="pt-4">
-                                    <ScheduleCallForm configurations={property.configurations} />
-                                </div>
+                            <div className="pt-4">
+                                <ScheduleCallForm configurations={property.configurations} />
                             </div>
 
                             {/* Trust Guarantee */}
@@ -338,6 +355,23 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                         </div>
                     </div>
                 </div>
+
+                {/* EMI Calculator Section */}
+                {property.type === 'sale' && (
+                    <div className="space-y-8 pt-12 border-t border-border/50">
+                        <div className="space-y-2">
+                            <div className="inline-flex items-center gap-2 bg-[#FF6F38]/10 text-[#FF6F38] text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-[#FF6F38]/20">
+                                <Calculator className="w-3.5 h-3.5" /> Finance Planning
+                            </div>
+                            <h2 className="text-3xl font-black text-primary tracking-tight">Home Loan Estimator</h2>
+                            <p className="text-muted-foreground font-medium">Estimate your monthly payments for this specific property.</p>
+                        </div>
+                        <EMICalculator
+                            initialAmount={property.price}
+                            className="!p-8 !shadow-none border border-border/50 bg-white"
+                        />
+                    </div>
+                )}
             </div>
 
             <Footer />

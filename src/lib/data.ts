@@ -115,13 +115,14 @@ export const properties: Property[] = [
         highlights: "Premium Italian marble flooring, Modular kitchen with built-in appliances, Custom designer lighting.",
         connectivity: "5 mins to Western Express Highway, 10 mins to Goregaon Railway Station, Walking distance to Hub Mall.",
         developerName: "Ekta World",
-        sellerName: "Amit Malhotra",
+        sellerName: "Authorized Jangid Brothers Seller Partner",
         contactDetails: {
-            phone: "+91 98200 12345",
-            email: "amit.m@example.com"
+            phone: "+91 91520 12345",
+            email: "partners@jangidbrothers.com"
         },
         price: 35000000,
         type: "sale",
+        category: "SECONDARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
         bhk: 3,
@@ -177,13 +178,14 @@ export const properties: Property[] = [
         highlights: "Direct access to Oberoi Mall, High-speed elevators, Unobstructed Aarey views.",
         connectivity: "Directly connected to Western Express Highway, 2 mins to proposed Metro station.",
         developerName: "Oberoi Realty",
-        sellerName: "Siddharth Jain",
+        sellerName: "Authorized Jangid Brothers Seller Partner",
         contactDetails: {
-            phone: "+91 99300 54321",
-            email: "sid.jain@example.com"
+            phone: "+91 91520 12345",
+            email: "partners@jangidbrothers.com"
         },
         price: 42000000,
         type: "sale",
+        category: "PRIMARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
         bhk: 2,
@@ -234,13 +236,14 @@ export const properties: Property[] = [
         highlights: "Lake-facing deck, VRF air conditioning, International standard safety systems.",
         connectivity: "2 mins to JVLR, 15 mins to International Airport, Close to Hiranandani Hospital.",
         developerName: "L&T Realty",
-        sellerName: "Neha Gupta",
+        sellerName: "Authorized Jangid Brothers Seller Partner",
         contactDetails: {
-            phone: "+91 98765 09876",
-            email: "neha.g@example.com"
+            phone: "+91 91520 12345",
+            email: "partners@jangidbrothers.com"
         },
         price: 52000000,
         type: "sale",
+        category: "PRIMARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
         bhk: 3,
@@ -286,13 +289,14 @@ export const properties: Property[] = [
         highlights: "Excellent daylighting, Clubhouse access, Close to corporate hubs.",
         connectivity: "Walking distance to Kanjurmarg Station, Easy access to LBS Marg.",
         developerName: "Lodha Group",
-        sellerName: "Pankaj Desai",
+        sellerName: "Authorized Jangid Brothers Seller Partner",
         contactDetails: {
-            phone: "+91 91234 56789",
-            email: "pankaj.d@example.com"
+            phone: "+91 91520 12345",
+            email: "partners@jangidbrothers.com"
         },
         price: 18500000,
         type: "sale",
+        category: "SECONDARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
         bhk: 2,
@@ -336,13 +340,14 @@ export const properties: Property[] = [
         highlights: "Private elevator lobby, Designer kitchen, Concierge services, Alfresco dining area.",
         connectivity: "Located off Link Road, 10 mins to Juhu Beach, Close to premium schools and hospitals.",
         developerName: "Rustomjee Group",
-        sellerName: "Rajesh Mehra",
+        sellerName: "Authorized Jangid Brothers Seller Partner",
         contactDetails: {
-            phone: "+91 98200 55667",
-            email: "rajesh.m@example.com"
+            phone: "+91 91520 12345",
+            email: "partners@jangidbrothers.com"
         },
         price: 125000000,
         type: "sale",
+        category: "PRIMARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
         bhk: 4,
@@ -388,13 +393,14 @@ export const properties: Property[] = [
         highlights: "Botanical garden views, Floor-to-ceiling windows, Italian marble finishes.",
         connectivity: "Excellent connectivity to South Mumbai via Eastern Freeway, 10 mins to Byculla Station.",
         developerName: "Piramal Realty",
-        sellerName: "Anjali Khanna",
+        sellerName: "Authorized Jangid Brothers Seller Partner",
         contactDetails: {
-            phone: "+91 99887 76655",
-            email: "anjali.k@example.com"
+            phone: "+91 91520 12345",
+            email: "partners@jangidbrothers.com"
         },
         price: 45000000,
         type: "sale",
+        category: "UNDER_CONSTRUCTION",
         usageType: "RESIDENTIAL",
         constructionStatus: "UNDER_CONSTRUCTION",
         possessionDate: "Dec 2025",
@@ -480,5 +486,44 @@ export const properties: Property[] = [
         viewOrientation: "Park View",
         auditScore: 94,
         mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.9!2d72.8!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEwJzAwLjAiTiA3MsKwNTAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890128!5m2!1sen!2sin",
+        category: "SECONDARY"
+    },
+    {
+        id: "8",
+        title: "Modern 2 BHK for Rent in Powai",
+        slug: "2-bhk-rent-powai",
+        description: "Experience luxury living in this fully furnished 2 BHK for rent in the heart of Powai.",
+        highlights: "Lake view, 24/7 water supply, Near Hiranandani gardens.",
+        connectivity: "Close to metro station, easy access to JVLR.",
+        developerName: "Hiranandani Developers",
+        sellerName: "Authorized Jangid Brothers Seller Partner",
+        contactDetails: {
+            phone: "+91 91520 12345",
+            email: "partners@jangidbrothers.com"
+        },
+        price: 75000,
+        type: "rent",
+        category: "SECONDARY",
+        usageType: "RESIDENTIAL",
+        constructionStatus: "READY_TO_MOVE",
+        bhk: 2,
+        configurations: [
+            { configuration: "2 BHK", price: "75k/mo", area: "950 sqft" }
+        ],
+        location: {
+            area: "Powai",
+            city: "Mumbai",
+            address: "Hiranandani Gardens, Powai, Mumbai",
+            tower: "Canary",
+            floor: 12
+        },
+        amenities: [
+            { icon: "Shield", label: "Security" },
+            { icon: "Waves", label: "Pool" },
+            { icon: "Dumbbell", label: "Gym" }
+        ],
+        images: ["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
+        stats: { bathrooms: 2, areaSqFt: 950 },
+        status: "LISTED"
     }
 ];
