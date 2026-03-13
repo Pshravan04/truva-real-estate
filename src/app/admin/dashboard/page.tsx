@@ -137,7 +137,7 @@ export default function AdminDashboard() {
                                                     <th className="px-6 py-4">Asset</th>
                                                     <th className="px-6 py-4">Price</th>
                                                     <th className="px-6 py-4">Status</th>
-                                                    <th className="px-6 py-4">Truva Assured</th>
+                                                    <th className="px-6 py-4">Jangid Brothers Assured</th>
                                                     <th className="px-6 py-4 text-center">Actions</th>
                                                 </tr>
                                             </thead>
@@ -527,7 +527,7 @@ function TaxonomyControl() {
                 {/* Locations */}
                 <div className="bg-white p-8 rounded-[32px] border border-border space-y-6">
                     <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
-                        <MapPin className="w-4 h-4 text-[#FF4802]" /> Primary Locations
+                        <MapPin className="w-4 h-4 text-[#FF6F38]" /> Primary Locations
                     </h3>
                     <div className="flex flex-wrap gap-2">
                         {filterSettings.locations.map((loc, i) => (
@@ -556,7 +556,7 @@ function TaxonomyControl() {
                 {/* Price Settings */}
                 <div className="bg-white p-8 rounded-[32px] border border-border space-y-6">
                     <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
-                        <IndianRupee className="w-4 h-4 text-[#FF4802]" /> Price Slider Limits
+                        <IndianRupee className="w-4 h-4 text-[#FF6F38]" /> Price Slider Limits
                     </h3>
                     <div className="grid grid-cols-3 gap-4">
                         <div className="space-y-2">
@@ -637,13 +637,13 @@ function TaxonomyControl() {
                 {/* Assurance Labels */}
                 <div className="col-span-full bg-white p-8 rounded-[32px] border border-border space-y-6">
                     <h3 className="font-bold flex items-center gap-2 text-sm uppercase tracking-wider">
-                        <ShieldCheck className="w-4 h-4 text-[#FF4802]" /> Truva Assurance Labels
+                        <ShieldCheck className="w-4 h-4 text-[#FF6F38]" /> Jangid Brothers Assurance Labels
                     </h3>
                     <div className="flex flex-wrap gap-2">
                         {filterSettings.assuranceLabels.map((opt, i) => (
-                            <span key={i} className="bg-[#FFF8F6] border border-[#FF4802]/10 px-4 py-2 rounded-xl text-xs font-black text-[#FF4802] flex items-center gap-3">
+                            <span key={i} className="bg-[#FFF8F6] border border-[#FF6F38]/10 px-4 py-2 rounded-xl text-xs font-black text-[#FF6F38] flex items-center gap-3">
                                 {opt}
-                                <button onClick={() => removeItem('assuranceLabels', i)} className="text-[#FF4802]/40 hover:text-red-500 transition-colors">
+                                <button onClick={() => removeItem('assuranceLabels', i)} className="text-[#FF6F38]/40 hover:text-red-500 transition-colors">
                                     <XCircle className="w-4 h-4" />
                                 </button>
                             </span>
@@ -657,7 +657,7 @@ function TaxonomyControl() {
                             onChange={(e) => setNewItem({ ...newItem, type: 'label', value: e.target.value })}
                             className="flex-1 bg-secondary border-none rounded-xl px-5 py-3 text-sm font-bold focus:ring-1 focus:ring-primary/20 outline-none"
                         />
-                        <button onClick={() => addItem('assuranceLabels')} className="bg-[#FF4802] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all">
+                        <button onClick={() => addItem('assuranceLabels')} className="bg-[#FF6F38] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all">
                             Add Label
                         </button>
                     </div>

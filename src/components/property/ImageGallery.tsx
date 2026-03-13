@@ -151,7 +151,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
                         {/* Lightbox Header */}
                         <div className="flex items-center justify-between p-8">
                             <div className="text-white space-y-1">
-                                <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50">Truva Immersive Gallery</p>
+                                <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50">Jangid Brothers Immersive Gallery</p>
                                 <h3 className="text-lg font-black uppercase tracking-tight">Luxury Property Preview</h3>
                             </div>
                             <button

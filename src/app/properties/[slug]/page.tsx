@@ -43,7 +43,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                 type: "sale",
                 bhk: 3,
                 location: { area: "Goregaon East", city: "Mumbai", address: "Goregaon East, Mumbai" },
-                amenities: [{ icon: "Shield", label: "Truva Verified" }],
+                amenities: [{ icon: "Shield", label: "Jangid Brothers Verified" }],
                 images: ["https://images.unsplash.com/photo-1600607687644-c7171b42498b"],
                 stats: { bathrooms: 3, areaSqFt: 1450 },
                 status: "LISTED"
@@ -81,10 +81,10 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                 <div className="space-y-2">
                                     <div className="flex items-center gap-3">
                                         <span className="bg-primary text-white text-[9px] font-black px-2 py-1 rounded-md uppercase tracking-widest flex items-center gap-1 shadow-lg shadow-primary/20">
-                                            <Shield className="w-3 h-3" /> Truva Assured
+                                            <Shield className="w-3 h-3" /> Jangid Brothers Assured
                                         </span>
                                         <span className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] opacity-60">
-                                            ID: TRV-{property.id}00
+                                            ID: JB-{property.id}00
                                         </span>
                                     </div>
                                     <h1 className="text-4xl md:text-5xl font-black text-primary tracking-tight">
@@ -145,13 +145,13 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                                 </div>
                                             )}
                                             {property.reraQr && (
-                                                <a 
-                                                    href={property.reraQr} 
-                                                    target="_blank" 
+                                                <a
+                                                    href={property.reraQr}
+                                                    target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary hover:bg-secondary/80 text-primary text-xs font-bold transition-all group"
                                                 >
-                                                    <Zap className="w-4 h-4 group-hover:scale-110 transition-transform" /> 
+                                                    <Zap className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                                     View QR Certificate
                                                 </a>
                                             )}
@@ -327,7 +327,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                 <div className="relative z-10 space-y-4">
                                     <div className="flex items-center gap-2">
                                         <Check className="w-5 h-5 p-1 bg-white text-primary rounded-full" />
-                                        <span className="text-[10px] font-black uppercase tracking-widest">Truva Verified Listing</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest">Jangid Brothers Verified Listing</span>
                                     </div>
                                     <h3 className="text-xl font-black">Zero-Brokerage Guarantee</h3>
                                     <p className="text-[11px] leading-relaxed font-bold opacity-80 uppercase tracking-wider">

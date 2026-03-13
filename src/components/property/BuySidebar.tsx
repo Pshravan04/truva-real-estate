@@ -34,7 +34,7 @@ export function BuySidebar({
             {/* Locality */}
             <section className="space-y-6">
                 <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.25em] flex items-center gap-2">
-                    <MapPin className="w-3 h-3 text-[#FF4802]" /> Locality
+                    <MapPin className="w-3 h-3 text-[#FF6F38]" /> Locality
                 </h3>
                 <div className="flex flex-wrap gap-2">
                     <button
@@ -68,7 +68,7 @@ export function BuySidebar({
             {/* Bedrooms */}
             <section className="space-y-6">
                 <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.25em] flex items-center gap-2">
-                    <Bed className="w-3 h-3 text-[#FF4802]" /> Bedrooms
+                    <Bed className="w-3 h-3 text-[#FF6F38]" /> Bedrooms
                 </h3>
                 <div className="flex flex-wrap gap-2">
                     <button
@@ -103,9 +103,9 @@ export function BuySidebar({
             <section className="space-y-6">
                 <div className="flex justify-between items-center">
                     <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.25em] flex items-center gap-2">
-                        <IndianRupee className="w-3 h-3 text-[#FF4802]" /> Price
+                        <IndianRupee className="w-3 h-3 text-[#FF6F38]" /> Price
                     </h3>
-                    <span className="text-[11px] font-black text-[#FF4802] tracking-widest">[ {filterSettings.priceSettings.min} - {filterSettings.priceSettings.max} CR ]</span>
+                    <span className="text-[11px] font-black text-[#FF6F38] tracking-widest">[ {filterSettings.priceSettings.min} - {filterSettings.priceSettings.max} CR ]</span>
                 </div>
                 <div className="px-2">
                     <input
@@ -115,7 +115,7 @@ export function BuySidebar({
                         step={filterSettings.priceSettings.step}
                         value={priceRange[1]}
                         onChange={(e) => onPriceChange(parseFloat(e.target.value))}
-                        className="w-full h-1.5 bg-border rounded-lg appearance-none cursor-pointer accent-[#FF4802]"
+                        className="w-full h-1.5 bg-border rounded-lg appearance-none cursor-pointer accent-[#FF6F38]"
                     />
                     <div className="flex justify-between mt-4 text-[10px] font-bold text-primary/20">
                         <span>{filterSettings.priceSettings.min}</span>
@@ -130,7 +130,7 @@ export function BuySidebar({
             {/* Bathrooms */}
             <section className="space-y-6">
                 <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.25em] flex items-center gap-2">
-                    <Bath className="w-3 h-3 text-[#FF4802]" /> Bathrooms
+                    <Bath className="w-3 h-3 text-[#FF6F38]" /> Bathrooms
                 </h3>
                 <div className="flex flex-wrap gap-2">
                     {filterSettings.bathOptions.map((bath) => (
@@ -150,17 +150,17 @@ export function BuySidebar({
                 </div>
             </section>
 
-            {/* Truva Assured Badge */}
-            <div className="p-8 bg-[#FFF8F6] rounded-[40px] relative overflow-hidden border border-[#FF4802]/5 group">
-                <div className="absolute top-4 right-4 text-[#FF4802]/20">
+            {/* Jangid Brothers Assured Badge */}
+            <div className="p-8 bg-[#FFF8F6] rounded-[40px] relative overflow-hidden border border-[#FF6F38]/5 group">
+                <div className="absolute top-4 right-4 text-[#FF6F38]/20">
                     <ShieldCheck className="w-10 h-10 rotate-12" />
                 </div>
                 <div className="space-y-6 relative z-10">
-                    <p className="text-[11px] font-black text-primary tracking-widest uppercase">All Truva homes are</p>
+                    <p className="text-[11px] font-black text-primary tracking-widest uppercase">All Jangid Brothers homes are</p>
                     <ul className="space-y-4">
                         {filterSettings.assuranceLabels.map((item, i) => (
-                            <li key={i} className="flex items-center gap-3 text-[10px] font-black text-[#FF4802] uppercase tracking-wide">
-                                <div className="w-4 h-4 rounded-full bg-[#FF4802] flex items-center justify-center">
+                            <li key={i} className="flex items-center gap-3 text-[10px] font-black text-[#FF6F38] uppercase tracking-wide">
+                                <div className="w-4 h-4 rounded-full bg-[#FF6F38] flex items-center justify-center">
                                     <Check className="w-2.5 h-2.5 text-white" />
                                 </div>
                                 {item}

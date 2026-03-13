@@ -3,7 +3,7 @@ import { Facebook, Instagram, Linkedin, Youtube, Phone, MessageSquare } from "lu
 
 export function Footer() {
     return (
-        <footer className="bg-[#FF4802] text-white pt-24 pb-16 font-sans overflow-hidden">
+        <footer className="bg-[#FF6F38] text-white pt-24 pb-16 font-sans overflow-hidden">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-24">
                     {/* Brand & Socials */}
@@ -27,11 +27,11 @@ export function Footer() {
                     {/* Contact Card */}
                     <div className="w-full md:w-80 bg-white p-6 rounded-[24px] shadow-2xl relative">
                         <div className="flex items-center gap-4 mb-6">
-                            <div className="w-10 h-10 bg-[#FF4802] rounded-full flex items-center justify-center">
-                                <span className="text-white font-black text-lg">A</span>
+                            <div className="w-10 h-10 bg-[#FF6F38] rounded-full flex items-center justify-center">
+                                <span className="text-white font-black text-lg">J</span>
                             </div>
                             <div>
-                                <h4 className="text-black font-black text-sm uppercase tracking-tight">Truva HQ</h4>
+                                <h4 className="text-black font-black text-sm uppercase tracking-tight">Jangid Brothers HQ</h4>
                                 <p className="text-black/60 text-xs font-bold">+91 8655479971</p>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ export function Footer() {
                         <h4 className="text-[10px] font-black uppercase tracking-[0.2em] mb-6 text-white/60">For Sellers</h4>
                         <ul className="space-y-4">
                             <li><Link href="/seller" className="text-sm font-black hover:opacity-70 transition-opacity">Get free home valuation</Link></li>
-                            <li><Link href="/why-sell" className="text-sm font-black hover:opacity-70 transition-opacity">Why sell with Truva?</Link></li>
+                            <li><Link href="/why-sell" className="text-sm font-black hover:opacity-70 transition-opacity">Why sell with Jangid Brothers?</Link></li>
                         </ul>
                     </div>
 

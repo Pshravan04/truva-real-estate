@@ -14,8 +14,8 @@ import { DataProvider } from "@/context/DataContext";
 import { Navbar } from "@/components/layout/Navbar";
 
 export const metadata: Metadata = {
-  title: "Truva - Buy & Sell Flats in Mumbai",
-  description: "Radically delightful home buying experience. Fully renovated homes in the finest societies.",
+  title: "Jangid Brothers | Premium Real Estate Discovery",
+  description: "Experience radically delightful real estate with Jangid Brothers. Transparent, verified, and premium property listings.",
 };
 
 export default function RootLayout({

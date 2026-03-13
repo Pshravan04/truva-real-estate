@@ -25,7 +25,7 @@ export default function SellPage() {
                         </h1>
                         <p className="text-xl text-muted-foreground font-medium max-w-lg">
                             Get the best market price, zero spam calls, and genuine buyers.
-                            Truva manages the entire process for you.
+                            Jangid Brothers manages the entire process for you.
                         </p>
 
                         <div className="grid grid-cols-1 gap-8 mt-12">

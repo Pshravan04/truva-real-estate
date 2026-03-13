@@ -26,7 +26,7 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-  --color-brand-orange: #FF4802;
+  --color-brand-orange: #FF6F38;
 }
 
 :root {
@@ -42,7 +42,7 @@
   --muted: #f4f4f5;
   --muted-foreground: #71717a;
 
-  /* Truva Gold Accent - approximating a premium gold color */
+  /* Jangid Brothers Gold Accent - approximating a premium gold color */
   --accent: #D4AF37; 
   --accent-foreground: #0a0a0a;
 
@@ -51,7 +51,7 @@
   --ring: #0a0a0a;
 
   --radius: 0.5rem;
-  --brand-orange: #FF4802;
+  --brand-orange: #FF6F38;
 }
 
 .dark {

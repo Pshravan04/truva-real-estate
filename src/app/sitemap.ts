@@ -2,14 +2,14 @@ import { MetadataRoute } from 'next'
 import { properties } from '@/lib/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://truva.in' // Assuming this is the domain, or I should use a generic one or localhost for now, but truva.in is good for production desire. User said "live it on netlify", so maybe "https://truva.netlify.app" or similar. I'll use a placeholder variable.
+    const baseUrl = 'https://jangidbrothers.in' // Assuming this is the domain...
 
     // Realistically, the user will configure the domain in Netlify. 
     // For now I'll use a relative path if possible? No, sitemaps need absolute URLs.
     // I'll genericize it or ask user. 
     // Actually, I'll use a standard placeholder and comment it.
 
-    const domain = process.env.NEXT_PUBLIC_BASE_URL || 'https://truva-demo.netlify.app';
+    const domain = process.env.NEXT_PUBLIC_BASE_URL || 'https://jangidbrothers-demo.netlify.app';
 
     const propertyEntries: MetadataRoute.Sitemap = properties.map((property) => ({
         url: `${domain}/properties/${property.slug}`,

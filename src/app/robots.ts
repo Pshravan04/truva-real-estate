@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-    const domain = process.env.NEXT_PUBLIC_BASE_URL || 'https://truva-demo.netlify.app';
+    const domain = process.env.NEXT_PUBLIC_BASE_URL || 'https://jangidbrothers-demo.netlify.app';
 
     return {
         rules: {

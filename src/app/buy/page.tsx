@@ -112,7 +112,7 @@ export default function BuyPage() {
                                                     className={cn(
                                                         "w-full text-left px-5 py-2.5 text-[11px] font-bold transition-colors",
                                                         sortBy === option.id
-                                                            ? "text-[#FF4802] bg-[#FAFAFA]"
+                                                            ? "text-[#FF6F38] bg-[#FAFAFA]"
                                                             : "text-primary/60 hover:bg-[#FAFAFA] hover:text-primary"
                                                     )}
                                                 >
@@ -136,7 +136,7 @@ export default function BuyPage() {
                                     <p className="text-2xl font-black text-primary opacity-20">No matching homes found</p>
                                     <button
                                         onClick={() => { setSelectedLocality(""); setSelectedBhk(""); setPriceRange([0, 90000000]); }}
-                                        className="text-[11px] font-black uppercase tracking-widest text-[#FF4802]"
+                                        className="text-[11px] font-black uppercase tracking-widest text-[#FF6F38]"
                                     >
                                         Clear Filters
                                     </button>

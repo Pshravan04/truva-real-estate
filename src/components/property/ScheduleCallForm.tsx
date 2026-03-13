@@ -100,7 +100,7 @@ export function ScheduleCallForm({ configurations }: ScheduleCallFormProps) {
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-all" />
             </button>
             <p className="text-[9px] text-center text-muted-foreground font-bold px-4">
-                By clicking "Confirm Callback", you agree to Truva's <span className="text-primary">Terms of Service</span> and <span className="text-primary">Privacy Policy</span>.
+                By clicking "Confirm Callback", you agree to Jangid Brothers' <span className="text-primary">Terms of Service</span> and <span className="text-primary">Privacy Policy</span>.
             </p>
         </form>
     );

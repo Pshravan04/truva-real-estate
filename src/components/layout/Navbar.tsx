@@ -32,7 +32,7 @@ export function Navbar() {
     return (
         <>
             {/* Announcement Bar */}
-            <div className="bg-[#FF4802] text-white py-1 relative z-50">
+            <div className="bg-[#FF6F38] text-white py-1 relative z-50">
                 <div className="container mx-auto px-4 flex items-center justify-center gap-4 overflow-hidden whitespace-nowrap">
                     <div className="flex items-center gap-8 animate-marquee">
                         {[1, 2, 3].map((i) => (
@@ -62,7 +62,7 @@ export function Navbar() {
                             (isScrolled || !transparent) ? "text-primary" : "text-white"
                         )}
                     >
-                        Truva
+                        Jangid Brothers
                     </Link>
 
                     {/* Desktop Links */}
@@ -71,16 +71,16 @@ export function Navbar() {
                         (isScrolled || !transparent) ? "text-primary" : "text-white"
                     )}>
                         <div className="flex items-center gap-8">
-                            <Link href="/buy" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF4802] transition-colors">
+                            <Link href="/buy" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
                                 Browse Homes
                             </Link>
-                            <Link href="/seller" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF4802] transition-colors">
+                            <Link href="/seller" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
                                 Sell Your House
                             </Link>
                         </div>
 
                         <div className="flex items-center gap-6">
-                            <Link href="/saved" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF4802] transition-colors flex items-center gap-1">
+                            <Link href="/saved" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors flex items-center gap-1">
                                 <Heart className="w-3.5 h-3.5" />
                             </Link>
 

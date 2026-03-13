@@ -62,18 +62,18 @@ export default function Home() {
                   AN AVERAGE HOUSE TAKES 9-12 MONTHS TO SELL
                 </p>
                 <h2 className="text-5xl md:text-[80px] font-black leading-[0.95] tracking-tighter">
-                  Most Truva homes <br />
-                  <span className="text-[#FF4802]">sell by the weekend</span>
+                  Most Jangid Brothers homes <br />
+                  <span className="text-[#FF6F38]">sell by the weekend</span>
                 </h2>
               </div>
 
               <div className="flex flex-wrap items-center gap-12 pt-4">
-                <button className="bg-white text-black px-10 py-5 rounded-sm font-black text-[11px] uppercase tracking-widest flex items-center gap-3 hover:bg-[#FF4802] hover:text-white transition-all shadow-xl shadow-white/5">
+                <button className="bg-white text-black px-10 py-5 rounded-sm font-black text-[11px] uppercase tracking-widest flex items-center gap-3 hover:bg-[#FF6F38] hover:text-white transition-all shadow-xl shadow-white/5">
                   <MessageSquare className="w-5 h-5" />
                   Get early access
                 </button>
                 <button className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em] group">
-                  <span className="w-4 h-4 bg-[#FF4802] rounded-none inline-block" />
+                  <span className="w-4 h-4 bg-[#FF6F38] rounded-none inline-block" />
                   HERE'S WHY <MoveDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
                 </button>
               </div>
@@ -83,7 +83,7 @@ export default function Home() {
             <div className="lg:col-span-4 border-l border-white/10 flex flex-col divide-y divide-white/10">
               <div className="flex-1 p-12 md:p-16 flex flex-col justify-center gap-6 group hover:bg-white/5 transition-colors">
                 <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                  <Timer className="w-6 h-6 text-white/60 group-hover:text-[#FF4802] transition-colors" />
+                  <Timer className="w-6 h-6 text-white/60 group-hover:text-[#FF6F38] transition-colors" />
                 </div>
                 <div>
                   <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-2">AVERAGE TIME TO SELL:</p>
@@ -92,7 +92,7 @@ export default function Home() {
               </div>
               <div className="flex-1 p-12 md:p-16 flex flex-col justify-center gap-6 group hover:bg-white/5 transition-colors">
                 <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                  <LayoutDashboard className="w-6 h-6 text-white/60 group-hover:text-[#FF4802] transition-colors" />
+                  <LayoutDashboard className="w-6 h-6 text-white/60 group-hover:text-[#FF6F38] transition-colors" />
                 </div>
                 <div>
                   <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-2">TOTAL VALUE:</p>
@@ -132,7 +132,7 @@ export default function Home() {
             <div className="space-y-6">
               {[
                 {
-                  quote: "Truva made finding our dream home so easy. The transparency and verified listings saved us months of hassle.",
+                  quote: "Jangid Brothers made finding our dream home so easy. The transparency and verified listings saved us months of hassle.",
                   author: "Rahul & Priyanshi",
                   sub: "Bought in Andheri"
                 },

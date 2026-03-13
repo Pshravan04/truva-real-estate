@@ -26,7 +26,7 @@ export default function SellerPage() {
                             </div>
                             <h1 className="text-6xl md:text-8xl font-black text-primary leading-[0.95] tracking-tighter">
                                 Experience the <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-b from-primary to-primary/50">Truva Standard.</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-b from-primary to-primary/50">Jangid Brothers Standard.</span>
                             </h1>
                             <p className="text-xl text-muted-foreground font-medium max-w-2xl leading-relaxed">
                                 List your property with Mumbai's most exclusive real estate partner. Zero spam, 100% verified buyers, and AI-driven premium valuation.
@@ -36,7 +36,7 @@ export default function SellerPage() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                             {[
                                 { icon: ShieldCheck, title: "Verified Listings", desc: "100-point physical audit ensures elite quality.", color: "bg-accent text-accent-foreground" },
-                                { icon: Zap, title: "Swift Closures", desc: "Average 45 days time-to-sale for prime assets.", color: "bg-orange-500" },
+                                { icon: Zap, title: "Swift Closures", desc: "Average 45 days time-to-sale for prime assets.", color: "bg-[#FF6F38]" },
                                 { icon: BarChart3, title: "Fair Value AI", desc: "Real-time market analytics for max return.", color: "bg-purple-500" }
                             ].map((item, i) => (
                                 <div key={i} className="group bg-white p-8 rounded-[32px] border border-border/60 shadow-xl shadow-black/[0.02] hover:shadow-primary/5 transition-all text-left flex flex-col gap-5">

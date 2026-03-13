@@ -34,8 +34,8 @@ export function Hero() {
                     {/* CTAs */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
                         <Link href="/buy" className="w-full sm:w-auto">
-                            <button className="w-full bg-[#FF4802] hover:bg-[#e64002] text-white px-10 py-5 rounded-sm font-black text-[11px] uppercase tracking-widest transition-all">
-                                Browse Truva Homes
+                            <button className="w-full bg-[#FF6F38] hover:bg-[#e64002] text-white px-10 py-5 rounded-sm font-black text-[11px] uppercase tracking-widest transition-all">
+                                Browse Jangid Brothers Homes
                             </button>
                         </Link>
                         <Link href="/seller" className="w-full sm:w-auto">

@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         // Check for user in localStorage on mount
-        const storedUser = localStorage.getItem("truva_user");
+        const storedUser = localStorage.getItem("jangid_brothers_user");
         if (storedUser) {
             setUser(JSON.parse(storedUser));
         }
@@ -34,18 +34,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const login = (email: string, name: string) => {
         const newUser = { id: Math.random().toString(36).substr(2, 9), email, name };
         setUser(newUser);
-        localStorage.setItem("truva_user", JSON.stringify(newUser));
+        localStorage.setItem("jangid_brothers_user", JSON.stringify(newUser));
     };
 
     const register = (email: string, name: string) => {
         const newUser = { id: Math.random().toString(36).substr(2, 9), email, name };
         setUser(newUser);
-        localStorage.setItem("truva_user", JSON.stringify(newUser));
+        localStorage.setItem("jangid_brothers_user", JSON.stringify(newUser));
     };
 
     const logout = () => {
         setUser(null);
-        localStorage.removeItem("truva_user");
+        localStorage.removeItem("jangid_brothers_user");
     };
 
     return (

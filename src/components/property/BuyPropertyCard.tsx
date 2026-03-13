@@ -52,7 +52,7 @@ export function BuyPropertyCard({ property }: BuyPropertyCardProps) {
             {/* Content */}
             <div className="p-5 flex flex-col flex-1">
                 <div className="mb-4">
-                    <h3 className="text-[17px] font-bold text-primary group-hover:text-[#FF4802] transition-colors tracking-tight leading-tight">
+                    <h3 className="text-[17px] font-bold text-primary group-hover:text-[#FF6F38] transition-colors tracking-tight leading-tight">
                         {property.bhk} BHK in {property.title.split(" ").slice(-1)}
                     </h3>
                     <p className="text-[15px] font-bold text-muted-foreground mt-1">
