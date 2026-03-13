@@ -165,7 +165,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                         <div className="bg-white p-10 rounded-[40px] border border-border/50 shadow-sm space-y-10">
                             <div className="space-y-4">
                                 <h2 className="text-xl font-black text-primary flex items-center gap-2 uppercase tracking-tight">
-                                    <Layout className="w-5 h-5" /> The Property Experience
+                                    <Layout className="w-5 h-5" /> About Property
                                 </h2>
                                 <p className="text-muted-foreground leading-relaxed italic border-l-4 border-accent/20 pl-6 py-2">
                                     "{property.description}"
