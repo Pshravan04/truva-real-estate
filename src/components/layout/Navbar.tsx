@@ -77,6 +77,9 @@ export function Navbar() {
                             <Link href="/seller" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
                                 Sell Your House
                             </Link>
+                            <Link href="/emi" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
+                                EMI Calculator
+                            </Link>
                         </div>
 
                         <div className="flex items-center gap-6">
@@ -139,6 +142,13 @@ export function Navbar() {
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Sell
+                        </Link>
+                        <Link
+                            href="/emi"
+                            className="text-base font-medium p-2 hover:bg-muted rounded-md"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            EMI Calculator
                         </Link>
                         <Link
                             href="/saved"

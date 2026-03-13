@@ -64,7 +64,13 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
                 if (propsRes.ok) {
                     const data = await propsRes.json();
-                    if (Array.isArray(data)) setProperties(data);
+                    if (Array.isArray(data) && data.length > 0) {
+                        setProperties(data);
+                    } else {
+                        // Fallback to mock data if API returns empty
+                        const { properties: mockProps } = await import("@/lib/data");
+                        setProperties(mockProps);
+                    }
                 }
 
                 if (subsRes.ok) {
