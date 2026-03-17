@@ -290,10 +290,87 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                         <ImageGallery images={property.projectImages || []} />
 
                         {/* Rental & Utility Details */}
-                        {(property.waterSupply || property.leaseTerm) && (
+                        {property.type === 'rent' && (
                             <div className="space-y-8 pt-12 border-t border-border/50">
-                                <h2 className="text-xl font-black text-primary uppercase tracking-tight">Utilities & Terms</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <h2 className="text-xl font-black text-primary uppercase tracking-tight">Rental Terms & Conditions</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {property.depositAmount && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center">
+                                                <Info className="w-6 h-6 text-orange-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Security Deposit</p>
+                                                <p className="font-black text-sm text-primary">₹{property.depositAmount.toLocaleString()}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {property.brokerage && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center">
+                                                <Shield className="w-6 h-6 text-purple-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Brokerage</p>
+                                                <p className="font-black text-sm text-primary">{property.brokerage}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {property.maintenance && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center">
+                                                <Check className="w-6 h-6 text-green-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Maintenance</p>
+                                                <p className="font-black text-sm text-primary">{property.maintenance}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {property.leaseTerm && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
+                                                <Calendar className="w-6 h-6 text-blue-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Lease Term</p>
+                                                <p className="font-black text-sm text-primary">{property.leaseTerm}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {property.leaseType && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center">
+                                                <Building2 className="w-6 h-6 text-yellow-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Lease Type</p>
+                                                <p className="font-black text-sm text-primary">{property.leaseType}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {property.propertyCondition && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center">
+                                                <Info className="w-6 h-6 text-teal-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Condition</p>
+                                                <p className="font-black text-sm text-primary">{property.propertyCondition}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {property.propertyAge && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center">
+                                                <Calendar className="w-6 h-6 text-red-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Property Age</p>
+                                                <p className="font-black text-sm text-primary">{property.propertyAge}</p>
+                                            </div>
+                                        </div>
+                                    )}
                                     {property.waterSupply && (
                                         <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
                                             <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
@@ -305,18 +382,18 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                             </div>
                                         </div>
                                     )}
-                                    {property.leaseTerm && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center">
-                                                <Calendar className="w-6 h-6 text-orange-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Lease Term</p>
-                                                <p className="font-black text-sm text-primary">{property.leaseTerm}</p>
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
+
+                                {property.termsAndConditions && (
+                                    <div className="p-8 bg-secondary/20 rounded-[32px] border border-border/50 space-y-4">
+                                        <h3 className="text-[11px] font-black text-primary uppercase tracking-[0.2em] flex items-center gap-2">
+                                            <Shield className="w-4 h-4 text-accent" /> Owner's Terms & Conditions
+                                        </h3>
+                                        <p className="text-sm font-bold text-muted-foreground leading-relaxed pl-6">
+                                            {property.termsAndConditions}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         )}
 

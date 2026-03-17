@@ -74,8 +74,14 @@ export interface Property {
 
     // Rental Details
     depositAmount?: number;
+    brokerage?: string;
+    maintenance?: string;
     waterSupply?: string;
     leaseTerm?: string;
+    leaseType?: string;
+    propertyCondition?: string;
+    propertyAge?: string;
+    termsAndConditions?: string;
     neighbourhood?: {
         schools?: string[];
         hospitals?: string[];
@@ -130,8 +136,14 @@ export interface Submission {
     // Rental Details
     listingType?: 'sale' | 'rent';
     depositAmount?: number;
+    brokerage?: string;
+    maintenance?: string;
     waterSupply?: string;
     leaseTerm?: string;
+    leaseType?: string;
+    propertyCondition?: string;
+    propertyAge?: string;
+    termsAndConditions?: string;
     neighbourhood?: {
         schools?: string[];
         hospitals?: string[];

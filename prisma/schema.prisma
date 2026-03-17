@@ -43,8 +43,14 @@ model Property {
 
   // Rental Specifics
   depositAmount   Float?
+  brokerage       String?
+  maintenance     String?
   waterSupply     String?
   leaseTerm       String?
+  leaseType       String?
+  propertyCondition String?
+  propertyAge     String?
+  termsAndConditions String?
   neighbourhood   Json?    // { schools: [], hospitals: [], transport: [], shopping: [] }
 
   // Media URLs
@@ -106,8 +112,14 @@ model Submission {
 
   // Rental Specifics
   depositAmount   Float?
+  brokerage       String?
+  maintenance     String?
   waterSupply     String?
   leaseTerm       String?
+  leaseType       String?
+  propertyCondition String?
+  propertyAge     String?
+  termsAndConditions String?
   neighbourhood   Json?
   
   // Configurations
