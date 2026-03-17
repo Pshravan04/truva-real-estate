@@ -218,68 +218,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                 </div>
                             )}
 
-                            {property.environmentalScores && (
-                                <div className="pt-8 border-t border-border/50 space-y-8">
-                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                                        <div className="space-y-2">
-                                            <h3 className="text-[11px] font-black text-primary uppercase tracking-[0.2em] flex items-center gap-2">
-                                                <Sparkles className="w-4 h-4 text-accent" /> Elite Audit & Environmental Quality
-                                            </h3>
-                                            <p className="text-xs font-bold text-muted-foreground opacity-60 uppercase tracking-widest pl-6">Independent platform verification of living standards</p>
-                                        </div>
-                                        {property.auditScore && (
-                                            <div className="flex items-center gap-4 bg-primary/5 px-6 py-4 rounded-[24px] border border-primary/10">
-                                                <div className="text-center">
-                                                    <p className="text-[8px] font-black text-primary uppercase tracking-widest">Audit Score</p>
-                                                    <p className="text-2xl font-black text-primary leading-none">{property.auditScore}<span className="text-xs opacity-40">/100</span></p>
-                                                </div>
-                                                <div className="w-10 h-10 rounded-full border-2 border-primary/20 border-t-primary animate-[spin_3s_linear_infinite] flex items-center justify-center">
-                                                    <Shield className="w-4 h-4 text-primary" />
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pl-6">
-                                        <div className="space-y-3 p-6 bg-secondary/20 rounded-[32px] border border-border/50">
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">Natural Light</span>
-                                                <span className="text-xs font-black text-primary">{property.environmentalScores.light}/10</span>
-                                            </div>
-                                            <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
-                                                <div className="h-full bg-yellow-400" style={{ width: `${property.environmentalScores.light * 10}%` }} />
-                                            </div>
-                                        </div>
-                                        <div className="space-y-3 p-6 bg-secondary/20 rounded-[32px] border border-border/50">
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">Noise Control</span>
-                                                <span className="text-xs font-black text-primary">{property.environmentalScores.noise}/10</span>
-                                            </div>
-                                            <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
-                                                <div className="h-full bg-blue-400" style={{ width: `${property.environmentalScores.noise * 10}%` }} />
-                                            </div>
-                                        </div>
-                                        <div className="space-y-3 p-6 bg-secondary/20 rounded-[32px] border border-border/50">
-                                            <div className="flex justify-between items-center">
-                                                <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">Air Quality</span>
-                                                <span className="text-xs font-black text-primary">{property.environmentalScores.air}/10</span>
-                                            </div>
-                                            <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
-                                                <div className="h-full bg-green-400" style={{ width: `${property.environmentalScores.air * 10}%` }} />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    {property.viewOrientation && (
-                                        <div className="flex items-center gap-3 pl-6 pt-4">
-                                            <div className="px-4 py-2 bg-accent/5 rounded-xl border border-accent/10 flex items-center gap-2">
-                                                <Eye className="w-4 h-4 text-accent" />
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-primary">Primary View: {property.viewOrientation}</span>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
                         </div>
 
                         <ImmersiveSections property={property} />
