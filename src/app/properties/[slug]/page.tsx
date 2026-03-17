@@ -217,39 +217,72 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                     </p>
                                 </div>
                             )}
+
+                            {property.environmentalScores && (
+                                <div className="pt-8 border-t border-border/50 space-y-8">
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                        <div className="space-y-2">
+                                            <h3 className="text-[11px] font-black text-primary uppercase tracking-[0.2em] flex items-center gap-2">
+                                                <Sparkles className="w-4 h-4 text-accent" /> Elite Audit & Environmental Quality
+                                            </h3>
+                                            <p className="text-xs font-bold text-muted-foreground opacity-60 uppercase tracking-widest pl-6">Independent platform verification of living standards</p>
+                                        </div>
+                                        {property.auditScore && (
+                                            <div className="flex items-center gap-4 bg-primary/5 px-6 py-4 rounded-[24px] border border-primary/10">
+                                                <div className="text-center">
+                                                    <p className="text-[8px] font-black text-primary uppercase tracking-widest">Audit Score</p>
+                                                    <p className="text-2xl font-black text-primary leading-none">{property.auditScore}<span className="text-xs opacity-40">/100</span></p>
+                                                </div>
+                                                <div className="w-10 h-10 rounded-full border-2 border-primary/20 border-t-primary animate-[spin_3s_linear_infinite] flex items-center justify-center">
+                                                    <Shield className="w-4 h-4 text-primary" />
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pl-6">
+                                        <div className="space-y-3 p-6 bg-secondary/20 rounded-[32px] border border-border/50">
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">Natural Light</span>
+                                                <span className="text-xs font-black text-primary">{property.environmentalScores.light}/10</span>
+                                            </div>
+                                            <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
+                                                <div className="h-full bg-yellow-400" style={{ width: `${property.environmentalScores.light * 10}%` }} />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-3 p-6 bg-secondary/20 rounded-[32px] border border-border/50">
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">Noise Control</span>
+                                                <span className="text-xs font-black text-primary">{property.environmentalScores.noise}/10</span>
+                                            </div>
+                                            <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
+                                                <div className="h-full bg-blue-400" style={{ width: `${property.environmentalScores.noise * 10}%` }} />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-3 p-6 bg-secondary/20 rounded-[32px] border border-border/50">
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-primary/60">Air Quality</span>
+                                                <span className="text-xs font-black text-primary">{property.environmentalScores.air}/10</span>
+                                            </div>
+                                            <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
+                                                <div className="h-full bg-green-400" style={{ width: `${property.environmentalScores.air * 10}%` }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {property.viewOrientation && (
+                                        <div className="flex items-center gap-3 pl-6 pt-4">
+                                            <div className="px-4 py-2 bg-accent/5 rounded-xl border border-accent/10 flex items-center gap-2">
+                                                <Eye className="w-4 h-4 text-accent" />
+                                                <span className="text-[10px] font-black uppercase tracking-widest text-primary">Primary View: {property.viewOrientation}</span>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
                         <ImmersiveSections property={property} />
-
-                        {/* Virtual Tour Section */}
-                        {property.virtualTourUrl && (
-                            <div className="space-y-8 pt-12 border-t border-border/50">
-                                <div className="space-y-2">
-                                    <div className="inline-flex items-center gap-2 bg-[#FF6F38]/10 text-[#FF6F38] text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-[#FF6F38]/20">
-                                        <Eye className="w-3.5 h-3.5" /> Virtual Experience
-                                    </div>
-                                    <h2 className="text-3xl font-black text-primary tracking-tight">Immersive 3D Tour</h2>
-                                    <p className="text-muted-foreground font-medium">Walk through your potential future home from anywhere in the world.</p>
-                                </div>
-                                <div className="aspect-video w-full rounded-[40px] border border-border/50 overflow-hidden shadow-2xl shadow-primary/5 bg-secondary/20 relative group">
-                                    <iframe
-                                        src={property.virtualTourUrl}
-                                        width="100%"
-                                        height="100%"
-                                        style={{ border: 0 }}
-                                        allowFullScreen
-                                        loading="lazy"
-                                        className="relative z-10"
-                                    />
-                                    <div className="absolute inset-0 flex items-center justify-center z-0">
-                                        <div className="flex flex-col items-center gap-4 text-primary/40">
-                                            <Zap className="w-12 h-12 animate-pulse" />
-                                            <span className="text-[10px] font-black uppercase tracking-widest">Loading Immersive Space...</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
 
                         {/* Unit Configurations */}
                         {property.configurations && property.configurations.length > 0 && (
