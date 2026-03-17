@@ -7,10 +7,11 @@ import { cn } from "@/lib/utils";
 interface EMICalculatorProps {
     initialAmount?: number;
     className?: string;
+    variant?: "full" | "mini";
 }
 
 
-export function EMICalculator({ initialAmount = 5000000, className }: EMICalculatorProps) {
+export function EMICalculator({ initialAmount = 5000000, className, variant = "full" }: EMICalculatorProps) {
     const [amountStr, setAmountStr] = useState(initialAmount.toString());
     const [rateStr, setRateStr] = useState("8.5");
     const [tenureStr, setTenureStr] = useState("20");
@@ -63,8 +64,71 @@ export function EMICalculator({ initialAmount = 5000000, className }: EMICalcula
         return val;
     };
 
+    if (variant === "mini") {
+        return (
+            <div className={cn("bg-white rounded-[32px] border border-border/50 p-6 space-y-6", className)}>
+                <div className="flex items-center gap-2 mb-2">
+                    <Calculator className="w-4 h-4 text-[#FF6F38]" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FF6F38]">EMI Calculator</span>
+                </div>
+
+                <div className="space-y-4">
+                    <div className="space-y-1.5 text-center">
+                        <p className="text-[10px] font-black uppercase tracking-widest text-primary/30">Monthly EMI</p>
+                        <p className="text-3xl font-black text-primary">{formatCurrency(emi)}</p>
+                    </div>
+
+                    <div className="space-y-4 pt-4 border-t border-black/[0.03]">
+                        <div className="space-y-1">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-primary/40">Loan Amount</label>
+                            <input
+                                type="number"
+                                value={amountStr}
+                                onChange={(e) => setAmountStr(e.target.value)}
+                                className="w-full bg-[#f2f2f7] rounded-xl px-4 py-2 text-sm font-bold outline-none border border-transparent focus:border-[#FF6F38]/30"
+                            />
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-primary/40">Rate (%)</label>
+                                <input
+                                    type="number"
+                                    step="0.1"
+                                    value={rateStr}
+                                    onChange={(e) => setRateStr(e.target.value)}
+                                    className="w-full bg-[#f2f2f7] rounded-xl px-4 py-2 text-sm font-bold outline-none border border-transparent focus:border-[#FF6F38]/30"
+                                />
+                            </div>
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-primary/40">Years</label>
+                                <input
+                                    type="number"
+                                    value={tenureStr}
+                                    onChange={(e) => setTenureStr(e.target.value)}
+                                    className="w-full bg-[#f2f2f7] rounded-xl px-4 py-2 text-sm font-bold outline-none border border-transparent focus:border-[#FF6F38]/30"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 pt-4 text-[9px] font-black uppercase tracking-widest">
+                    <div className="space-y-1">
+                        <span className="text-primary/30">Interest</span>
+                        <p className="text-primary">₹{(totalInterest / 100000).toFixed(1)} L</p>
+                    </div>
+                    <div className="space-y-1">
+                        <span className="text-primary/30">Total</span>
+                        <p className="text-primary">₹{(totalPayable / 10000000).toFixed(2)} Cr</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={cn("bg-white rounded-[48px] border border-border/50 shadow-2xl shadow-primary/5 overflow-hidden flex flex-col lg:flex-row max-w-5xl mx-auto", className)}>
+            {/* ... existing full variant code ... */}
             {/* Input Interface (iPhone Style) */}
             <div className="bg-[#f2f2f7] p-8 lg:p-12 lg:w-1/2 flex flex-col justify-center gap-10">
                 <div className="space-y-2">
@@ -124,7 +188,7 @@ export function EMICalculator({ initialAmount = 5000000, className }: EMICalcula
                     </div>
                 </div>
 
-                <button 
+                <button
                     onClick={() => {
                         setAmountStr("5000000");
                         setRateStr("8.5");

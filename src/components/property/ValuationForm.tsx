@@ -20,8 +20,8 @@ export function ValuationForm() {
         email: "",
         phone: "",
         location: "",
-        propertyType: "Ready To move", 
-        usageType: "Non commercial", 
+        propertyType: "Ready To move",
+        usageType: "Non commercial",
         description: "",
         highlights: "",
         connectivity: "",
@@ -101,14 +101,14 @@ export function ValuationForm() {
 
         const submission: Submission = {
             id: `sub-${Date.now()}`,
-            sellerId: "u1", 
+            sellerId: "u1",
             societyId: formData.societyId,
             sellerName: formData.sellerName,
             developerName: formData.developerName,
             propertyName: formData.propertyName,
             location: formData.location,
-            carpetArea: 1250, 
-            valuationAmount: listingType === "sale" ? 45000000 : 85000, 
+            carpetArea: 1250,
+            valuationAmount: listingType === "sale" ? 45000000 : 85000,
             status: "VALUATED",
             createdAt: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
             image: formData.projectImages[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
@@ -125,6 +125,7 @@ export function ValuationForm() {
             reraQr: formData.reraQr,
             projectImages: formData.projectImages.filter(img => img !== ""),
             // Rental fields
+            listingType: listingType,
             depositAmount: parseFloat(formData.depositAmount),
             waterSupply: formData.waterSupply,
             leaseTerm: formData.leaseTerm,
@@ -382,7 +383,7 @@ export function ValuationForm() {
                             {listingType === "rent" && (
                                 <div className="space-y-8 pt-10 border-t border-border/40 animate-in slide-in-from-top-4 duration-300">
                                     <SectionHeader icon={DollarSign} title="Rental Terms" subtitle="Security & Water" />
-                                    
+
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
                                             <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Security Deposit (₹)</label>

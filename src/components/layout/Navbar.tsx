@@ -87,12 +87,21 @@ export function Navbar() {
                                 <Heart className="w-3.5 h-3.5" />
                             </Link>
 
-                            <button className="flex items-center gap-2 border border-current rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                            <button
+                                onClick={() => {
+                                    const footer = document.querySelector('footer');
+                                    footer?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="flex items-center gap-2 border border-current rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+                            >
                                 <MessageSquare className="w-3.5 h-3.5" />
                                 Talk to us
                             </button>
 
-                            <button className="p-2 border border-current rounded-full">
+                            <button
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                className="p-2 border border-current rounded-full"
+                            >
                                 <Menu className="w-4 h-4" />
                             </button>
 

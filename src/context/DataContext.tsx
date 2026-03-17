@@ -23,6 +23,7 @@ interface DataContextType {
     approveSubmission: (subId: string) => Promise<void>;
     rejectSubmission: (subId: string) => Promise<void>;
     deleteProperty: (propertyId: string) => Promise<void>;
+    isInitialized: boolean;
     updatePropertyStatus: (propertyId: string, status: Property['status']) => Promise<void>;
     addListing: (property: Property) => Promise<void>;
     updateFilterSettings: (settings: Partial<FilterSettings>) => Promise<void>;
@@ -191,7 +192,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
             deleteProperty,
             updatePropertyStatus,
             addListing,
-            updateFilterSettings
+            updateFilterSettings,
+            isInitialized
         }}>
             {children}
         </DataContext.Provider>

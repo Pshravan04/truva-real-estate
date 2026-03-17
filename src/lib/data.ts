@@ -109,436 +109,245 @@ export const inquiries: Inquiry[] = [
 export const properties: Property[] = [
     {
         id: "1",
-        title: "3 BHK in Ekta Tripolis",
-        slug: "3-bhk-ekta-tripolis",
-        description: "Fully renovated 3 BHK apartment in the premium Ekta Tripolis society. High floor with great views.",
-        highlights: "Premium Italian marble flooring, Modular kitchen with built-in appliances, Custom designer lighting.",
-        connectivity: "5 mins to Western Express Highway, 10 mins to Goregaon Railway Station, Walking distance to Hub Mall.",
-        developerName: "Ekta World",
+        title: "Piramal Aranya",
+        slug: "piramal-aranya-byculla",
+        description: "Bespoke 2, 3 & 4 BHK residences at Aranya, Byculla. Overlooking the lush greenery of Rani Baug and the Arabian Sea.",
+        highlights: "Sea Views, Botanical Garden Views, Premium Club, High-Speed Connectivity.",
+        connectivity: "Located on Eastern Express Highway, 10 mins to South Mumbai.",
+        developerName: "Piramal Realty",
         sellerName: "Authorized Jangid Brothers Seller Partner",
-        contactDetails: {
-            phone: "+91 91520 12345",
-            email: "partners@jangidbrothers.com"
-        },
-        price: 35000000,
+        price: 45000000,
         type: "sale",
-        category: "SECONDARY",
+        category: "PRIMARY",
         usageType: "RESIDENTIAL",
-        constructionStatus: "READY_TO_MOVE",
-        bhk: 3,
+        constructionStatus: "UNDER_CONSTRUCTION",
+        possessionDate: "Dec 2025",
+        bhk: 2,
         configurations: [
-            { configuration: "3 BHK", price: "3.5 Cr", area: "1250 sqft" },
-            { configuration: "2 BHK", price: "2.5 Cr", area: "950 sqft" }
+            { configuration: "2 BHK", price: "4.5 Cr", area: "1050 sqft" },
+            { configuration: "3 BHK", price: "6.8 Cr", area: "1450 sqft" }
         ],
         location: {
-            area: "Goregaon West",
+            area: "Byculla",
             city: "Mumbai",
-            address: "Ekta Tripolis, Goregaon West, Mumbai",
+            address: "Piramal Aranya, Byculla East, Mumbai",
             tower: "Tower A",
-            floor: 15
+            floor: 25
         },
         amenities: [
-            { icon: "Wifi", label: "Smart Home" },
-            { icon: "Car", label: "Parking" },
-            { icon: "Dumbbell", label: "Gym" },
-            { icon: "Trees", label: "Garden" },
-            { icon: "Waves", label: "Swimming Pool" },
-            { icon: "Shield", label: "Security" },
+            { icon: "Shield", label: "24/7 Security" },
+            { icon: "Waves", label: "Infinity Pool" },
+            { icon: "Dumbbell", label: "State-of-art Gym" },
+            { icon: "Trees", label: "Botanical Garden View" },
         ],
         images: [
-            "https://images.unsplash.com/photo-1600596542815-2495db9dc2c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1626178793926-22b28830aa30?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80"
         ],
-        stats: {
-            bathrooms: 3,
-            areaSqFt: 1250,
-        },
+        stats: { bathrooms: 3, areaSqFt: 1050 },
         isFeatured: true,
         status: "LISTED",
-        environmentalScores: { light: 8, noise: 7, air: 6 },
-        viewOrientation: "Greenery",
-        auditScore: 92,
-        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.956627045129!2d72.84654931490234!3d19.164319987037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7ad553ec57b%3A0xe54955726257f884!2sEkta%20Tripolis!5e0!3m2!1sen!2sin!4v1676543210123!5m2!1sen!2sin",
-        projectImages: [
-            "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-        ],
-        virtualTourUrl: "https://my.matterport.com/show/?m=9S7W2C3X4Y5",
-        masterPlanUrl: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-        floorPlanUrl: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-        reraNumber: "P51800001234",
-        reraQr: "https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg",
+        environmentalScores: { light: 9, noise: 8, air: 8 },
+        viewOrientation: "Sea View",
+        auditScore: 98,
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.5!2d72.8!3d18.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDU0JzAwLjAiTiA3MsKwNDgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin",
         neighbourhood: {
-            schools: ["Vibgyor High", "Mount Mary School"],
-            hospitals: ["Lifeline Hospital"],
-            transport: ["WEH Metro", "Ram Mandir Station"],
-            shopping: ["Hub Mall", "Oberoi Mall"]
+            schools: ["St. Mary's School", "Greenlawns School"],
+            hospitals: ["Masina Hospital", "JJ Hospital"],
+            transport: ["Byculla Station", "Eastern Freeway"],
+            shopping: ["High Street Phoenix", "Palladium Mall"]
         }
     },
     {
         id: "2",
-        title: "2 BHK in Oberoi Esquire",
-        slug: "2-bhk-oberoi-esquire",
-        description: "Elegant 2 BHK apartment in the iconic Oberoi Esquire. Spacious layout with premium finishes.",
-        highlights: "Direct access to Oberoi Mall, High-speed elevators, Unobstructed Aarey views.",
-        connectivity: "Directly connected to Western Express Highway, 2 mins to proposed Metro station.",
+        title: "Oberoi Esquire",
+        slug: "oberoi-esquire-goregaon",
+        description: "Experience the pinnacle of luxury at Oberoi Esquire. Ready-to-move-in 3 BHK apartments in Goregaon East.",
+        highlights: "Part of Oberoi Garden City, Integrated development, Premium finishes.",
+        connectivity: "Direct WEH access, Near Hub Mall and Oberoi Mall.",
         developerName: "Oberoi Realty",
         sellerName: "Authorized Jangid Brothers Seller Partner",
-        contactDetails: {
-            phone: "+91 91520 12345",
-            email: "partners@jangidbrothers.com"
-        },
-        price: 42000000,
-        type: "sale",
-        category: "PRIMARY",
-        usageType: "RESIDENTIAL",
-        constructionStatus: "READY_TO_MOVE",
-        bhk: 2,
-        configurations: [
-            { configuration: "2 BHK", price: "4.2 Cr", area: "1400 sqft" }
-        ],
-        location: {
-            area: "Goregaon East",
-            city: "Mumbai",
-            address: "Oberoi Esquire, Goregaon East, Mumbai",
-            tower: "Tower B",
-            floor: 10
-        },
-        amenities: [
-            { icon: "Car", label: "Parking" },
-            { icon: "Dumbbell", label: "Gym" },
-            { icon: "Trees", label: "Garden" },
-            { icon: "Waves", label: "Swimming Pool" },
-            { icon: "Shield", label: "Security" },
-        ],
-        images: [
-            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1600607687889-7e3d2223ca0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        ],
-        stats: {
-            bathrooms: 2,
-            areaSqFt: 1400,
-        },
-        isFeatured: false,
-        status: "LISTED",
-        environmentalScores: { light: 9, noise: 9, air: 8 },
-        viewOrientation: "City View",
-        auditScore: 95,
-        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.745123456789!2d72.85!3d19.17!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEwJzEyLjAiTiA3MsKwNTEnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin",
-        projectImages: [
-            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-        ],
-        virtualTourUrl: "https://my.matterport.com/show/?m=9S7W2C3X4Y5",
-        masterPlanUrl: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-        floorPlanUrl: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-    },
-    {
-        id: "3",
-        title: "3 BHK in L&T Emerald Isle",
-        slug: "3-bhk-lt-emerald-isle",
-        description: "Sophisticated 3 BHK in the lush green L&T Emerald Isle. Overlooking Powai Lake, this home offers unparalleled peace.",
-        highlights: "Lake-facing deck, VRF air conditioning, International standard safety systems.",
-        connectivity: "2 mins to JVLR, 15 mins to International Airport, Close to Hiranandani Hospital.",
-        developerName: "L&T Realty",
-        sellerName: "Authorized Jangid Brothers Seller Partner",
-        contactDetails: {
-            phone: "+91 91520 12345",
-            email: "partners@jangidbrothers.com"
-        },
-        price: 52000000,
-        type: "sale",
-        category: "PRIMARY",
-        usageType: "RESIDENTIAL",
-        constructionStatus: "READY_TO_MOVE",
-        bhk: 3,
-        configurations: [
-            { configuration: "3 BHK", price: "5.2 Cr", area: "1650 sqft" },
-            { configuration: "4 BHK", price: "7.1 Cr", area: "2100 sqft" }
-        ],
-        location: {
-            area: "Powai",
-            city: "Mumbai",
-            address: "L&T Emerald Isle, Powai, Mumbai",
-            tower: "Emerald A",
-            floor: 28
-        },
-        amenities: [
-            { icon: "Waves", label: "Infinity Pool" },
-            { icon: "Dumbbell", label: "Gym" },
-            { icon: "Trees", label: "Central Park" },
-            { icon: "Zap", label: "EV Charging" },
-            { icon: "Shield", label: "24/7 Security" },
-        ],
-        images: [
-            "https://images.unsplash.com/photo-1626178793926-22b28830aa30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        ],
-        stats: {
-            bathrooms: 3,
-            areaSqFt: 1650,
-        },
-        isFeatured: true,
-        status: "LISTED",
-        environmentalScores: { light: 9, noise: 8, air: 7 },
-        viewOrientation: "Lake View",
-        auditScore: 98,
-        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.1!2d72.9!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890124!5m2!1sen!2sin",
-        projectImages: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"],
-    },
-    {
-        id: "4",
-        title: "2 BHK in Lodha Aurum Grande",
-        slug: "2-bhk-lodha-aurum-grande",
-        description: "Modern living at Lodha Aurum Grande. Compact yet efficiently designed 2 BHK for young professionals.",
-        highlights: "Excellent daylighting, Clubhouse access, Close to corporate hubs.",
-        connectivity: "Walking distance to Kanjurmarg Station, Easy access to LBS Marg.",
-        developerName: "Lodha Group",
-        sellerName: "Authorized Jangid Brothers Seller Partner",
-        contactDetails: {
-            phone: "+91 91520 12345",
-            email: "partners@jangidbrothers.com"
-        },
-        price: 18500000,
+        price: 55000000,
         type: "sale",
         category: "SECONDARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
-        bhk: 2,
+        bhk: 3,
         configurations: [
-            { configuration: "2 BHK", price: "1.85 Cr", area: "750 sqft" }
+            { configuration: "3 BHK", price: "5.5 Cr", area: "1650 sqft" }
         ],
         location: {
-            area: "Kanjurmarg",
+            area: "Goregaon East",
             city: "Mumbai",
-            address: "Lodha Aurum Grande, Kanjurmarg, Mumbai",
-            tower: "Grande B",
-            floor: 12
+            address: "Oberoi Garden City, Goregaon East, Mumbai",
+            tower: "Wing B",
+            floor: 18
         },
         amenities: [
-            { icon: "Car", label: "Parking" },
-            { icon: "Dumbbell", label: "Gym" },
-            { icon: "Shield", label: "Security" },
-            { icon: "Waves", label: "Pool" },
+            { icon: "Car", label: "Covered Parking" },
+            { icon: "Dumbbell", label: "Fitness Center" },
+            { icon: "Waves", label: "Clubhouse Pool" },
+            { icon: "Shield", label: "Multi-tier Security" },
         ],
         images: [
-            "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1600596542815-2495db9dc2c3?auto=format&fit=crop&w=800&q=80"
         ],
-        stats: {
-            bathrooms: 2,
-            areaSqFt: 750,
-        },
-        isFeatured: false,
+        stats: { bathrooms: 3, areaSqFt: 1650 },
+        isFeatured: true,
         status: "LISTED",
-        environmentalScores: { light: 7, noise: 6, air: 5 },
+        environmentalScores: { light: 8, noise: 9, air: 7 },
         viewOrientation: "Cityscape",
-        auditScore: 88,
-        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.2!2d72.9!3d19.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEyJzAwLjAiTiA3MsKwNTUnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890125!5m2!1sen!2sin",
-        projectImages: ["https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"],
+        auditScore: 96,
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.9!2d72.8!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEwJzEyLjAiTiA3MsKwNTEnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890124!5m2!1sen!2sin",
+        neighbourhood: {
+            schools: ["Oberoi International", "Ryan Global"],
+            hospitals: ["Lifeline Medicare", "Suvidha Hospital"],
+            transport: ["Goregaon Metro", "Western Express Highway"],
+            shopping: ["Oberoi Mall", "Hub Mall"]
+        }
     },
     {
-        id: "5",
-        title: "4 BHK in Rustomjee Elements",
-        slug: "4-bhk-rustomjee-elements",
-        description: "Ultra-luxury living at Rustomjee Elements. This bespoke 4 BHK residence offers expansive living spaces and world-class amenities in the heart of the city.",
-        highlights: "Private elevator lobby, Designer kitchen, Concierge services, Alfresco dining area.",
-        connectivity: "Located off Link Road, 10 mins to Juhu Beach, Close to premium schools and hospitals.",
-        developerName: "Rustomjee Group",
+        id: "3",
+        title: "Lodha World One",
+        slug: "lodha-world-one-lower-parel",
+        description: "Live in one of the iconic skyscrapers of Mumbai. World-class 4 BHK residences with unparalleled luxury.",
+        highlights: "Tallest residential building, Observatory deck, Private elevators.",
+        connectivity: "Heart of Lower Parel, minutes from Worli and Prabhadevi.",
+        developerName: "Lodha Group",
         sellerName: "Authorized Jangid Brothers Seller Partner",
-        contactDetails: {
-            phone: "+91 91520 12345",
-            email: "partners@jangidbrothers.com"
-        },
-        price: 125000000,
+        price: 120000000,
         type: "sale",
         category: "PRIMARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
         bhk: 4,
         configurations: [
-            { configuration: "4 BHK", price: "12.5 Cr", area: "3200 sqft" },
-            { configuration: "5 BHK", price: "18.0 Cr", area: "4500 sqft" }
+            { configuration: "3 BHK", price: "9.5 Cr", area: "2200 sqft" },
+            { configuration: "4 BHK", price: "12.0 Cr", area: "3200 sqft" }
         ],
         location: {
-            area: "Upper Juhu",
+            area: "Lower Parel",
             city: "Mumbai",
-            address: "Rustomjee Elements, Off Link Road, Upper Juhu, Mumbai",
-            tower: "Wing C",
-            floor: 18
+            address: "The Park, Lower Parel, Mumbai",
+            tower: "World View",
+            floor: 65
         },
         amenities: [
-            { icon: "Shield", label: "Multi-tier Security" },
-            { icon: "Waves", label: "Rooftop Pool" },
-            { icon: "Dumbbell", label: "Pro Gym" },
-            { icon: "Trees", label: "Landscaped Gardens" },
-            { icon: "Globe", label: "Business Center" },
+            { icon: "Shield", label: "Bespoke Concierge" },
+            { icon: "Waves", label: "Private Pool" },
+            { icon: "Dumbbell", label: "Equinox Gym" },
         ],
         images: [
-            "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1600566753086-00f18fb6f3ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
         ],
-        stats: {
-            bathrooms: 5,
-            areaSqFt: 3200,
-        },
+        stats: { bathrooms: 4, areaSqFt: 3200 },
         isFeatured: true,
         status: "LISTED",
-        environmentalScores: { light: 9, noise: 8, air: 8 },
-        viewOrientation: "Sea View",
+        environmentalScores: { light: 9, noise: 7, air: 6 },
+        viewOrientation: "Panoramic Sea View",
         auditScore: 99,
-        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.5!2d72.8!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890126!5m2!1sen!2sin",
-        projectImages: ["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"],
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.5!2d72.8!3d18.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890125!5m2!1sen!2sin",
+        neighbourhood: {
+            schools: ["Dhirubhai Ambani Intl", "Aditya Birla World"],
+            hospitals: ["Jaslok Hospital", "Global Hospital"],
+            transport: ["Lower Parel Monorail", "Sea Link"],
+            shopping: ["Phoenix Palladium", "Kamala Mills"]
+        }
     },
     {
-        id: "6",
-        title: "2 BHK in Piramal Aranya",
-        slug: "2-bhk-piramal-aranya",
-        description: "Experience serene luxury at Piramal Aranya. Overlooking the Rani Baug gardens, this home blends nature with modern architecture.",
-        highlights: "Botanical garden views, Floor-to-ceiling windows, Italian marble finishes.",
-        connectivity: "Excellent connectivity to South Mumbai via Eastern Freeway, 10 mins to Byculla Station.",
-        developerName: "Piramal Realty",
+        id: "4",
+        title: "Luxury 3 BHK for Rent",
+        slug: "luxury-3-bhk-powai-rent",
+        description: "Fully furnished high-end 3 BHK apartment in the premium Hiranandani Gardens, Powai.",
+        highlights: "Lake-facing, Neo-classical architecture, Fully furnished with designer pieces.",
+        connectivity: "Close to JVLR and EEH, easy access to airport.",
+        developerName: "Hiranandani Group",
         sellerName: "Authorized Jangid Brothers Seller Partner",
-        contactDetails: {
-            phone: "+91 91520 12345",
-            email: "partners@jangidbrothers.com"
-        },
-        price: 45000000,
-        type: "sale",
-        category: "UNDER_CONSTRUCTION",
+        price: 150000,
+        type: "rent",
+        category: "SECONDARY",
         usageType: "RESIDENTIAL",
-        constructionStatus: "UNDER_CONSTRUCTION",
-        possessionDate: "Dec 2025",
-        bhk: 2,
-        configurations: [
-            { configuration: "2 BHK", price: "4.5 Cr", area: "1150 sqft" },
-            { configuration: "3 BHK", price: "6.8 Cr", area: "1750 sqft" }
-        ],
-        location: {
-            area: "Byculla",
-            city: "Mumbai",
-            address: "Piramal Aranya, Byculla East, Mumbai",
-            tower: "Avyan",
-            floor: 35
-        },
-        amenities: [
-            { icon: "Trees", label: "Private Park" },
-            { icon: "Waves", label: "Lap Pool" },
-            { icon: "Dumbbell", label: "Fitness Center" },
-            { icon: "Shield", label: "Smart Security" },
-        ],
-        images: [
-            "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        ],
-        stats: {
-            bathrooms: 2,
-            areaSqFt: 1150,
-        },
-        isFeatured: false,
-        status: "LISTED",
-        environmentalScores: { light: 9, noise: 7, air: 9 },
-        viewOrientation: "Botanical Garden",
-        auditScore: 96,
-        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.5!2d72.8!3d18.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDU0JzAwLjAiTiA3MsKwNDgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890127!5m2!1sen!2sin",
-    },
-    {
-        id: "7",
-        title: "3 BHK in Kalpataru Radiance",
-        slug: "3-bhk-kalpataru-radiance",
-        description: "Experience the glow of luxury at Kalpataru Radiance. A perfectly balanced 3 BHK with premium amenities and sprawling open spaces.",
-        highlights: "Grand entrance lobby, Temperature controlled pool, Multi-purpose sports court.",
-        connectivity: "Located in Goregaon West, Easy access to SV Road and Link Road, 10 mins to Inorbit Mall.",
-        developerName: "Kalpataru Group",
-        sellerName: "Sanjay Mehta",
-        contactDetails: {
-            phone: "+91 97766 55443",
-            email: "sanjay.m@example.com"
-        },
-        price: 38000000,
-        type: "sale",
-        usageType: "RESIDENTIAL",
-        constructionStatus: "NEAR_POSSESSION",
-        possessionDate: "June 2024",
+        constructionStatus: "READY_TO_MOVE",
         bhk: 3,
         configurations: [
-            { configuration: "3 BHK", price: "3.8 Cr", area: "1350 sqft" }
+            { configuration: "3 BHK", price: "1.5L/mo", area: "1350 sqft" }
         ],
         location: {
-            area: "Goregaon West",
+            area: "Powai",
             city: "Mumbai",
-            address: "Kalpataru Radiance, Goregaon West, Mumbai",
-            tower: "Radiance B",
-            floor: 21
+            address: "Hiranandani Gardens, Powai, Mumbai",
+            tower: "Pasadena",
+            floor: 15
         },
         amenities: [
-            { icon: "Waves", label: "Swimming Pool" },
-            { icon: "Dumbbell", label: "Gym" },
-            { icon: "Trees", label: "Parks" },
-            { icon: "Shield", label: "High Security" },
+            { icon: "Shield", label: "24/7 Security" },
+            { icon: "Waves", label: "Community Pool" },
+            { icon: "Dumbbell", label: "Resident Gym" },
         ],
         images: [
-            "https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
         ],
-        stats: {
-            bathrooms: 3,
-            areaSqFt: 1350,
-        },
+        stats: { bathrooms: 3, areaSqFt: 1350 },
         isFeatured: false,
         status: "LISTED",
-        environmentalScores: { light: 8, noise: 7, air: 7 },
-        viewOrientation: "Park View",
-        auditScore: 94,
-        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.9!2d72.8!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDEwJzAwLjAiTiA3MsKwNTAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890128!5m2!1sen!2sin",
-        category: "SECONDARY"
+        depositAmount: 450000,
+        waterSupply: "Both",
+        leaseTerm: "11 Months",
+        neighbourhood: {
+            schools: ["Hiranandani Foundation School", "Podar International"],
+            hospitals: ["Hiranandani Hospital"],
+            transport: ["Powai Metro station", "Saki Naka Metro"],
+            shopping: ["Galleria Mall", "D-Mart Powai"]
+        }
     },
     {
-        id: "8",
-        title: "Modern 2 BHK for Rent in Powai",
-        slug: "2-bhk-rent-powai",
-        description: "Experience luxury living in this fully furnished 2 BHK for rent in the heart of Powai.",
-        highlights: "Lake view, 24/7 water supply, Near Hiranandani gardens.",
-        connectivity: "Close to metro station, easy access to JVLR.",
-        developerName: "Hiranandani Developers",
+        id: "5",
+        title: "Premium 2 BHK for Rent",
+        slug: "premium-2-bhk-worli-rent",
+        description: "A stunning 2 BHK with a view of the Sea Link. Modern interiors and high-end security features.",
+        highlights: "Sea views, Open layout, Valet parking, Smart home enabled.",
+        connectivity: "Seconds away from Worli Sea Link.",
+        developerName: "Indiabulls Greens",
         sellerName: "Authorized Jangid Brothers Seller Partner",
-        contactDetails: {
-            phone: "+91 91520 12345",
-            email: "partners@jangidbrothers.com"
-        },
-        price: 75000,
+        price: 120000,
         type: "rent",
         category: "SECONDARY",
         usageType: "RESIDENTIAL",
         constructionStatus: "READY_TO_MOVE",
         bhk: 2,
         configurations: [
-            { configuration: "2 BHK", price: "75k/mo", area: "950 sqft" }
+            { configuration: "2 BHK", price: "1.2L/mo", area: "950 sqft" }
         ],
         location: {
-            area: "Powai",
+            area: "Worli",
             city: "Mumbai",
-            address: "Hiranandani Gardens, Powai, Mumbai",
-            tower: "Canary",
-            floor: 12
+            address: "Indiabulls Sky Forest, Worli, Mumbai",
+            tower: "Tower 2",
+            floor: 42
         },
         amenities: [
-            { icon: "Shield", label: "Security" },
-            { icon: "Waves", label: "Pool" },
-            { icon: "Dumbbell", label: "Gym" }
+            { icon: "Shield", label: "Hi-Tech Security" },
+            { icon: "Waves", label: "Sky Pool" },
+            { icon: "Dumbbell", label: "Elite Gym" },
         ],
-        images: ["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
+        images: [
+            "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80"
+        ],
         stats: { bathrooms: 2, areaSqFt: 950 },
+        isFeatured: true,
         status: "LISTED",
-        depositAmount: 200000,
+        depositAmount: 360000,
         waterSupply: "Municipal",
-        leaseTerm: "11 Months",
+        leaseTerm: "22 Months",
         neighbourhood: {
-            schools: ["Hiranandani Foundation School", "Podar International"],
-            hospitals: ["Hiranandani Hospital"],
-            transport: ["Powai Metro (Upcoming)", "Kanjurmarg Station"],
-            shopping: ["Galleria Mall", "D-Mart"]
+            schools: ["GEMS Education", "Podar Intl Worli"],
+            hospitals: ["Lilavati Hospital", "Podar Hospital"],
+            transport: ["Worli Sea Link", "Proposed Metro"],
+            shopping: ["Atria Mall", "High Street Phoenix"]
         }
     }
 ];

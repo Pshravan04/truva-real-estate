@@ -25,11 +25,13 @@ interface PageProps {
 
 export default function PropertyDetailsPage({ params }: PageProps) {
     const { slug } = use(params);
-    const { properties } = useData();
+    const { properties, isInitialized } = useData();
     const [property, setProperty] = useState<Property | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        if (!isInitialized) return;
+
         const found = properties.find((p) => p.slug === slug);
         if (found) {
             setProperty(found);
@@ -50,9 +52,15 @@ export default function PropertyDetailsPage({ params }: PageProps) {
             } as Property);
         }
         setIsLoading(false);
-    }, [slug, properties]);
+    }, [slug, properties, isInitialized]);
 
-    if (isLoading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    if (!isInitialized || isLoading) return (
+        <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-[#FAFAFA]">
+            <div className="w-12 h-12 border-4 border-[#FF6F38] border-t-transparent rounded-full animate-spin" />
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary/40">Initializing Discovery...</p>
+        </div>
+    );
+
     if (!property) return notFound();
 
     return (
@@ -62,7 +70,9 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                 <div className="flex items-center text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-8">
                     <Link href="/" className="hover:text-primary transition-colors">Home</Link>
                     <span className="mx-2 opacity-30">/</span>
-                    <Link href="/buy" className="hover:text-primary transition-colors">Buy</Link>
+                    <Link href="/buy" className="hover:text-primary transition-colors">
+                        {property.type === 'rent' ? 'Rent' : 'Buy'}
+                    </Link>
                     <span className="mx-2 opacity-30">/</span>
                     <span className="text-primary truncate max-w-[200px]">{property.title}</span>
                 </div>
@@ -393,8 +403,16 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             <WhatsAppButton
                                 propertyId={property.id}
                                 propertyTitle={property.title}
-                                phoneNumber={property.contactDetails?.phone || "+919876543210"}
+                                phoneNumber="+919152012345"
                             />
+
+                            {property.type === 'sale' && (
+                                <EMICalculator
+                                    variant="mini"
+                                    initialAmount={property.price}
+                                    className="!shadow-none border border-border/50"
+                                />
+                            )}
 
                             <div className="pt-4">
                                 <ScheduleCallForm configurations={property.configurations} />
@@ -417,23 +435,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                         </div>
                     </div>
                 </div>
-
-                {/* EMI Calculator Section */}
-                {property.type === 'sale' && (
-                    <div className="space-y-8 pt-12 border-t border-border/50">
-                        <div className="space-y-2">
-                            <div className="inline-flex items-center gap-2 bg-[#FF6F38]/10 text-[#FF6F38] text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-[#FF6F38]/20">
-                                <Calculator className="w-3.5 h-3.5" /> Finance Planning
-                            </div>
-                            <h2 className="text-3xl font-black text-primary tracking-tight">Home Loan Estimator</h2>
-                            <p className="text-muted-foreground font-medium">Estimate your monthly payments for this specific property.</p>
-                        </div>
-                        <EMICalculator
-                            initialAmount={property.price}
-                            className="!p-8 !shadow-none border border-border/50 bg-white"
-                        />
-                    </div>
-                )}
             </div>
 
             <Footer />

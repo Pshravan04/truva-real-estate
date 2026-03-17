@@ -128,6 +128,7 @@ export interface Submission {
     reraQr?: string;
 
     // Rental Details
+    listingType?: 'sale' | 'rent';
     depositAmount?: number;
     waterSupply?: string;
     leaseTerm?: string;

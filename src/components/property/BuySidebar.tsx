@@ -78,21 +78,24 @@ export function BuySidebar({
                     Collection
                 </h3>
                 <div className="flex flex-col gap-3">
-                    {["PRIMARY", "SECONDARY", "UNDER_CONSTRUCTION"].map((cat) => (
+                    {[
+                        { id: "PRIMARY", label: "Primary" },
+                        { id: "SECONDARY", label: "Reselling" }
+                    ].map((cat) => (
                         <button
-                            key={cat}
-                            onClick={() => onCategoryChange(selectedCategory === cat ? "" : cat)}
+                            key={cat.id}
+                            onClick={() => onCategoryChange(selectedCategory === cat.id ? "" : cat.id)}
                             className={cn(
                                 "group flex items-center justify-between p-4 rounded-2xl border transition-all text-left",
-                                selectedCategory === cat
+                                selectedCategory === cat.id
                                     ? "bg-black border-black text-white shadow-xl shadow-black/10"
                                     : "bg-white border-border/60 text-primary/60 hover:border-primary/20"
                             )}
                         >
                             <span className="text-[10px] font-black uppercase tracking-widest">
-                                {cat.replace(/_/g, ' ')}
+                                {cat.label}
                             </span>
-                            {selectedCategory === cat && <Check className="w-3 h-3 text-[#FF6F38]" />}
+                            {selectedCategory === cat.id && <Check className="w-3 h-3 text-[#FF6F38]" />}
                         </button>
                     ))}
                 </div>
@@ -172,7 +175,9 @@ export function BuySidebar({
                     <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.25em] flex items-center gap-2">
                         <IndianRupee className="w-3 h-3 text-[#FF6F38]" /> Budget
                     </h3>
-                    <span className="text-[11px] font-black text-[#FF6F38] tracking-widest">{formatINR(priceRange[1])}</span>
+                    <span className="text-[11px] font-black text-[#FF6F38] tracking-widest">
+                        {formatINR(priceRange[1])}{selectedListingType === 'rent' ? '/mo' : ''}
+                    </span>
                 </div>
                 <div className="px-2">
                     <input

@@ -135,6 +135,7 @@ export default function AdminDashboard() {
                                             <thead className="bg-secondary/50 border-b border-border">
                                                 <tr className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
                                                     <th className="px-6 py-4">Asset</th>
+                                                    <th className="px-6 py-4">Type</th>
                                                     <th className="px-6 py-4">Price</th>
                                                     <th className="px-6 py-4">Status</th>
                                                     <th className="px-6 py-4">Jangid Brothers Assured</th>
@@ -153,7 +154,16 @@ export default function AdminDashboard() {
                                                                 </div>
                                                             </div>
                                                         </td>
+                                                        <td className="px-6 py-4">
+                                                            <span className={cn(
+                                                                "text-[9px] font-black uppercase px-2 py-1 rounded-full",
+                                                                prop.type === 'rent' ? "bg-blue-100 text-blue-600" : "bg-green-100 text-green-600"
+                                                            )}>
+                                                                {prop.type}
+                                                            </span>
+                                                        </td>
                                                         <td className="px-6 py-4 font-bold text-sm text-primary">₹{(prop.price / 10000000).toFixed(2)} Cr</td>
+                                                        {/* ... existing cells ... */}
                                                         <td className="px-6 py-4">
                                                             <select
                                                                 value={prop.status}
@@ -210,8 +220,10 @@ export default function AdminDashboard() {
                                         </div>
                                     </div>
 
-                                    <div className="bg-secondary/10 rounded-[40px] p-1 border border-border/50">
-                                        <ValuationForm />
+                                    <div className="bg-secondary/10 rounded-[40px] p-8 border border-border/50 bg-white">
+                                        <div className="max-w-4xl mx-auto">
+                                            <ValuationForm />
+                                        </div>
                                     </div>
                                 </div>
                             )}
@@ -282,6 +294,10 @@ export default function AdminDashboard() {
                                                             <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] border-l-2 border-primary pl-3">Asset Details</p>
                                                             <div className="space-y-2">
                                                                 <p className="text-sm font-bold text-primary flex justify-between">
+                                                                    <span className="text-muted-foreground opacity-60">Listing Type</span>
+                                                                    <span className="uppercase">{sub.listingType || 'Sale'}</span>
+                                                                </p>
+                                                                <p className="text-sm font-bold text-primary flex justify-between">
                                                                     <span className="text-muted-foreground opacity-60">Floor</span>
                                                                     <span>Level {sub.floor}</span>
                                                                 </p>
@@ -289,6 +305,22 @@ export default function AdminDashboard() {
                                                                     <span className="text-muted-foreground opacity-60">Carpet Area</span>
                                                                     <span>{sub.carpetArea} SQFT</span>
                                                                 </p>
+                                                                {sub.listingType === 'rent' && (
+                                                                    <>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Deposit</span>
+                                                                            <span>₹{sub.depositAmount}</span>
+                                                                        </p>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Water</span>
+                                                                            <span>{sub.waterSupply}</span>
+                                                                        </p>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Term</span>
+                                                                            <span>{sub.leaseTerm}</span>
+                                                                        </p>
+                                                                    </>
+                                                                )}
                                                             </div>
                                                         </div>
 
