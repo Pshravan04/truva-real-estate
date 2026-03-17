@@ -41,6 +41,12 @@ model Property {
   viewOrientation String?
   auditScore      Float?
 
+  // Rental Specifics
+  depositAmount   Float?
+  waterSupply     String?
+  leaseTerm       String?
+  neighbourhood   Json?    // { schools: [], hospitals: [], transport: [], shopping: [] }
+
   // Media URLs
   images          Json     // Array of strings stored as JSON
   projectImages   Json?    // Array of strings stored as JSON
@@ -97,6 +103,12 @@ model Submission {
   // RERA
   reraNumber      String?
   reraQr          String?
+
+  // Rental Specifics
+  depositAmount   Float?
+  waterSupply     String?
+  leaseTerm       String?
+  neighbourhood   Json?
   
   // Configurations
   configurations  Json?

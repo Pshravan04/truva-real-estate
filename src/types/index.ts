@@ -71,6 +71,17 @@ export interface Property {
     floorPlanUrl?: string;
     reraNumber?: string;
     reraQr?: string;
+
+    // Rental Details
+    depositAmount?: number;
+    waterSupply?: string;
+    leaseTerm?: string;
+    neighbourhood?: {
+        schools?: string[];
+        hospitals?: string[];
+        transport?: string[];
+        shopping?: string[];
+    };
 }
 
 export interface Society {
@@ -115,6 +126,17 @@ export interface Submission {
     floorPlanUrl?: string;
     reraNumber?: string;
     reraQr?: string;
+
+    // Rental Details
+    depositAmount?: number;
+    waterSupply?: string;
+    leaseTerm?: string;
+    neighbourhood?: {
+        schools?: string[];
+        hospitals?: string[];
+        transport?: string[];
+        shopping?: string[];
+    };
 }
 
 export interface Inquiry {

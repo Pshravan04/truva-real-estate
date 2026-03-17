@@ -5,8 +5,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
     MapPin, Bed, Bath, Square, Share2, Heart,
-    Shield, Check, Eye, Zap, Info, Phone,
-    Mail, Building2, Layout, Calendar, Globe, Sparkles,
+    Shield, Check, Eye, Zap, Info,
+    Building2, Layout, Calendar, Globe, Sparkles,
     Calculator
 } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
@@ -99,8 +99,17 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                 </div>
                                 <div className="text-left md:text-right">
                                     <p className="text-4xl font-black text-primary tracking-tighter">
-                                        ₹{(property.price / 10000000).toFixed(2)} <span className="text-xl">Cr</span>
+                                        {property.type === 'sale' ? (
+                                            <>₹{(property.price / 10000000).toFixed(2)} <span className="text-xl">Cr</span></>
+                                        ) : (
+                                            <>₹{property.price.toLocaleString()} <span className="text-xl">/mo</span></>
+                                        )}
                                     </p>
+                                    {property.type === 'rent' && property.depositAmount && (
+                                        <p className="text-xs font-black text-muted-foreground uppercase tracking-widest mt-1">
+                                            Deposit: ₹{property.depositAmount.toLocaleString()}
+                                        </p>
+                                    )}
                                     <div className="flex items-center md:justify-end gap-1 text-[9px] font-black text-accent-foreground uppercase tracking-widest mt-1">
                                         <Zap className="w-3 h-3" /> High Appreciation Area
                                     </div>
@@ -298,13 +307,80 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                         )}
 
                         <ImageGallery images={property.projectImages || []} />
+
+                        {/* Rental & Utility Details */}
+                        {(property.waterSupply || property.leaseTerm) && (
+                            <div className="space-y-8 pt-12 border-t border-border/50">
+                                <h2 className="text-xl font-black text-primary uppercase tracking-tight">Utilities & Terms</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {property.waterSupply && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
+                                                <Zap className="w-6 h-6 text-blue-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Water Supply</p>
+                                                <p className="font-black text-sm text-primary">{property.waterSupply}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {property.leaseTerm && (
+                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
+                                            <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center">
+                                                <Calendar className="w-6 h-6 text-orange-500" />
+                                            </div>
+                                            <div>
+                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Lease Term</p>
+                                                <p className="font-black text-sm text-primary">{property.leaseTerm}</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Neighbourhood Highlights */}
+                        {property.neighbourhood && Object.values(property.neighbourhood).some(arr => arr && arr.length > 0) && (
+                            <div className="space-y-8 pt-12 border-t border-border/50">
+                                <div className="space-y-2">
+                                    <div className="inline-flex items-center gap-2 bg-purple-500/10 text-purple-500 text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-purple-500/20">
+                                        <Search className="w-3.5 h-3.5" /> Discovery
+                                    </div>
+                                    <h2 className="text-3xl font-black text-primary tracking-tight">Explore Neighbourhood</h2>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    {Object.entries(property.neighbourhood).map(([category, items]) => (
+                                        items && items.length > 0 && (
+                                            <div key={category} className="space-y-4">
+                                                <h3 className="text-[11px] font-black text-primary uppercase tracking-[0.2em] flex items-center gap-2">
+                                                    {category === 'schools' && <Building2 className="w-4 h-4 text-accent" />}
+                                                    {category === 'hospitals' && <Info className="w-4 h-4 text-red-500" />}
+                                                    {category === 'transport' && <Globe className="w-4 h-4 text-blue-500" />}
+                                                    {category === 'shopping' && <Sparkles className="w-4 h-4 text-yellow-500" />}
+                                                    {category}
+                                                </h3>
+                                                <ul className="space-y-3">
+                                                    {items.map((item, i) => (
+                                                        <li key={i} className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-border/40 shadow-sm text-xs font-bold text-muted-foreground">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
+                                                            {item}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Sidebar / Conversion Hub */}
                     <div className="lg:col-span-1 space-y-6">
                         <div className="sticky top-24 space-y-6">
-                            {/* Contact Hub */}
-                            <div className="bg-white p-8 rounded-[40px] border border-border shadow-2xl shadow-primary/5 space-y-8">
+                            {/* Presented By */}
+                            <div className="bg-white p-8 rounded-[40px] border border-border shadow-2xl shadow-primary/5 space-y-4">
                                 <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Presented By</p>
                                 <h3 className="text-lg font-black text-primary flex items-start gap-3">
                                     <div className="w-10 h-10 rounded-xl bg-[#FF6F38]/10 flex items-center justify-center flex-shrink-0">
@@ -312,20 +388,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                     </div>
                                     Authorized Jangid Brothers <br /> Seller Partner
                                 </h3>
-                                <div className="flex flex-col gap-2 pt-4">
-                                    <a href={`tel:+919152012345`} className="flex items-center gap-3 text-xs font-bold text-muted-foreground hover:text-primary transition-colors">
-                                        <div className="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
-                                            <Phone className="w-4 h-4" />
-                                        </div>
-                                        +91 91520 12345
-                                    </a>
-                                    <a href={`mailto:partners@jangidbrothers.com`} className="flex items-center gap-3 text-xs font-bold text-muted-foreground hover:text-primary transition-colors">
-                                        <div className="w-8 h-8 rounded-xl bg-[#FF6F38]/5 flex items-center justify-center text-[#FF6F38]">
-                                            <Mail className="w-4 h-4" />
-                                        </div>
-                                        partners@jangidbrothers.com
-                                    </a>
-                                </div>
                             </div>
 
                             <WhatsAppButton

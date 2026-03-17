@@ -168,7 +168,13 @@ export const properties: Property[] = [
         masterPlanUrl: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
         floorPlanUrl: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
         reraNumber: "P51800001234",
-        reraQr: "https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"
+        reraQr: "https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg",
+        neighbourhood: {
+            schools: ["Vibgyor High", "Mount Mary School"],
+            hospitals: ["Lifeline Hospital"],
+            transport: ["WEH Metro", "Ram Mandir Station"],
+            shopping: ["Hub Mall", "Oberoi Mall"]
+        }
     },
     {
         id: "2",
@@ -524,6 +530,15 @@ export const properties: Property[] = [
         ],
         images: ["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"],
         stats: { bathrooms: 2, areaSqFt: 950 },
-        status: "LISTED"
+        status: "LISTED",
+        depositAmount: 200000,
+        waterSupply: "Municipal",
+        leaseTerm: "11 Months",
+        neighbourhood: {
+            schools: ["Hiranandani Foundation School", "Podar International"],
+            hospitals: ["Hiranandani Hospital"],
+            transport: ["Powai Metro (Upcoming)", "Kanjurmarg Station"],
+            shopping: ["Galleria Mall", "D-Mart"]
+        }
     }
 ];

@@ -12,6 +12,7 @@ export function ValuationForm() {
     const [showResults, setShowResults] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [listingType, setListingType] = useState<"sale" | "rent">("sale");
     const [formData, setFormData] = useState({
         propertyName: "",
         sellerName: "",
@@ -19,8 +20,8 @@ export function ValuationForm() {
         email: "",
         phone: "",
         location: "",
-        propertyType: "Ready To move", // Underconstruction, Ready To move, Near Possession
-        usageType: "Non commercial", // Commercial, Non commercial
+        propertyType: "Ready To move", 
+        usageType: "Non commercial", 
         description: "",
         highlights: "",
         connectivity: "",
@@ -34,7 +35,17 @@ export function ValuationForm() {
         masterPlanUrl: "",
         floorPlanUrl: "",
         reraNumber: "",
-        reraQr: ""
+        reraQr: "",
+        // Rental Fields
+        depositAmount: "",
+        waterSupply: "Municipal", // Municipal, Borewell, Both
+        leaseTerm: "11 Months",
+        neighbourhood: {
+            schools: ["", ""],
+            hospitals: ["", ""],
+            transport: ["", ""],
+            shopping: ["", ""]
+        }
     });
 
     const filteredSocieties = societies.filter(s =>
@@ -52,6 +63,12 @@ export function ValuationForm() {
         const newAmenities = [...formData.amenities];
         newAmenities[index] = value;
         setFormData({ ...formData, amenities: newAmenities });
+    };
+
+    const handleNeighbourhoodChange = (category: keyof typeof formData.neighbourhood, index: number, value: string) => {
+        const newNeighbourhood = { ...formData.neighbourhood };
+        newNeighbourhood[category][index] = value;
+        setFormData({ ...formData, neighbourhood: newNeighbourhood });
     };
 
 
@@ -84,14 +101,14 @@ export function ValuationForm() {
 
         const submission: Submission = {
             id: `sub-${Date.now()}`,
-            sellerId: "u1", // Hardcoded for now
+            sellerId: "u1", 
             societyId: formData.societyId,
             sellerName: formData.sellerName,
             developerName: formData.developerName,
             propertyName: formData.propertyName,
             location: formData.location,
-            carpetArea: 1250, // Default or calculated
-            valuationAmount: 45000000, // Simulated valuation
+            carpetArea: 1250, 
+            valuationAmount: listingType === "sale" ? 45000000 : 85000, 
             status: "VALUATED",
             createdAt: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
             image: formData.projectImages[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
@@ -106,7 +123,17 @@ export function ValuationForm() {
             floorPlanUrl: formData.floorPlanUrl,
             reraNumber: formData.reraNumber,
             reraQr: formData.reraQr,
-            projectImages: formData.projectImages.filter(img => img !== "")
+            projectImages: formData.projectImages.filter(img => img !== ""),
+            // Rental fields
+            depositAmount: parseFloat(formData.depositAmount),
+            waterSupply: formData.waterSupply,
+            leaseTerm: formData.leaseTerm,
+            neighbourhood: {
+                schools: formData.neighbourhood.schools.filter(s => s !== ""),
+                hospitals: formData.neighbourhood.hospitals.filter(h => h !== ""),
+                transport: formData.neighbourhood.transport.filter(t => t !== ""),
+                shopping: formData.neighbourhood.shopping.filter(s => s !== "")
+            }
         };
 
         addSubmission(submission);
@@ -134,9 +161,36 @@ export function ValuationForm() {
 
     return (
         <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-2xl shadow-primary/10 border border-border/50 max-w-7xl w-full mx-auto relative z-10 transition-all hover:shadow-primary/20">
-            <div className="mb-12 text-center">
-                <h2 className="text-4xl font-black text-primary mb-2 tracking-tighter">Request a Valuation</h2>
-                <p className="text-primary font-bold uppercase text-[10px] tracking-[0.2em]">Provide details for a premium, 100-point physical audit.</p>
+            <div className="mb-12 text-center space-y-8">
+                <div>
+                    <h2 className="text-4xl font-black text-primary mb-2 tracking-tighter">Property Submission</h2>
+                    <p className="text-primary font-bold uppercase text-[10px] tracking-[0.2em]">Provide details for a premium, 100-point physical audit.</p>
+                </div>
+
+                <div className="flex justify-center">
+                    <div className="bg-secondary/50 p-1.5 rounded-[24px] border border-border/50 inline-flex min-w-[320px]">
+                        <button
+                            type="button"
+                            onClick={() => setListingType("sale")}
+                            className={cn(
+                                "flex-1 py-3.5 rounded-[18px] text-[11px] font-black uppercase tracking-widest transition-all",
+                                listingType === "sale" ? "bg-white text-primary shadow-xl shadow-black/5" : "text-primary/40 hover:text-primary/60"
+                            )}
+                        >
+                            Sell Property
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setListingType("rent")}
+                            className={cn(
+                                "flex-1 py-3.5 rounded-[18px] text-[11px] font-black uppercase tracking-widest transition-all",
+                                listingType === "rent" ? "bg-white text-primary shadow-xl shadow-black/5" : "text-primary/40 hover:text-primary/60"
+                            )}
+                        >
+                            Rent Property
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-16">
@@ -321,6 +375,76 @@ export function ValuationForm() {
                                         </select>
                                         <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                                     </div>
+                                </div>
+                            </div>
+
+                            {/* Rental Specific Details */}
+                            {listingType === "rent" && (
+                                <div className="space-y-8 pt-10 border-t border-border/40 animate-in slide-in-from-top-4 duration-300">
+                                    <SectionHeader icon={DollarSign} title="Rental Terms" subtitle="Security & Water" />
+                                    
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Security Deposit (₹)</label>
+                                            <input
+                                                type="number"
+                                                placeholder="e.g. 500000"
+                                                className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                                value={formData.depositAmount}
+                                                onChange={(e) => setFormData({ ...formData, depositAmount: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Water Supply</label>
+                                            <div className="relative">
+                                                <select
+                                                    className="w-full p-4 rounded-2xl border border-border/60 appearance-none bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                                    value={formData.waterSupply}
+                                                    onChange={(e) => setFormData({ ...formData, waterSupply: e.target.value })}
+                                                >
+                                                    <option>Municipal</option>
+                                                    <option>Borewell</option>
+                                                    <option>Both</option>
+                                                </select>
+                                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Lease Term</label>
+                                        <input
+                                            type="text"
+                                            placeholder="e.g. 11 Months, 2 Years"
+                                            className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                            value={formData.leaseTerm}
+                                            onChange={(e) => setFormData({ ...formData, leaseTerm: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Explore Neighbourhood */}
+                            <div className="space-y-8 pt-10 border-t border-border/40">
+                                <SectionHeader icon={Search} title="Explore Neighbourhood" subtitle="Nearby Highlights" />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {(Object.keys(formData.neighbourhood) as Array<keyof typeof formData.neighbourhood>).map((category) => (
+                                        <div key={category} className="space-y-3">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">{category}</label>
+                                            <div className="space-y-3">
+                                                {formData.neighbourhood[category].map((item, idx) => (
+                                                    <input
+                                                        key={idx}
+                                                        type="text"
+                                                        placeholder={`Nearby ${category.slice(0, -1)}`}
+                                                        className="w-full p-3 rounded-xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-xs h-12"
+                                                        value={item}
+                                                        onChange={(e) => handleNeighbourhoodChange(category, idx, e.target.value)}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
