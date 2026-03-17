@@ -309,7 +309,27 @@ export default function AdminDashboard() {
                                                                     <>
                                                                         <p className="text-sm font-bold text-primary flex justify-between">
                                                                             <span className="text-muted-foreground opacity-60">Deposit</span>
-                                                                            <span>₹{sub.depositAmount}</span>
+                                                                            <span>₹{sub.depositAmount?.toLocaleString()}</span>
+                                                                        </p>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Maintenance</span>
+                                                                            <span>{sub.maintenance || 'N/A'}</span>
+                                                                        </p>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Brokerage</span>
+                                                                            <span>{sub.brokerage || 'N/A'}</span>
+                                                                        </p>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Lease Type</span>
+                                                                            <span>{sub.leaseType || 'N/A'}</span>
+                                                                        </p>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Condition</span>
+                                                                            <span>{sub.propertyCondition || 'N/A'}</span>
+                                                                        </p>
+                                                                        <p className="text-sm font-bold text-primary flex justify-between">
+                                                                            <span className="text-muted-foreground opacity-60">Age</span>
+                                                                            <span>{sub.propertyAge || 'N/A'}</span>
                                                                         </p>
                                                                         <p className="text-sm font-bold text-primary flex justify-between">
                                                                             <span className="text-muted-foreground opacity-60">Water</span>
@@ -319,6 +339,12 @@ export default function AdminDashboard() {
                                                                             <span className="text-muted-foreground opacity-60">Term</span>
                                                                             <span>{sub.leaseTerm}</span>
                                                                         </p>
+                                                                        {sub.termsAndConditions && (
+                                                                            <div className="col-span-full mt-4 p-4 bg-secondary/30 rounded-2xl border border-border/50">
+                                                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest mb-2">Owner's Terms & Conditions</p>
+                                                                                <p className="text-xs font-bold text-primary italic leading-relaxed">"{sub.termsAndConditions}"</p>
+                                                                            </div>
+                                                                        )}
                                                                     </>
                                                                 )}
                                                             </div>

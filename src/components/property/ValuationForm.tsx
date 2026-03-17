@@ -38,8 +38,14 @@ export function ValuationForm() {
         reraQr: "",
         // Rental Fields
         depositAmount: "",
+        brokerage: "",
+        maintenance: "",
         waterSupply: "Municipal", // Municipal, Borewell, Both
         leaseTerm: "11 Months",
+        leaseType: "",
+        propertyCondition: "",
+        propertyAge: "",
+        termsAndConditions: "",
         neighbourhood: {
             schools: ["", ""],
             hospitals: ["", ""],
@@ -127,8 +133,14 @@ export function ValuationForm() {
             // Rental fields
             listingType: listingType,
             depositAmount: parseFloat(formData.depositAmount),
+            brokerage: formData.brokerage,
+            maintenance: formData.maintenance,
             waterSupply: formData.waterSupply,
             leaseTerm: formData.leaseTerm,
+            leaseType: formData.leaseType,
+            propertyCondition: formData.propertyCondition,
+            propertyAge: formData.propertyAge,
+            termsAndConditions: formData.termsAndConditions,
             neighbourhood: {
                 schools: formData.neighbourhood.schools.filter(s => s !== ""),
                 hospitals: formData.neighbourhood.hospitals.filter(h => h !== ""),
@@ -381,8 +393,8 @@ export function ValuationForm() {
 
                             {/* Rental Specific Details */}
                             {listingType === "rent" && (
-                                <div className="space-y-8 pt-10 border-t border-border/40 animate-in slide-in-from-top-4 duration-300">
-                                    <SectionHeader icon={DollarSign} title="Rental Terms" subtitle="Security & Water" />
+                                <div className="space-y-10 pt-10 border-t border-border/40 animate-in slide-in-from-top-4 duration-300">
+                                    <SectionHeader icon={DollarSign} title="Rental Terms" subtitle="Security & Logistics" />
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
@@ -412,14 +424,80 @@ export function ValuationForm() {
                                         </div>
                                     </div>
 
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Brokerage</label>
+                                            <input
+                                                type="text"
+                                                placeholder="e.g. 1 Month / No Brokerage"
+                                                className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                                value={formData.brokerage}
+                                                onChange={(e) => setFormData({ ...formData, brokerage: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Maintenance</label>
+                                            <input
+                                                type="text"
+                                                placeholder="e.g. ₹5,000/mo or Included"
+                                                className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                                value={formData.maintenance}
+                                                onChange={(e) => setFormData({ ...formData, maintenance: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Lease Term</label>
+                                            <input
+                                                type="text"
+                                                placeholder="e.g. 11 Months"
+                                                className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                                value={formData.leaseTerm}
+                                                onChange={(e) => setFormData({ ...formData, leaseTerm: e.target.value })}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Lease Type</label>
+                                            <input
+                                                type="text"
+                                                placeholder="e.g. Family / Bachelors / Any"
+                                                className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                                value={formData.leaseType}
+                                                onChange={(e) => setFormData({ ...formData, leaseType: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Property Age</label>
+                                            <input
+                                                type="text"
+                                                placeholder="e.g. 5 Years"
+                                                className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
+                                                value={formData.propertyAge}
+                                                onChange={(e) => setFormData({ ...formData, propertyAge: e.target.value })}
+                                            />
+                                        </div>
+                                    </div>
+
                                     <div className="space-y-2">
-                                        <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Lease Term</label>
+                                        <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Condition of Property</label>
                                         <input
                                             type="text"
-                                            placeholder="e.g. 11 Months, 2 Years"
+                                            placeholder="e.g. Semi-Furnished, Excellent condition"
                                             className="w-full p-4 rounded-2xl border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm h-14"
-                                            value={formData.leaseTerm}
-                                            onChange={(e) => setFormData({ ...formData, leaseTerm: e.target.value })}
+                                            value={formData.propertyCondition}
+                                            onChange={(e) => setFormData({ ...formData, propertyCondition: e.target.value })}
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Flat Owner's Terms & Conditions</label>
+                                        <textarea
+                                            placeholder="e.g. Vegetarian only, No pets allowed, etc."
+                                            className="w-full p-5 rounded-[28px] border border-border/60 bg-white focus:ring-2 focus:ring-primary/10 outline-none font-bold transition-all text-sm min-h-[100px] resize-none leading-relaxed"
+                                            value={formData.termsAndConditions}
+                                            onChange={(e) => setFormData({ ...formData, termsAndConditions: e.target.value })}
                                         />
                                     </div>
                                 </div>
@@ -484,7 +562,7 @@ export function ValuationForm() {
                                             </div>
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">Expected Price</label>
+                                            <label className="text-[10px] font-black uppercase text-muted-foreground tracking-widest ml-1">{listingType === 'sale' ? 'Expected Price' : 'Monthly Rent'}</label>
                                             <div className="relative">
                                                 <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                                                 <input
