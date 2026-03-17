@@ -7,7 +7,7 @@ import {
     MapPin, Bed, Bath, Square, Share2, Heart,
     Shield, Check, Eye, Zap, Info,
     Building2, Layout, Calendar, Globe, Sparkles,
-    Calculator
+    Calculator, Search
 } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
 import { ImageGallery } from "@/components/property/ImageGallery";
