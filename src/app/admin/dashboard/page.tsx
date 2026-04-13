@@ -32,6 +32,7 @@ import { ValuationForm } from "@/components/property/ValuationForm"; // Imported
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState('properties');
     const [showAddListing, setShowAddListing] = useState(false); // Added showAddListing state
+    const [editingProperty, setEditingProperty] = useState<Property | null>(null);
     const {
         properties: mockProperties,
         submissions: mockSubmissions,
@@ -42,6 +43,16 @@ export default function AdminDashboard() {
         deleteProperty,
         updatePropertyStatus
     } = useData();
+
+    const handleEdit = (prop: Property) => {
+        setEditingProperty(prop);
+        setShowAddListing(true);
+    };
+
+    const handleCancelEdit = () => {
+        setEditingProperty(null);
+        setShowAddListing(false);
+    };
 
     const toggleStatus = (id: string, status: string) => {
         updatePropertyStatus(id, status as any);
@@ -55,7 +66,7 @@ export default function AdminDashboard() {
                     <p className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mb-4 ml-2">Control Center</p>
 
                     <button
-                        onClick={() => { setActiveTab('properties'); setShowAddListing(false); }}
+                        onClick={() => { setActiveTab('properties'); handleCancelEdit(); }}
                         className={cn(
                             "w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all",
                             activeTab === 'properties' ? "bg-primary text-primary-foreground shadow-lg" : "text-muted-foreground hover:bg-secondary"
@@ -159,11 +170,12 @@ export default function AdminDashboard() {
                                                                 "text-[9px] font-black uppercase px-2 py-1 rounded-full",
                                                                 prop.type === 'rent' ? "bg-blue-100 text-blue-600" : "bg-green-100 text-green-600"
                                                             )}>
-                                                                {prop.type}
+                                                                {prop.type || 'sale'}
                                                             </span>
                                                         </td>
-                                                        <td className="px-6 py-4 font-bold text-sm text-primary">₹{(prop.price / 10000000).toFixed(2)} Cr</td>
-                                                        {/* ... existing cells ... */}
+                                                        <td className="px-6 py-4 font-bold text-sm text-primary">
+                                                            {prop.type === 'rent' ? `₹${prop.price.toLocaleString()}/mo` : `₹${(prop.price / 10000000).toFixed(2)} Cr`}
+                                                        </td>
                                                         <td className="px-6 py-4">
                                                             <select
                                                                 value={prop.status}
@@ -173,6 +185,7 @@ export default function AdminDashboard() {
                                                                 <option value="LISTED">LISTED</option>
                                                                 <option value="SOLD">SOLD</option>
                                                                 <option value="PENDING">COMING SOON</option>
+                                                                <option value="AUDITED">AUDITED</option>
                                                             </select>
                                                         </td>
                                                         <td className="px-6 py-4">
@@ -180,10 +193,10 @@ export default function AdminDashboard() {
                                                                 onClick={() => toggleStatus(prop.id, prop.status === 'AUDITED' ? 'LISTED' : 'AUDITED')}
                                                                 className={cn(
                                                                     "w-12 h-6 rounded-full p-1 transition-all flex items-center",
-                                                                    prop.status === 'LISTED' ? "bg-accent/20 border border-accent/30 justify-end" : "bg-slate-200 border border-slate-300 justify-start"
+                                                                    prop.status === 'AUDITED' ? "bg-accent border border-accent justify-end" : "bg-slate-200 border border-slate-300 justify-start"
                                                                 )}
                                                             >
-                                                                <div className={cn("w-4 h-4 rounded-full", prop.status === 'LISTED' ? "bg-accent-foreground" : "bg-slate-400")} />
+                                                                <div className={cn("w-4 h-4 rounded-full", prop.status === 'AUDITED' ? "bg-white" : "bg-slate-400")} />
                                                             </button>
                                                         </td>
                                                         <td className="px-6 py-4 flex items-center justify-center gap-2">
@@ -192,7 +205,10 @@ export default function AdminDashboard() {
                                                                     <Eye className="w-4 h-4" />
                                                                 </button>
                                                             </Link>
-                                                            <button className="p-2 bg-secondary text-primary rounded-lg hover:bg-primary hover:text-white transition-all">
+                                                            <button
+                                                                onClick={() => handleEdit(prop)}
+                                                                className="p-2 bg-secondary text-primary rounded-lg hover:bg-primary hover:text-white transition-all"
+                                                            >
                                                                 <Edit3 className="w-4 h-4" />
                                                             </button>
                                                             <button onClick={() => deleteProperty(prop.id)} className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all">
@@ -209,20 +225,30 @@ export default function AdminDashboard() {
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-4">
                                         <button
-                                            onClick={() => setShowAddListing(false)}
+                                            onClick={handleCancelEdit}
                                             className="p-2 bg-white border border-border rounded-xl hover:bg-secondary transition-all"
                                         >
                                             <ArrowLeft className="w-5 h-5" />
                                         </button>
                                         <div>
-                                            <h1 className="text-2xl font-black text-primary">Add New Listing</h1>
-                                            <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest mt-1">Property Deployment Zone</p>
+                                            <h1 className="text-2xl font-black text-primary">
+                                                {editingProperty ? "Edit Listing" : "Add New Listing"}
+                                            </h1>
+                                            <p className="text-xs text-muted-foreground font-bold uppercase tracking-widest mt-1">
+                                                Property Deployment Zone
+                                            </p>
                                         </div>
                                     </div>
 
-                                    <div className="bg-secondary/10 rounded-[40px] p-8 border border-border/50 bg-white">
+                                    <div className="bg-secondary/10 rounded-[40px] p-8 border border-border/50 bg-white shadow-2xl">
                                         <div className="max-w-4xl mx-auto">
-                                            <ValuationForm />
+                                            <ValuationForm
+                                                initialData={editingProperty || undefined}
+                                                onSuccess={() => {
+                                                    setEditingProperty(null);
+                                                    setShowAddListing(false);
+                                                }}
+                                            />
                                         </div>
                                     </div>
                                 </div>

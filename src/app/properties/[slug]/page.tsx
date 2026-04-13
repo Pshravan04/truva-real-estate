@@ -127,9 +127,11 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                         )}
                                     </p>
                                     {property.type === 'rent' && property.depositAmount && (
-                                        <p className="text-xs font-black text-muted-foreground uppercase tracking-widest mt-1">
-                                            Deposit: ₹{property.depositAmount.toLocaleString()}
-                                        </p>
+                                        <div className="flex md:justify-end">
+                                            <p className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary rounded-full text-[10px] font-black text-primary uppercase tracking-widest mt-2 border border-border/50">
+                                                <Shield className="w-3 h-3 text-[#FF6F38]" /> Security Deposit: ₹{property.depositAmount.toLocaleString()}
+                                            </p>
+                                        </div>
                                     )}
                                     <div className="flex items-center md:justify-end gap-1 text-[9px] font-black text-accent-foreground uppercase tracking-widest mt-1">
                                         <Zap className="w-3 h-3" /> High Appreciation Area

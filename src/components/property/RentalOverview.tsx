@@ -62,6 +62,11 @@ export function RentalOverview({ property, className }: RentalOverviewProps) {
             label: "Gated Security",
             value: property.gatedSecurity || "Yes",
             icon: ShieldCheck
+        },
+        {
+            label: "Security Deposit",
+            value: property.depositAmount ? `₹${property.depositAmount.toLocaleString()}` : "N/A",
+            icon: Info
         }
     ];
 

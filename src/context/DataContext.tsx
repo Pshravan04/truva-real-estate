@@ -25,6 +25,7 @@ interface DataContextType {
     deleteProperty: (propertyId: string) => Promise<void>;
     isInitialized: boolean;
     updatePropertyStatus: (propertyId: string, status: Property['status']) => Promise<void>;
+    updateProperty: (property: Property) => Promise<void>;
     addListing: (property: Property) => Promise<void>;
     updateFilterSettings: (settings: Partial<FilterSettings>) => Promise<void>;
 }
@@ -148,6 +149,19 @@ export function DataProvider({ children }: { children: ReactNode }) {
         // TODO: Backend API call
     };
 
+    const updateProperty = async (updatedProp: Property) => {
+        setProperties(prev => prev.map(p => p.id === updatedProp.id ? updatedProp : p));
+        try {
+            await fetch(`/api/properties/${updatedProp.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedProp)
+            });
+        } catch (error) {
+            console.error("Failed to update property", error);
+        }
+    };
+
     const addListing = async (property: Property) => {
         try {
             const res = await fetch('/api/properties', {
@@ -191,6 +205,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
             rejectSubmission,
             deleteProperty,
             updatePropertyStatus,
+            updateProperty,
             addListing,
             updateFilterSettings,
             isInitialized
