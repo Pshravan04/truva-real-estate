@@ -143,6 +143,7 @@ export const properties: Property[] = [
         reraQr: "https://static.maharera.mahaonline.gov.in/project-qr/P51800009876.png",
         masterPlanUrl: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7",
         floorPlanUrl: "https://images.unsplash.com/photo-1503387762-592bed58ef23",
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.9!2d72.825!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMzAuMCJF!5e0!3m2!1sen!2sin!4v123456789",
         neighbourhood: {
             schools: ["Oberoi International", "Ryan International"],
             hospitals: ["Lifeline Medicare", "Suvidha Hospital"],
@@ -193,6 +194,7 @@ export const properties: Property[] = [
         auditScore: 92,
         reraNumber: "P51900005544",
         reraQr: "https://static.maharera.mahaonline.gov.in/project-qr/P51900005544.png",
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.21!2d72.883!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMzAuMCJF!5e0!3m2!1sen!2sin!4v123456789",
         neighbourhood: {
             schools: ["Seven Hills School", "Holy Family"],
             hospitals: ["Seven Hills Hospital", "Sushrusha"],
@@ -272,6 +274,7 @@ export const properties: Property[] = [
         environmentalScores: { light: 9, noise: 8, air: 8 },
         viewOrientation: "Garden View",
         auditScore: 95,
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.21!2d72.883!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMzAuMCJF!5e0!3m2!1sen!2sin!4v123456789",
         neighbourhood: {
             transport: ["Juhu Bus Depot", "Vile Parle Station"],
             shopping: ["Nature's Basket", "JW Marriott Shops"]
@@ -438,6 +441,7 @@ export const properties: Property[] = [
         environmentalScores: { light: 8, noise: 7, air: 8 },
         viewOrientation: "Skyline View",
         auditScore: 93,
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.21!2d72.883!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMzAuMCJF!5e0!3m2!1sen!2sin!4v123456789",
         neighbourhood: {
             transport: ["Marol Naka Metro", "Andheri Station"],
             shopping: ["Phoenix Marketcity", "Hubtown Solaris"]
@@ -508,6 +512,7 @@ export const properties: Property[] = [
         environmentalScores: { light: 9, noise: 9, air: 8 },
         viewOrientation: "Powai Lake",
         auditScore: 96,
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.9!2d72.825!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMzAuMCJF!5e0!3m2!1sen!2sin!4v123456789",
         neighbourhood: {
             schools: ["Kiwon School", "Podar"],
             hospitals: ["LH Hiranandani Hospital"],
@@ -579,6 +584,7 @@ export const properties: Property[] = [
         environmentalScores: { light: 9, noise: 10, air: 9 },
         viewOrientation: "Lush Greenery",
         auditScore: 98,
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.9!2d72.825!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMzAuMCJF!5e0!3m2!1sen!2sin!4v123456789",
         neighbourhood: {
             hospitals: ["Lifeline Medicare"],
             transport: ["Goregaon Metro", "Film City Bus Stop"]
@@ -648,6 +654,7 @@ export const properties: Property[] = [
         environmentalScores: { light: 7, noise: 5, air: 7 },
         viewOrientation: "Business Park",
         auditScore: 89,
+        mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.9!2d72.825!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNDknMzAuMCJF!5e0!3m2!1sen!2sin!4v123456789",
         neighbourhood: {
             transport: ["SEEPZ Metro", "MIDC Bus Stop"],
             shopping: ["Local Market"]

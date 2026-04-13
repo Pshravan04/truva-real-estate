@@ -294,19 +294,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             </div>
                         )}
 
-                        {/* EMI Calculator — in main content for sale properties */}
-                        {property.type === 'sale' && (
-                            <div className="space-y-6">
-                                <h2 className="text-xl font-black text-primary uppercase tracking-tight flex items-center gap-2">
-                                    <Calculator className="w-5 h-5 text-accent" /> EMI Calculator
-                                </h2>
-                                <EMICalculator
-                                    variant="full"
-                                    initialAmount={property.price}
-                                    className="!shadow-none border border-border/50 rounded-[40px]"
-                                />
-                            </div>
-                        )}
 
                         {/* Location Map */}
                         {property.mapUrl && (
@@ -361,6 +348,21 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                         </p>
                                     </div>
                                 )}
+                            </div>
+                        )}
+
+                        {/* EMI Calculator — Compact Version before Related Properties */}
+                        {property.type === 'sale' && (
+                            <div className="space-y-6 pt-12 border-t border-border/50">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-1 bg-[#FF6F38] rounded-full" />
+                                    <h2 className="text-xl font-black text-primary tracking-tight">Project Finance Calculator</h2>
+                                </div>
+                                <EMICalculator
+                                    variant="mini"
+                                    initialAmount={property.price}
+                                    className="!shadow-none border border-border/50 rounded-[32px] max-w-sm"
+                                />
                             </div>
                         )}
 
