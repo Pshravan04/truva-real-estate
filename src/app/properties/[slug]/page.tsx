@@ -295,28 +295,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                         )}
 
 
-                        {/* Location Map */}
-                        {property.mapUrl && (
-                            <div className="space-y-6">
-                                <div className="flex items-center justify-between">
-                                    <h2 className="text-xl font-black text-primary uppercase tracking-tight">Location Context</h2>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
-                                        <MapPin className="w-3 h-3" /> {property.location.area}
-                                    </span>
-                                </div>
-                                <div className="aspect-video w-full rounded-[40px] border border-border/50 overflow-hidden shadow-2xl shadow-primary/5">
-                                    <iframe
-                                        src={property.mapUrl}
-                                        width="100%"
-                                        height="100%"
-                                        style={{ border: 0 }}
-                                        allowFullScreen
-                                        loading="lazy"
-                                        referrerPolicy="no-referrer-when-downgrade"
-                                    />
-                                </div>
-                            </div>
-                        )}
 
                         {/* Neighbourhood Highlights */}
                         <div className="space-y-8 pt-12 border-t border-border/50">
@@ -351,18 +329,46 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             </div>
                         )}
 
-                        {/* EMI Calculator — Compact Version before Related Properties */}
-                        {property.type === 'sale' && (
-                            <div className="space-y-6 pt-12 border-t border-border/50">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-1 bg-[#FF6F38] rounded-full" />
-                                    <h2 className="text-xl font-black text-primary tracking-tight">Project Finance Calculator</h2>
-                                </div>
-                                <EMICalculator
-                                    variant="mini"
-                                    initialAmount={property.price}
-                                    className="!shadow-none border border-border/50 rounded-[32px] max-w-sm"
-                                />
+                        {/* Map & EMI Section — Filling the space and showing the context */}
+                        {(property.mapUrl || property.type === 'sale') && (
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-12 border-t border-border/50">
+                                {/* Map - Takes 2/3 of space on desktop */}
+                                {property.mapUrl && (
+                                    <div className={cn(property.type === 'sale' ? "lg:col-span-2" : "lg:col-span-3", "space-y-6")}>
+                                        <div className="flex items-center justify-between">
+                                            <h2 className="text-xl font-black text-primary uppercase tracking-tight">Location Context</h2>
+                                            <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                                                <MapPin className="w-3 h-3" /> {property.location.area}
+                                            </span>
+                                        </div>
+                                        <div className="aspect-video w-full rounded-[40px] border border-border/50 overflow-hidden shadow-xl shadow-primary/5">
+                                            <iframe
+                                                src={property.mapUrl}
+                                                width="100%"
+                                                height="100%"
+                                                style={{ border: 0 }}
+                                                allowFullScreen
+                                                loading="lazy"
+                                                referrerPolicy="no-referrer-when-downgrade"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* EMI Calculator — Compact Version */}
+                                {property.type === 'sale' && (
+                                    <div className={cn(property.mapUrl ? "lg:col-span-1" : "lg:col-span-3", "space-y-6")}>
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-1 bg-[#FF6F38] rounded-full" />
+                                            <h2 className="text-xl font-black text-primary tracking-tight">Project Finance</h2>
+                                        </div>
+                                        <EMICalculator
+                                            variant="mini"
+                                            initialAmount={property.price}
+                                            className="!shadow-none border border-border/50 rounded-[32px] w-full"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         )}
 
