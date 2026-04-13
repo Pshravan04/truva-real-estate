@@ -270,7 +270,7 @@ export function ValuationForm({ initialData, onSuccess }: ValuationFormProps) {
     );
 
     return (
-        <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-2xl shadow-primary/10 border border-border/50 max-w-7xl w-full mx-auto relative z-10 transition-all hover:shadow-primary/20">
+        <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-2xl shadow-primary/10 border border-border/50 max-w-full w-full mx-auto relative z-10 transition-all hover:shadow-primary/20">
             <div className="mb-12 text-center space-y-8">
                 <div>
                     <h2 className="text-4xl font-black text-primary mb-2 tracking-tighter">Property Submission</h2>

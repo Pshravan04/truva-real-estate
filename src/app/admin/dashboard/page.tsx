@@ -241,7 +241,7 @@ export default function AdminDashboard() {
                                     </div>
 
                                     <div className="bg-secondary/10 rounded-[40px] p-8 border border-border/50 bg-white shadow-2xl">
-                                        <div className="max-w-4xl mx-auto">
+                                        <div className="max-w-full mx-auto">
                                             <ValuationForm
                                                 initialData={editingProperty || undefined}
                                                 onSuccess={() => {
