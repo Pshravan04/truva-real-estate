@@ -72,6 +72,13 @@ export interface Property {
     reraNumber?: string;
     reraQr?: string;
 
+    // Project Details
+    projectUnits?: number;
+    projectArea?: string;
+    totalBuildings?: number;
+    avgPricePerSqFt?: string;
+    launchDate?: string;
+
     // Rental Details
     depositAmount?: number;
     brokerage?: string;
@@ -82,11 +89,35 @@ export interface Property {
     propertyCondition?: string;
     propertyAge?: string;
     termsAndConditions?: string;
+    furnishingStatus?: 'Full' | 'Semi' | 'None';
+    nonVegAllowed?: string;
+    facing?: string;
+    floorDetail?: string;
+    petAllowed?: string;
+    gatedSecurity?: string;
+    preferredTenant?: string;
+    parking?: string;
+    balcony?: string;
+    postedOn?: string;
+    featureRatings?: {
+        connectivity: number;
+        neighbourhood: number;
+        safety: number;
+        livability: number;
+    };
+    propertyReviews?: Array<{
+        userName: string;
+        userAvatar?: string;
+        rating: number;
+        comment: string;
+        date: string;
+    }>;
     neighbourhood?: {
         schools?: string[];
         hospitals?: string[];
         transport?: string[];
         shopping?: string[];
+        lifestyle?: string[];
     };
 }
 
@@ -133,6 +164,13 @@ export interface Submission {
     reraNumber?: string;
     reraQr?: string;
 
+    // Project Details
+    projectUnits?: number;
+    projectArea?: string;
+    totalBuildings?: number;
+    avgPricePerSqFt?: string;
+    launchDate?: string;
+
     // Rental Details
     listingType?: 'sale' | 'rent';
     depositAmount?: number;
@@ -144,11 +182,28 @@ export interface Submission {
     propertyCondition?: string;
     propertyAge?: string;
     termsAndConditions?: string;
+    furnishingStatus?: 'Full' | 'Semi' | 'None';
+    nonVegAllowed?: string;
+    facing?: string;
+    floorDetail?: string;
+    petAllowed?: string;
+    gatedSecurity?: string;
+    preferredTenant?: string;
+    parking?: string;
+    balcony?: string;
+    postedOn?: string;
+    featureRatings?: {
+        connectivity: number;
+        neighbourhood: number;
+        safety: number;
+        livability: number;
+    };
     neighbourhood?: {
         schools?: string[];
         hospitals?: string[];
         transport?: string[];
         shopping?: string[];
+        lifestyle?: string[];
     };
 }
 

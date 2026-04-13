@@ -7,7 +7,7 @@ import {
     MapPin, Bed, Bath, Square, Share2, Heart,
     Shield, Check, Eye, Zap, Info,
     Building2, Layout, Calendar, Globe, Sparkles,
-    Calculator, Search
+    Calculator, Search, Phone, ArrowRight
 } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
 import { ImageGallery } from "@/components/property/ImageGallery";
@@ -16,6 +16,12 @@ import { WhatsAppButton } from "@/components/property/WhatsAppButton";
 import { ScheduleCallForm } from "@/components/property/ScheduleCallForm";
 import { ImmersiveSections } from "@/components/property/ImmersiveSections";
 import { EMICalculator } from "@/components/property/EMICalculator";
+import { ConnectivityTabs } from "@/components/property/ConnectivityTabs";
+import { ProjectDetails } from "@/components/property/ProjectDetails";
+import { RentalOverview } from "@/components/property/RentalOverview";
+import { RentalDetailsGrid } from "@/components/property/RentalDetailsGrid";
+import { FeatureRatings } from "@/components/property/FeatureRatings";
+import { PropertyReviews } from "@/components/property/PropertyReviews";
 import { cn } from "@/lib/utils";
 import { Property } from "@/types";
 
@@ -62,6 +68,11 @@ export default function PropertyDetailsPage({ params }: PageProps) {
     );
 
     if (!property) return notFound();
+
+    // Get related properties (same type, different property)
+    const relatedProperties = properties
+        .filter(p => p.id !== property.id && p.type === property.type && p.status === 'LISTED')
+        .slice(0, 3);
 
     return (
         <main className="min-h-screen flex flex-col pt-20 bg-[#FAFAFA]">
@@ -133,7 +144,7 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                     <p className="text-sm font-black text-primary">{property.bhk} BHK</p>
                                 </div>
                                 <div className="space-y-1 pl-4 border-l-2 border-primary">
-                                    <span className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Built-up</span>
+                                    <span className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Carpet Area</span>
                                     <p className="text-sm font-black text-primary">{property.stats?.areaSqFt || 0} SQFT</p>
                                 </div>
                                 <div className="space-y-1 pl-4 border-l-2 border-accent">
@@ -148,32 +159,37 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                 </div>
                             </div>
 
-                            {/* MahaRERA Details */}
-                            {(property.reraNumber || property.reraQr) && (
-                                <div className="flex items-center gap-4 p-6 bg-white rounded-[24px] border border-border/50 shadow-sm">
-                                    <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center">
-                                        <Shield className="w-6 h-6 text-primary" />
+                            {/* Project Details Grid (Only for Buy properties or high-level info) */}
+                            {property.type === 'sale' && <ProjectDetails property={property} />}
+
+                            {/* Rental Specific Grid Details (Only for Rent properties) */}
+                            {property.type === 'rent' && (
+                                <RentalDetailsGrid property={property} className="rounded-[40px] overflow-hidden" />
+                            )}
+
+                            {/* Developer Info - Prominent */}
+                            {property.developerName && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="flex items-center gap-5 p-6 bg-white rounded-[28px] border border-border/50 shadow-sm">
+                                        <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0">
+                                            <Building2 className="w-7 h-7 text-white" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest mb-0.5">Developed By</p>
+                                            <p className="text-xl font-black text-primary">{property.developerName}</p>
+                                            {property.category && (
+                                                <span className="text-[9px] font-black uppercase tracking-wider text-accent-foreground">{property.category.replace(/_/g, ' ')}</span>
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="flex-1 space-y-1">
-                                        <p className="text-[10px] font-black uppercase text-muted-foreground tracking-widest">MahaRERA Registration</p>
-                                        <div className="flex flex-col md:flex-row md:items-center gap-4">
-                                            {property.reraNumber && (
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-lg font-black text-primary tracking-tight">{property.reraNumber}</span>
-                                                    <span className="px-2 py-0.5 rounded-full bg-green-100 text-green-700 text-[9px] font-black uppercase tracking-wider border border-green-200">Verified</span>
-                                                </div>
-                                            )}
-                                            {property.reraQr && (
-                                                <a
-                                                    href={property.reraQr}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary hover:bg-secondary/80 text-primary text-xs font-bold transition-all group"
-                                                >
-                                                    <Zap className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                                                    View QR Certificate
-                                                </a>
-                                            )}
+                                    <div className="flex items-center gap-4 p-6 bg-white rounded-[28px] border border-border/50 shadow-sm relative overflow-hidden group">
+                                        <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors" />
+                                        <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center relative z-10">
+                                            <Globe className="w-6 h-6 text-blue-500" />
+                                        </div>
+                                        <div className="relative z-10">
+                                            <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest mb-0.5">Project Status</p>
+                                            <p className="text-sm font-black text-primary uppercase tracking-tight">{property.constructionStatus?.replace(/_/g, ' ')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +280,35 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             </div>
                         </div>
 
-                        {/* Map Section */}
+                        {/* Floor Plan */}
+                        {property.floorPlanUrl && (
+                            <div className="space-y-6">
+                                <h2 className="text-xl font-black text-primary uppercase tracking-tight">Floor Plan</h2>
+                                <div className="bg-white rounded-[40px] border border-border/50 shadow-xl shadow-primary/5 overflow-hidden p-6">
+                                    <img
+                                        src={property.floorPlanUrl}
+                                        alt={`${property.title} Floor Plan`}
+                                        className="w-full h-auto rounded-[28px] object-contain max-h-[600px]"
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+                        {/* EMI Calculator — in main content for sale properties */}
+                        {property.type === 'sale' && (
+                            <div className="space-y-6">
+                                <h2 className="text-xl font-black text-primary uppercase tracking-tight flex items-center gap-2">
+                                    <Calculator className="w-5 h-5 text-accent" /> EMI Calculator
+                                </h2>
+                                <EMICalculator
+                                    variant="full"
+                                    initialAmount={property.price}
+                                    className="!shadow-none border border-border/50 rounded-[40px]"
+                                />
+                            </div>
+                        )}
+
+                        {/* Location Map */}
                         {property.mapUrl && (
                             <div className="space-y-6">
                                 <div className="flex items-center justify-between">
@@ -287,105 +331,28 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             </div>
                         )}
 
+                        {/* Neighbourhood Highlights */}
+                        <div className="space-y-8 pt-12 border-t border-border/50">
+                            <div className="space-y-2">
+                                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-primary/20">
+                                    <Search className="w-3.5 h-3.5" /> Neighbourhood Discovery
+                                </div>
+                                <h2 className="text-3xl font-black text-primary tracking-tight">Prime Location Connectivity</h2>
+                            </div>
+
+                            <ConnectivityTabs neighbourhood={property.neighbourhood} />
+                        </div>
+
                         <ImageGallery images={property.projectImages || []} />
 
-                        {/* Rental & Utility Details */}
+                        {/* Rental Specific Overview & Ratings */}
                         {property.type === 'rent' && (
-                            <div className="space-y-8 pt-12 border-t border-border/50">
-                                <h2 className="text-xl font-black text-primary uppercase tracking-tight">Rental Terms & Conditions</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {property.depositAmount && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center">
-                                                <Info className="w-6 h-6 text-orange-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Security Deposit</p>
-                                                <p className="font-black text-sm text-primary">₹{property.depositAmount.toLocaleString()}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {property.brokerage && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center">
-                                                <Shield className="w-6 h-6 text-purple-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Brokerage</p>
-                                                <p className="font-black text-sm text-primary">{property.brokerage}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {property.maintenance && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center">
-                                                <Check className="w-6 h-6 text-green-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Maintenance</p>
-                                                <p className="font-black text-sm text-primary">{property.maintenance}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {property.leaseTerm && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
-                                                <Calendar className="w-6 h-6 text-blue-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Lease Term</p>
-                                                <p className="font-black text-sm text-primary">{property.leaseTerm}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {property.leaseType && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center">
-                                                <Building2 className="w-6 h-6 text-yellow-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Lease Type</p>
-                                                <p className="font-black text-sm text-primary">{property.leaseType}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {property.propertyCondition && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center">
-                                                <Info className="w-6 h-6 text-teal-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Condition</p>
-                                                <p className="font-black text-sm text-primary">{property.propertyCondition}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {property.propertyAge && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center">
-                                                <Calendar className="w-6 h-6 text-red-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Property Age</p>
-                                                <p className="font-black text-sm text-primary">{property.propertyAge}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {property.waterSupply && (
-                                        <div className="flex items-center gap-4 p-6 bg-white border border-border/50 rounded-[28px] shadow-sm">
-                                            <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
-                                                <Zap className="w-6 h-6 text-blue-500" />
-                                            </div>
-                                            <div>
-                                                <p className="text-[9px] font-black uppercase text-muted-foreground tracking-widest">Water Supply</p>
-                                                <p className="font-black text-sm text-primary">{property.waterSupply}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-
+                            <div className="space-y-12">
+                                <RentalOverview property={property} />
+                                <FeatureRatings property={property} />
+                                <PropertyReviews property={property} />
                                 {property.termsAndConditions && (
-                                    <div className="p-8 bg-secondary/20 rounded-[32px] border border-border/50 space-y-4">
+                                    <div className="p-8 bg-secondary/20 rounded-[32px] border border-border/50 space-y-4 pt-12 border-t border-border/50">
                                         <h3 className="text-[11px] font-black text-primary uppercase tracking-[0.2em] flex items-center gap-2">
                                             <Shield className="w-4 h-4 text-accent" /> Owner's Terms & Conditions
                                         </h3>
@@ -397,38 +364,80 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                             </div>
                         )}
 
-                        {/* Neighbourhood Highlights */}
-                        {property.neighbourhood && Object.values(property.neighbourhood).some(arr => arr && arr.length > 0) && (
+                        {/* Related Properties */}
+                        {relatedProperties.length > 0 && (
                             <div className="space-y-8 pt-12 border-t border-border/50">
-                                <div className="space-y-2">
-                                    <div className="inline-flex items-center gap-2 bg-purple-500/10 text-purple-500 text-[9px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest border border-purple-500/20">
-                                        <Search className="w-3.5 h-3.5" /> Discovery
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">You Might Also Like</p>
+                                        <h2 className="text-3xl font-black text-primary tracking-tight mt-1">Related Properties</h2>
                                     </div>
-                                    <h2 className="text-3xl font-black text-primary tracking-tight">Explore Neighbourhood</h2>
+                                    <Link
+                                        href="/buy"
+                                        className="hidden md:flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary hover:text-[#FF6F38] transition-colors"
+                                    >
+                                        View All <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {relatedProperties.map((rel) => (
+                                        <Link key={rel.id} href={`/properties/${rel.slug}`} className="group">
+                                            <div className="bg-white rounded-[32px] border border-border/50 overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1">
+                                                <div className="relative h-44 overflow-hidden">
+                                                    <img
+                                                        src={rel.images?.[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c"}
+                                                        alt={rel.title}
+                                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                                                    <span className="absolute top-3 left-3 bg-[#FF6F38] text-white text-[8px] font-black px-2 py-1 rounded-lg uppercase tracking-widest">
+                                                        {rel.type === 'sale' ? 'For Sale' : 'For Rent'}
+                                                    </span>
+                                                </div>
+                                                <div className="p-5 space-y-2">
+                                                    <p className="font-black text-primary text-sm leading-tight line-clamp-2">{rel.title}</p>
+                                                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{rel.location.area}, {rel.location.city}</p>
+                                                    <div className="flex items-center justify-between pt-2 border-t border-border/30">
+                                                        <p className="font-black text-primary text-sm">
+                                                            {rel.type === 'sale'
+                                                                ? `₹${(rel.price / 10000000).toFixed(2)} Cr`
+                                                                : `₹${rel.price.toLocaleString()}/mo`
+                                                            }
+                                                        </p>
+                                                        <span className="text-[9px] font-black uppercase text-muted-foreground">{rel.bhk} BHK • {rel.stats?.areaSqFt} sqft</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {Object.entries(property.neighbourhood).map(([category, items]) => (
-                                        items && items.length > 0 && (
-                                            <div key={category} className="space-y-4">
-                                                <h3 className="text-[11px] font-black text-primary uppercase tracking-[0.2em] flex items-center gap-2">
-                                                    {category === 'schools' && <Building2 className="w-4 h-4 text-accent" />}
-                                                    {category === 'hospitals' && <Info className="w-4 h-4 text-red-500" />}
-                                                    {category === 'transport' && <Globe className="w-4 h-4 text-blue-500" />}
-                                                    {category === 'shopping' && <Sparkles className="w-4 h-4 text-yellow-500" />}
-                                                    {category}
-                                                </h3>
-                                                <ul className="space-y-3">
-                                                    {items.map((item, i) => (
-                                                        <li key={i} className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-border/40 shadow-sm text-xs font-bold text-muted-foreground">
-                                                            <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
-                                                            {item}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )
-                                    ))}
+                                {/* CTA after Related Properties */}
+                                <div className="mt-8 bg-gradient-to-br from-primary to-primary/80 rounded-[40px] p-10 text-white relative overflow-hidden shadow-2xl shadow-primary/30">
+                                    <div className="absolute -right-8 -top-8 w-48 h-48 rounded-full bg-white/5" />
+                                    <div className="absolute -left-4 -bottom-4 w-32 h-32 rounded-full bg-[#FF6F38]/20" />
+                                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                                        <div className="space-y-3">
+                                            <span className="text-[9px] font-black uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">Jangid Brothers Exclusive</span>
+                                            <h3 className="text-2xl md:text-3xl font-black leading-tight">Find Your Perfect Property</h3>
+                                            <p className="text-sm font-bold opacity-70 leading-relaxed max-w-md">
+                                                Our experts are ready to guide you through Mumbai's finest real estate. Zero brokerage, full legal transparency.
+                                            </p>
+                                        </div>
+                                        <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+                                            <WhatsAppButton
+                                                propertyId={property.id}
+                                                propertyTitle={property.title}
+                                                phoneNumber="+919152012345"
+                                            />
+                                            <Link
+                                                href="/buy"
+                                                className="flex items-center gap-2 px-6 py-4 bg-white/10 hover:bg-white/20 rounded-2xl font-black text-xs uppercase tracking-widest transition-all border border-white/20"
+                                            >
+                                                Browse All <ArrowRight className="w-4 h-4" />
+                                            </Link>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -454,14 +463,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
                                 phoneNumber="+919152012345"
                             />
 
-                            {property.type === 'sale' && (
-                                <EMICalculator
-                                    variant="mini"
-                                    initialAmount={property.price}
-                                    className="!shadow-none border border-border/50"
-                                />
-                            )}
-
                             <div className="pt-4">
                                 <ScheduleCallForm configurations={property.configurations} />
                             </div>
@@ -486,6 +487,6 @@ export default function PropertyDetailsPage({ params }: PageProps) {
             </div>
 
             <Footer />
-        </main>
+        </main >
     );
 }
