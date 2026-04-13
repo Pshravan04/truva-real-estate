@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -32,6 +33,7 @@ export default function RootLayout({
             {children}
           </DataProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
