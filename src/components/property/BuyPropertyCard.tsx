@@ -69,7 +69,9 @@ export function BuyPropertyCard({ property }: BuyPropertyCardProps) {
                         {property.bhk} BHK in {property.title.split(" ").slice(-1)}
                     </h3>
                     <p className="text-[15px] font-bold text-muted-foreground mt-1">
-                        INR {(property.price / 10000000).toFixed(2)} Cr.
+                        INR {property.type === 'sale'
+                            ? (property.price / 10000000).toFixed(2) + " Cr."
+                            : (property.price >= 100000 ? (property.price / 100000).toFixed(2) + " L" : property.price.toLocaleString('en-IN')) + "/mo"}
                     </p>
                 </div>
 

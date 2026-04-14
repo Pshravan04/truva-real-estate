@@ -8,8 +8,8 @@ interface BuySidebarProps {
     localities: { name: string; count: number }[];
     selectedLocality: string;
     onLocalityChange: (name: string) => void;
-    selectedListingType: "sale" | "rent";
-    onListingTypeChange: (type: "sale" | "rent") => void;
+    selectedListingType?: "sale" | "rent";
+    onListingTypeChange?: (type: "sale" | "rent") => void;
     selectedCategory: string;
     onCategoryChange: (category: string) => void;
     selectedBhk: string;
@@ -46,31 +46,33 @@ export function BuySidebar({
     return (
         <aside className="w-full lg:w-[300px] flex-shrink-0 space-y-12 pb-20">
             {/* Buy/Rent Toggle */}
-            <section className="space-y-6">
-                <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.25em] flex items-center gap-2">
-                    Listing Type
-                </h3>
-                <div className="flex bg-secondary/50 p-1.5 rounded-2xl border border-border/50">
-                    <button
-                        onClick={() => onListingTypeChange("sale")}
-                        className={cn(
-                            "flex-1 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all",
-                            selectedListingType === "sale" ? "bg-white text-primary shadow-sm" : "text-primary/40 hover:text-primary/60"
-                        )}
-                    >
-                        Buy
-                    </button>
-                    <button
-                        onClick={() => onListingTypeChange("rent")}
-                        className={cn(
-                            "flex-1 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all",
-                            selectedListingType === "rent" ? "bg-white text-primary shadow-sm" : "text-primary/40 hover:text-primary/60"
-                        )}
-                    >
-                        Rent
-                    </button>
-                </div>
-            </section>
+            {onListingTypeChange && (
+                <section className="space-y-6">
+                    <h3 className="text-[10px] font-black text-primary uppercase tracking-[0.25em] flex items-center gap-2">
+                        Listing Type
+                    </h3>
+                    <div className="flex bg-secondary/50 p-1.5 rounded-2xl border border-border/50">
+                        <button
+                            onClick={() => onListingTypeChange?.("sale")}
+                            className={cn(
+                                "flex-1 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all",
+                                selectedListingType === "sale" ? "bg-white text-primary shadow-sm" : "text-primary/40 hover:text-primary/60"
+                            )}
+                        >
+                            Buy
+                        </button>
+                        <button
+                            onClick={() => onListingTypeChange?.("rent")}
+                            className={cn(
+                                "flex-1 py-2.5 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all",
+                                selectedListingType === "rent" ? "bg-white text-primary shadow-sm" : "text-primary/40 hover:text-primary/60"
+                            )}
+                        >
+                            Rent
+                        </button>
+                    </div>
+                </section>
+            )}
 
             {/* Property Category */}
             <section className="space-y-6">

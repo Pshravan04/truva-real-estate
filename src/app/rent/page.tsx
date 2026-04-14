@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useData } from "@/context/DataContext";
 import { Footer } from "@/components/layout/Footer";
 import { BuySidebar } from "@/components/property/BuySidebar";
@@ -9,13 +9,13 @@ import { ChevronDown } from "lucide-react";
 import { Property } from "@/types";
 import { cn } from "@/lib/utils";
 
-export default function BuyPage() {
+export default function RentPage() {
     const { properties, filterSettings } = useData();
     const [selectedLocality, setSelectedLocality] = useState("");
-    const selectedListingType = "sale";
+    const selectedListingType = "rent";
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedBhk, setSelectedBhk] = useState("");
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 500000000]);
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 500000]);
     const [selectedBath, setSelectedBath] = useState("");
     const [sortBy, setSortBy] = useState("relevance");
     const [isSortOpen, setIsSortOpen] = useState(false);
@@ -23,20 +23,15 @@ export default function BuyPage() {
     // Generate localities list dynamically from our properties
     const localities = properties.reduce((acc: { name: string; count: number }[], p) => {
         const area = p.location.area || "Other";
-
-        // If admin has defined specific locations, we track them differently
         if (filterSettings.locations.length > 0) {
-            // Only count if it matches a defined location
             if (!filterSettings.locations.includes(area)) return acc;
         }
-
         const existing = acc.find(a => a.name === area);
         if (existing) existing.count++;
         else acc.push({ name: area, count: 1 });
         return acc;
     }, []);
 
-    // Ensure all admin-defined locations are present even if count is 0
     if (filterSettings.locations.length > 0) {
         filterSettings.locations.forEach(loc => {
             if (!localities.find(l => l.name === loc)) {
@@ -78,7 +73,6 @@ export default function BuyPage() {
                         selectedLocality={selectedLocality}
                         onLocalityChange={setSelectedLocality}
                         selectedListingType={selectedListingType}
-                        onListingTypeChange={setSelectedListingType}
                         selectedCategory={selectedCategory}
                         onCategoryChange={setSelectedCategory}
                         selectedBhk={selectedBhk}
@@ -94,7 +88,7 @@ export default function BuyPage() {
                         {/* Header */}
                         <div className="flex justify-between items-end border-b border-black/[0.03] pb-10">
                             <h1 className="text-[32px] font-bold text-primary tracking-tight">
-                                {filteredProperties.length} Handpicked homes
+                                {filteredProperties.length} Rental homes
                             </h1>
                             <div className="flex items-center gap-3 relative">
                                 <span className="text-[10px] font-bold text-primary/30 uppercase tracking-[0.2em]">Sort by</span>
@@ -141,9 +135,9 @@ export default function BuyPage() {
                                 ))
                             ) : (
                                 <div className="col-span-full py-32 text-center space-y-4">
-                                    <p className="text-2xl font-black text-primary opacity-20">No matching homes found</p>
+                                    <p className="text-2xl font-black text-primary opacity-20">No matching rentals found</p>
                                     <button
-                                        onClick={() => { setSelectedLocality(""); setSelectedBhk(""); setPriceRange([0, 90000000]); }}
+                                        onClick={() => { setSelectedLocality(""); setSelectedBhk(""); setPriceRange([0, 500000]); }}
                                         className="text-[11px] font-black uppercase tracking-widest text-[#FF6F38]"
                                     >
                                         Clear Filters

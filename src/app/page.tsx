@@ -1,7 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/ui/Hero";
+import { TrustStrip } from "@/components/ui/TrustStrip";
+import { Differentiation } from "@/components/ui/Differentiation";
 import { PropertyCard } from "@/components/PropertyCard";
 import { useData } from "@/context/DataContext";
 import { ShieldCheck, Zap, BarChart3, ChevronRight, Quote, Sparkles, MessageSquare, Timer, LayoutDashboard, MoveDown } from "lucide-react";
@@ -15,6 +18,7 @@ export default function Home() {
     <main className="min-h-screen flex flex-col bg-[#FAFAFA] relative overflow-hidden">
       {/* Hero Section */}
       <Hero />
+      <TrustStrip />
 
       {/* Background Depth Effects */}
       <div className="absolute top-[80vh] left-0 right-0 h-[1000px] pointer-events-none z-0">
@@ -33,14 +37,19 @@ export default function Home() {
                 Exclusively Curated
               </div>
               <h2 className="text-5xl md:text-6xl font-black text-primary tracking-tighter leading-none">
-                MUMBAI'S FINEST <br />
-                <span className="opacity-40">RESIDENCES.</span>
+                MUMBAI'S MOST <br />
+                <span className="text-[#FF6F38]">IN-DEMAND HOMES.</span>
               </h2>
+              <p className="text-muted-foreground font-bold text-sm max-w-md">
+                Carefully curated listings that match what buyers are actually looking for – no clutter, no outdated inventory.
+              </p>
             </div>
-            <button className="bg-primary hover:bg-black text-white px-8 py-4 rounded-2xl transition-all font-black text-[10px] uppercase tracking-widest flex items-center gap-3">
-              View Collection
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            <Link href="/buy">
+              <button className="bg-primary hover:bg-black text-white px-8 py-4 rounded-2xl transition-all font-black text-[10px] uppercase tracking-widest flex items-center gap-3 group">
+                View All Properties
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -51,58 +60,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 3: Market Insights */}
-      <section className="py-24 bg-[#0a0a0a] text-white relative z-10 overflow-hidden">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-white/10 rounded-[40px] overflow-hidden bg-black/40">
-            {/* Left Main Content */}
-            <div className="lg:col-span-8 p-12 md:p-24 space-y-10">
-              <div className="space-y-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-white/40">
-                  AN AVERAGE HOUSE TAKES 9-12 MONTHS TO SELL
-                </p>
-                <h2 className="text-5xl md:text-[80px] font-black leading-[0.95] tracking-tighter">
-                  Most Jangid Brothers homes <br />
-                  <span className="text-[#FF6F38]">sell by the weekend</span>
-                </h2>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-12 pt-4">
-                <button className="bg-white text-black px-10 py-5 rounded-sm font-black text-[11px] uppercase tracking-widest flex items-center gap-3 hover:bg-[#FF6F38] hover:text-white transition-all shadow-xl shadow-white/5">
-                  <MessageSquare className="w-5 h-5" />
-                  Get early access
-                </button>
-                <button className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em] group">
-                  <span className="w-4 h-4 bg-[#FF6F38] rounded-none inline-block" />
-                  HERE'S WHY <MoveDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right Stats Pane */}
-            <div className="lg:col-span-4 border-l border-white/10 flex flex-col divide-y divide-white/10">
-              <div className="flex-1 p-12 md:p-16 flex flex-col justify-center gap-6 group hover:bg-white/5 transition-colors">
-                <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                  <Timer className="w-6 h-6 text-white/60 group-hover:text-[#FF6F38] transition-colors" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-2">AVERAGE TIME TO SELL:</p>
-                  <p className="text-4xl md:text-5xl font-black tracking-tighter">45 days</p>
-                </div>
-              </div>
-              <div className="flex-1 p-12 md:p-16 flex flex-col justify-center gap-6 group hover:bg-white/5 transition-colors">
-                <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                  <LayoutDashboard className="w-6 h-6 text-white/60 group-hover:text-[#FF6F38] transition-colors" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-2">TOTAL VALUE:</p>
-                  <p className="text-4xl md:text-5xl font-black tracking-tighter">300+ Crs</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Differentiation />
 
       {/* Section 4: Client Stories / Testimonials */}
       <section className="py-32 relative z-10 overflow-hidden">

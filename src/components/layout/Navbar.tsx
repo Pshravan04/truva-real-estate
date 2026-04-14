@@ -67,18 +67,27 @@ export function Navbar() {
 
                     {/* Desktop Links */}
                     <div className={cn(
-                        "hidden md:flex items-center gap-10",
+                        "hidden xl:flex items-center gap-10",
                         (isScrolled || !transparent) ? "text-primary" : "text-white"
                     )}>
-                        <div className="flex items-center gap-8">
-                            <Link href="/buy" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
-                                Browse Homes
+                        <div className="flex items-center gap-6">
+                            <Link href="/buy" className="text-[10px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
+                                Buy
                             </Link>
-                            <Link href="/seller" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
-                                Sell Your House
+                            <Link href="/rent" className="text-[10px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
+                                Rent
                             </Link>
-                            <Link href="/emi" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
-                                EMI Calculator
+                            <Link href="/new-projects" className="text-[10px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
+                                New Projects
+                            </Link>
+                            <Link href="/resale" className="text-[10px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
+                                Resale
+                            </Link>
+                            <Link href="/seller" className="text-[10px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
+                                Sell Property
+                            </Link>
+                            <Link href="/brokers" className="text-[10px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors">
+                                For Brokers
                             </Link>
                         </div>
 
@@ -92,10 +101,10 @@ export function Navbar() {
                                     const footer = document.querySelector('footer');
                                     footer?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className="flex items-center gap-2 border border-current rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all"
+                                className="flex items-center gap-2 bg-[#FF6F38] text-white rounded-full px-6 py-2.5 text-[10px] font-black uppercase tracking-widest hover:bg-[#e64002] transition-all shadow-lg shadow-[#FF6F38]/20"
                             >
                                 <MessageSquare className="w-3.5 h-3.5" />
-                                Talk to us
+                                Talk to Expert
                             </button>
 
                             <button
