@@ -1,8 +1,33 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Search, MapPin, Sparkles, ChevronRight, Banknote, ShieldCheck, CheckCircle2, FileText, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
+    const router = useRouter();
+    const [activeTab, setActiveTab] = useState('Buy');
+    const [searchQuery, setSearchQuery] = useState("");
+    const [budget, setBudget] = useState("");
+    const [bhk, setBhk] = useState("");
+    const [propertyType, setPropertyType] = useState("");
+
+    const handleSearch = () => {
+        const params = new URLSearchParams();
+        if (searchQuery) params.set("q", searchQuery);
+        if (budget) params.set("budget", budget);
+        if (bhk) params.set("bhk", bhk);
+        if (propertyType) params.set("type", propertyType);
+
+        const basePath = activeTab === 'Rent' ? '/rent' :
+            activeTab === 'New Projects' ? '/new-projects' :
+                activeTab === 'Resale' ? '/resale' : '/buy';
+
+        router.push(`${basePath}?${params.toString()}`);
+    };
+
     return (
         <section className="relative h-screen flex items-center overflow-hidden bg-black">
             {/* Background Image with Layered Overlays */}
@@ -69,9 +94,10 @@ export function Hero() {
                                 {['Buy', 'Rent', 'Resale', 'New Projects'].map((tab) => (
                                     <button
                                         key={tab}
+                                        onClick={() => setActiveTab(tab)}
                                         className={cn(
                                             "px-8 py-3 rounded-[24px] text-[10px] font-black uppercase tracking-widest transition-all",
-                                            tab === 'Buy' ? "bg-primary text-white shadow-xl" : "text-primary/40 hover:bg-primary/5 hover:text-primary"
+                                            activeTab === tab ? "bg-primary text-white shadow-xl" : "text-primary/40 hover:bg-primary/5 hover:text-primary"
                                         )}
                                     >
                                         {tab}
@@ -85,6 +111,9 @@ export function Hero() {
                                     <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/40" />
                                     <input
                                         type="text"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                                         placeholder="Search by location, project, or builder..."
                                         className="w-full bg-transparent pl-14 pr-6 py-5 text-primary font-bold text-sm outline-none placeholder:text-primary/30"
                                     />
@@ -93,24 +122,45 @@ export function Hero() {
                                 <div className="h-10 w-px bg-primary/10 hidden md:block" />
 
                                 <div className="flex items-center gap-2 w-full md:w-auto px-4">
-                                    <select className="bg-transparent text-primary font-black text-[10px] uppercase tracking-widest outline-none py-4 cursor-pointer">
-                                        <option>Budget</option>
-                                        <option>1Cr - 2Cr</option>
-                                        <option>2Cr - 5Cr</option>
+                                    <select
+                                        value={budget}
+                                        onChange={(e) => setBudget(e.target.value)}
+                                        className="bg-transparent text-primary font-black text-[10px] uppercase tracking-widest outline-none py-4 cursor-pointer"
+                                    >
+                                        <option value="">Budget</option>
+                                        <option value="0-5000000">Below 50L</option>
+                                        <option value="5000000-10000000">50L - 1Cr</option>
+                                        <option value="10000000-20000000">1Cr - 2Cr</option>
+                                        <option value="20000000-50000000">2Cr - 5Cr</option>
+                                        <option value="50000000+">5Cr+</option>
                                     </select>
-                                    <select className="bg-transparent text-primary font-black text-[10px] uppercase tracking-widest outline-none py-4 cursor-pointer">
-                                        <option>BHK</option>
-                                        <option>2 BHK</option>
-                                        <option>3 BHK</option>
+                                    <select
+                                        value={bhk}
+                                        onChange={(e) => setBhk(e.target.value)}
+                                        className="bg-transparent text-primary font-black text-[10px] uppercase tracking-widest outline-none py-4 cursor-pointer"
+                                    >
+                                        <option value="">BHK</option>
+                                        <option value="1">1 BHK</option>
+                                        <option value="2">2 BHK</option>
+                                        <option value="3">3 BHK</option>
+                                        <option value="4+">4+ BHK</option>
                                     </select>
-                                    <select className="bg-transparent text-primary font-black text-[10px] uppercase tracking-widest outline-none py-4 cursor-pointer">
-                                        <option>Property Type</option>
-                                        <option>Apartment</option>
-                                        <option>Villa</option>
+                                    <select
+                                        value={propertyType}
+                                        onChange={(e) => setPropertyType(e.target.value)}
+                                        className="bg-transparent text-primary font-black text-[10px] uppercase tracking-widest outline-none py-4 cursor-pointer"
+                                    >
+                                        <option value="">Property Type</option>
+                                        <option value="APARTMENT">Apartment</option>
+                                        <option value="VILLA">Villa</option>
+                                        <option value="PENTHOUSE">Penthouse</option>
                                     </select>
                                 </div>
 
-                                <button className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white p-5 rounded-[24px] flex items-center justify-center transition-all group">
+                                <button
+                                    onClick={handleSearch}
+                                    className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white p-5 rounded-[24px] flex items-center justify-center transition-all group"
+                                >
                                     <Search className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                 </button>
                             </div>

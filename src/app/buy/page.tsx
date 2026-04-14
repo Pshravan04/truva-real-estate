@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useData } from "@/context/DataContext";
 import { Footer } from "@/components/layout/Footer";
 import { BuySidebar } from "@/components/property/BuySidebar";
@@ -9,8 +10,10 @@ import { ChevronDown } from "lucide-react";
 import { Property } from "@/types";
 import { cn } from "@/lib/utils";
 
-export default function BuyPage() {
+function BuyPageContent() {
     const { properties, filterSettings } = useData();
+    const searchParams = useSearchParams();
+
     const [selectedLocality, setSelectedLocality] = useState("");
     const selectedListingType = "sale";
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -19,6 +22,21 @@ export default function BuyPage() {
     const [selectedBath, setSelectedBath] = useState("");
     const [sortBy, setSortBy] = useState("relevance");
     const [isSortOpen, setIsSortOpen] = useState(false);
+
+    // Sync filters with URL params
+    useEffect(() => {
+        const query = searchParams.get("q");
+        const budgetParam = searchParams.get("budget");
+        const bhkParam = searchParams.get("bhk");
+
+        if (query) setSelectedLocality(query);
+        if (bhkParam) setSelectedBhk(bhkParam);
+        if (budgetParam) {
+            const [min, max] = budgetParam.split("-").map(Number);
+            if (max) setPriceRange([0, max]);
+            else if (budgetParam.includes("+")) setPriceRange([0, 500000000]);
+        }
+    }, [searchParams]);
 
     // Generate localities list dynamically from our properties
     const localities = properties.reduce((acc: { name: string; count: number }[], p) => {
@@ -78,7 +96,6 @@ export default function BuyPage() {
                         selectedLocality={selectedLocality}
                         onLocalityChange={setSelectedLocality}
                         selectedListingType={selectedListingType}
-                        onListingTypeChange={setSelectedListingType}
                         selectedCategory={selectedCategory}
                         onCategoryChange={setSelectedCategory}
                         selectedBhk={selectedBhk}
@@ -143,7 +160,7 @@ export default function BuyPage() {
                                 <div className="col-span-full py-32 text-center space-y-4">
                                     <p className="text-2xl font-black text-primary opacity-20">No matching homes found</p>
                                     <button
-                                        onClick={() => { setSelectedLocality(""); setSelectedBhk(""); setPriceRange([0, 90000000]); }}
+                                        onClick={() => { setSelectedLocality(""); setSelectedBhk(""); setPriceRange([0, 500000000]); }}
                                         className="text-[11px] font-black uppercase tracking-widest text-[#FF6F38]"
                                     >
                                         Clear Filters
@@ -157,5 +174,13 @@ export default function BuyPage() {
 
             <Footer />
         </main>
+    );
+}
+
+export default function BuyPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <BuyPageContent />
+        </Suspense>
     );
 }

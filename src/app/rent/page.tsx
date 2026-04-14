@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { useData } from "@/context/DataContext";
 import { Footer } from "@/components/layout/Footer";
 import { BuySidebar } from "@/components/property/BuySidebar";
@@ -9,8 +10,10 @@ import { ChevronDown } from "lucide-react";
 import { Property } from "@/types";
 import { cn } from "@/lib/utils";
 
-export default function RentPage() {
+function RentPageContent() {
     const { properties, filterSettings } = useData();
+    const searchParams = useSearchParams();
+
     const [selectedLocality, setSelectedLocality] = useState("");
     const selectedListingType = "rent";
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -19,6 +22,21 @@ export default function RentPage() {
     const [selectedBath, setSelectedBath] = useState("");
     const [sortBy, setSortBy] = useState("relevance");
     const [isSortOpen, setIsSortOpen] = useState(false);
+
+    // Sync filters with URL params
+    useEffect(() => {
+        const query = searchParams.get("q");
+        const budgetParam = searchParams.get("budget");
+        const bhkParam = searchParams.get("bhk");
+
+        if (query) setSelectedLocality(query);
+        if (bhkParam) setSelectedBhk(bhkParam);
+        if (budgetParam) {
+            const [min, max] = budgetParam.split("-").map(Number);
+            if (max) setPriceRange([0, max]);
+            else if (budgetParam.includes("+")) setPriceRange([0, 500000]);
+        }
+    }, [searchParams]);
 
     // Generate localities list dynamically from our properties
     const localities = properties.reduce((acc: { name: string; count: number }[], p) => {
@@ -151,5 +169,13 @@ export default function RentPage() {
 
             <Footer />
         </main>
+    );
+}
+
+export default function RentPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <RentPageContent />
+        </Suspense>
     );
 }
