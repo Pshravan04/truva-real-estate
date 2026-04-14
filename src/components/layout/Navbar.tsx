@@ -10,6 +10,7 @@ import { useRouter, usePathname } from "next/navigation";
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const { user, logout } = useAuth();
     const router = useRouter();
     const pathname = usePathname();
@@ -17,6 +18,7 @@ export function Navbar() {
     const transparent = pathname === "/";
 
     useEffect(() => {
+        setMounted(true);
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
@@ -91,45 +93,48 @@ export function Navbar() {
                             </Link>
                         </div>
 
-                        <div className="flex items-center gap-6">
-                            <Link href="/saved" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors flex items-center gap-1">
-                                <Heart className="w-3.5 h-3.5" />
-                            </Link>
+                        {mounted && (
+                            <div className="flex items-center gap-6">
+                                <Link href="/saved" className="text-[11px] font-black uppercase tracking-widest hover:text-[#FF6F38] transition-colors flex items-center gap-1">
+                                    <Heart className="w-3.5 h-3.5" />
+                                </Link>
 
-                            <button
-                                onClick={() => {
-                                    const footer = document.querySelector('footer');
-                                    footer?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                                className="flex items-center gap-2 bg-[#FF6F38] text-white rounded-full px-6 py-2.5 text-[10px] font-black uppercase tracking-widest hover:bg-[#e64002] transition-all shadow-lg shadow-[#FF6F38]/20"
-                            >
-                                <MessageSquare className="w-3.5 h-3.5" />
-                                Talk to Expert
-                            </button>
+                                <button
+                                    onClick={() => {
+                                        const footer = document.querySelector('footer');
+                                        footer?.scrollIntoView({ behavior: 'smooth' });
+                                    }}
+                                    suppressHydrationWarning
+                                    className="flex items-center gap-2 bg-[#FF6F38] text-white rounded-full px-6 py-2.5 text-[10px] font-black uppercase tracking-widest hover:bg-[#e64002] transition-all shadow-lg shadow-[#FF6F38]/20"
+                                >
+                                    <MessageSquare className="w-3.5 h-3.5" />
+                                    Talk to Expert
+                                </button>
 
-                            <button
-                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className="p-2 border border-current rounded-full"
-                            >
-                                <Menu className="w-4 h-4" />
-                            </button>
+                                <button
+                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                    className="p-2 border border-current rounded-full"
+                                >
+                                    <Menu className="w-4 h-4" />
+                                </button>
 
-                            {user && (
-                                <div className="flex items-center gap-6">
-                                    <span className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2">
-                                        <User className="w-3.5 h-3.5" />
-                                        {user.name}
-                                    </span>
-                                    <button
-                                        onClick={handleLogout}
-                                        className="text-[10px] font-black uppercase tracking-widest bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded-full transition-colors flex items-center gap-2"
-                                    >
-                                        <LogOut className="w-3.5 h-3.5" />
-                                        Logout
-                                    </button>
-                                </div>
-                            )}
-                        </div>
+                                {user && (
+                                    <div className="flex items-center gap-6">
+                                        <span className="text-[11px] font-black uppercase tracking-widest flex items-center gap-2">
+                                            <User className="w-3.5 h-3.5" />
+                                            {user.name}
+                                        </span>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="text-[10px] font-black uppercase tracking-widest bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded-full transition-colors flex items-center gap-2"
+                                        >
+                                            <LogOut className="w-3.5 h-3.5" />
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                     </div>
 
                     {/* Mobile Menu Toggle */}
@@ -145,7 +150,7 @@ export function Navbar() {
                 </div>
 
                 {/* Mobile Menu */}
-                {isMobileMenuOpen && (
+                {(mounted && isMobileMenuOpen) && (
                     <div className="absolute top-16 left-0 right-0 bg-white border-b border-border p-4 flex flex-col gap-4 md:hidden shadow-lg animate-in slide-in-from-top-5 text-primary">
                         <Link
                             href="/buy"
